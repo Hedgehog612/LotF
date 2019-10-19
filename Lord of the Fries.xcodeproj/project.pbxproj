@@ -1,0 +1,317 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F4FD9D92235A89880030DA5E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9D91235A89880030DA5E /* main.swift */; };
+		F4FD9D99235A8A6A0030DA5E /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9D98235A8A6A0030DA5E /* Card.swift */; };
+		F4FD9D9B235A8AFE0030DA5E /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9D9A235A8AFE0030DA5E /* Restaurant.swift */; };
+		F4FD9D9D235A8B6F0030DA5E /* MenuCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9D9C235A8B6F0030DA5E /* MenuCategory.swift */; };
+		F4FD9D9F235A8CD30030DA5E /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9D9E235A8CD30030DA5E /* MenuItem.swift */; };
+		F4FD9DA1235A8D6F0030DA5E /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9DA0235A8D6F0030DA5E /* Player.swift */; };
+		F4FD9DA3235A8DED0030DA5E /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9DA2235A8DED0030DA5E /* Game.swift */; };
+		F4FD9DA5235A8EA00030DA5E /* CurrentOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9DA4235A8EA00030DA5E /* CurrentOrder.swift */; };
+		F4FD9DA7235A968D0030DA5E /* RestrauntInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9DA6235A968D0030DA5E /* RestrauntInfo.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F4FD9D8C235A89880030DA5E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		F4FD9D8E235A89880030DA5E /* Lord of the Fries */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Lord of the Fries"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4FD9D91235A89880030DA5E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		F4FD9D98235A8A6A0030DA5E /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		F4FD9D9A235A8AFE0030DA5E /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		F4FD9D9C235A8B6F0030DA5E /* MenuCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCategory.swift; sourceTree = "<group>"; };
+		F4FD9D9E235A8CD30030DA5E /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
+		F4FD9DA0235A8D6F0030DA5E /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		F4FD9DA2235A8DED0030DA5E /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		F4FD9DA4235A8EA00030DA5E /* CurrentOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentOrder.swift; sourceTree = "<group>"; };
+		F4FD9DA6235A968D0030DA5E /* RestrauntInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestrauntInfo.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F4FD9D8B235A89880030DA5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F4FD9D85235A89880030DA5E = {
+			isa = PBXGroup;
+			children = (
+				F4FD9D90235A89880030DA5E /* Lord of the Fries */,
+				F4FD9D8F235A89880030DA5E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F4FD9D8F235A89880030DA5E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F4FD9D8E235A89880030DA5E /* Lord of the Fries */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F4FD9D90235A89880030DA5E /* Lord of the Fries */ = {
+			isa = PBXGroup;
+			children = (
+				F4FD9D91235A89880030DA5E /* main.swift */,
+				F4FD9D98235A8A6A0030DA5E /* Card.swift */,
+				F4FD9D9A235A8AFE0030DA5E /* Restaurant.swift */,
+				F4FD9D9C235A8B6F0030DA5E /* MenuCategory.swift */,
+				F4FD9D9E235A8CD30030DA5E /* MenuItem.swift */,
+				F4FD9DA0235A8D6F0030DA5E /* Player.swift */,
+				F4FD9DA2235A8DED0030DA5E /* Game.swift */,
+				F4FD9DA4235A8EA00030DA5E /* CurrentOrder.swift */,
+				F4FD9DA6235A968D0030DA5E /* RestrauntInfo.swift */,
+			);
+			path = "Lord of the Fries";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F4FD9D8D235A89880030DA5E /* Lord of the Fries */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F4FD9D95235A89880030DA5E /* Build configuration list for PBXNativeTarget "Lord of the Fries" */;
+			buildPhases = (
+				F4FD9D8A235A89880030DA5E /* Sources */,
+				F4FD9D8B235A89880030DA5E /* Frameworks */,
+				F4FD9D8C235A89880030DA5E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Lord of the Fries";
+			productName = "Lord of the Fries";
+			productReference = F4FD9D8E235A89880030DA5E /* Lord of the Fries */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F4FD9D86235A89880030DA5E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
+				ORGANIZATIONNAME = "Marcus Bamberger";
+				TargetAttributes = {
+					F4FD9D8D235A89880030DA5E = {
+						CreatedOnToolsVersion = 11.0;
+					};
+				};
+			};
+			buildConfigurationList = F4FD9D89235A89880030DA5E /* Build configuration list for PBXProject "Lord of the Fries" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F4FD9D85235A89880030DA5E;
+			productRefGroup = F4FD9D8F235A89880030DA5E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F4FD9D8D235A89880030DA5E /* Lord of the Fries */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F4FD9D8A235A89880030DA5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4FD9D9D235A8B6F0030DA5E /* MenuCategory.swift in Sources */,
+				F4FD9D9B235A8AFE0030DA5E /* Restaurant.swift in Sources */,
+				F4FD9DA3235A8DED0030DA5E /* Game.swift in Sources */,
+				F4FD9D92235A89880030DA5E /* main.swift in Sources */,
+				F4FD9DA5235A8EA00030DA5E /* CurrentOrder.swift in Sources */,
+				F4FD9D99235A8A6A0030DA5E /* Card.swift in Sources */,
+				F4FD9DA7235A968D0030DA5E /* RestrauntInfo.swift in Sources */,
+				F4FD9DA1235A8D6F0030DA5E /* Player.swift in Sources */,
+				F4FD9D9F235A8CD30030DA5E /* MenuItem.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		F4FD9D93235A89880030DA5E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F4FD9D94235A89880030DA5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		F4FD9D96235A89880030DA5E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F4FD9D97235A89880030DA5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F4FD9D89235A89880030DA5E /* Build configuration list for PBXProject "Lord of the Fries" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F4FD9D93235A89880030DA5E /* Debug */,
+				F4FD9D94235A89880030DA5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F4FD9D95235A89880030DA5E /* Build configuration list for PBXNativeTarget "Lord of the Fries" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F4FD9D96235A89880030DA5E /* Debug */,
+				F4FD9D97235A89880030DA5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F4FD9D86235A89880030DA5E /* Project object */;
+}
