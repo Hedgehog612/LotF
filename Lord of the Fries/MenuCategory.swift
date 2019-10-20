@@ -7,16 +7,23 @@
 //
 
 import Foundation
+
+
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 struct MenuCategory {
     var name: String
     var range: ClosedRange<Int>
     var canCall: Bool
     var menuItems: [MenuItem]
     
+
+    //------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------
     init(name nameIn: String, range rangeIn: ClosedRange<Int>, canCall canCallIn: Bool = true, menuItems menuItemsIn: [MenuItem]) {
-    name = nameIn
-    range = rangeIn
-    canCall = canCallIn
-    menuItems = menuItemsIn
+        name = nameIn
+        range = rangeIn
+        canCall = canCallIn
+        menuItems = menuItemsIn
     }
 }

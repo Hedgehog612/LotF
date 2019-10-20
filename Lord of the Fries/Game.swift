@@ -7,6 +7,10 @@
 //
 
 import Foundation
+
+
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 class Game {
     var currentOrder: CurrentOrder?
     var specialRule: String
@@ -15,6 +19,9 @@ class Game {
     var stewPot: [Card]
     var timer: Int
     
+
+    //------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------
     init(specialRule specialRuleIn: String, playerOrder playerOrderIn: [Player]) {
         specialRule = specialRuleIn
         playerOrder = playerOrderIn
@@ -23,6 +30,9 @@ class Game {
         timer = 0
     }
     
+
+    //------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------
     func fillOrder(player: Player) {
         print("Can you fill the order? The order is\(currentOrder!.name) and it contains \(currentOrder?.content). It has been short \(currentOrder?.short) times.")
     }

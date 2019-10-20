@@ -7,11 +7,17 @@
 //
 
 import Foundation
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 class Restaurant {
     var image: String
     var name: String
     var subTitle: String
     var menuCategories: [MenuCategory]
+    
+    
+    //------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------
     init(image imageIn: String, name nameIn: String, subTitle subTitleIn: String, menuCategories menuCategoriesIn: [MenuCategory]) {
         image = imageIn
         name = nameIn

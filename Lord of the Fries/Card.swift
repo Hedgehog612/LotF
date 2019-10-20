@@ -7,7 +7,11 @@
 //
 
 import Foundation
-enum Card {
+
+//------------------------------------------------------------------------------
+// Card
+//------------------------------------------------------------------------------
+enum Card: CaseIterable {
     case Bun
     case Sauce
     case Fries
@@ -18,36 +22,62 @@ enum Card {
     case Fish
     case Cow
     case Pie
+    
+    case AnyMeat
+    case AnyIngredient
+    
 
+    //------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------
+    static let values: [Card: (name: String, score: Int, image: String)] = [
+        Bun:    ("Bun",        1,      "bunImage"),
+        Sauce:  ("Sauce",      1,       "sauceImage"),
+    ]
+    
+
+    //------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------
+    func name() -> String {
+        return Card.values[self]!.name
+    }
+    
+
+    //------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------
     func score() -> Int {
-        switch self {
-            case .Bun:
-                return 1
-            default:
-                return 2
-        }
+        return Card.values[self]!.score
     }
     
+
+    //------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------
+    func image() -> String {
+        return Card.values[self]!.image
+    }
+    
+
+    //------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------
     func isMeat() -> Bool {
-        switch self {
-        case .Bird:
+        return self == .Bird || self == .Fish || self == .Cow
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------
+    func matchesRequirement(requirement: Card) -> Bool {
+        if requirement == self {
             return true
-        default:
-            return false
         }
-    }
-    
-    func getImage() -> String {
-        return("Put an image in!")
-    }
-     
-    
-    func cardName() -> String {
-        switch self {
-        case .Bun:
-            return("Bun")
-        default:
-            return("Not a valid type!")
+        
+        if requirement == .AnyMeat && self.isMeat() {
+            return true
         }
+        
+        if requirement == .AnyIngredient {
+            return true
+        }
+        
+        return false
     }
 }

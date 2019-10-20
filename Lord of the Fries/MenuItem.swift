@@ -7,7 +7,21 @@
 //
 
 import Foundation
+
+
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 struct MenuItem {
     var name: String
-    var cardItems: [Card:Int]
+    var ingredients: [Card:Int]
+    var cardsMustAllBeDifferent: Bool
+    
+    
+    //------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------
+    init(name nameIn: String, ingredients ingredientsIn: [Card:Int], cardsMustAllBeDifferent cardsMustAllBeDifferentIn: Bool = false) {
+        name = nameIn
+        ingredients = ingredientsIn
+        cardsMustAllBeDifferent = cardsMustAllBeDifferentIn
+    }
 }
