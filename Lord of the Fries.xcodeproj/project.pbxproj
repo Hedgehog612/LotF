@@ -21,6 +21,7 @@
 		FFD269DA235E0B5400572168 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9D9E235A8CD30030DA5E /* MenuItem.swift */; };
 		FFD269DB235E0B5400572168 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9DA0235A8D6F0030DA5E /* Player.swift */; };
 		FFD269DC235E0B5400572168 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9D9A235A8AFE0030DA5E /* Restaurant.swift */; };
+		FFE04E7B235E3121002B953B /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE04E7A235E3121002B953B /* Deck.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		FF6EDDDD235E07DF00744CAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF6EDDDE235E07DF00744CAB /* Lord_of_the_Fries.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Lord_of_the_Fries.entitlements; sourceTree = "<group>"; };
 		FFD269D3235E0A7900572168 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		FFE04E7A235E3121002B953B /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				FFD269D3235E0A7900572168 /* CardView.swift */,
+				FFE04E7A235E3121002B953B /* Deck.swift */,
 				FF6EDDD3235E07DE00744CAB /* ContentView.swift */,
 			);
 			path = Views;
@@ -188,6 +191,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFE04E7B235E3121002B953B /* Deck.swift in Sources */,
 				FFD269DC235E0B5400572168 /* Restaurant.swift in Sources */,
 				FFD269D9235E0B5400572168 /* MenuCategory.swift in Sources */,
 				FF6EDDD4235E07DE00744CAB /* ContentView.swift in Sources */,

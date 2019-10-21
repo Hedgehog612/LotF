@@ -1,8 +1,8 @@
 //
-//  Player.swift
+//  Deck.swift
 //  Lord of the Fries
 //
-//  Created by Marcus Bamberger on 10/18/19.
+//  Created by Matt Bamberger on 10/21/19.
 //  Copyright © 2019 Marcus Bamberger. All rights reserved.
 //
 
@@ -10,22 +10,13 @@ import Foundation
 
 
 //------------------------------------------------------------------------------
+// Deck
 //------------------------------------------------------------------------------
-class Player {
-    var hand: [Card : Int]
-    var score: [Card : Int]
-    var name: String
-    var image: String
-    var scoreTokens: Int
-    
-
+class Deck {
     //------------------------------------------------------------------------------
+    // init
     //------------------------------------------------------------------------------
-    init(name nameIn: String, image imageIn: String) {
-        hand = [:]
-        score = [:]
-        name = nameIn
-        image = imageIn
-        scoreTokens = 0
+    init(cards: [Card: Int] = [:]) {
+        
     }
 }
