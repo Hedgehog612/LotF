@@ -25,7 +25,6 @@ struct ContentView: View {
             CardView(card: .Fish)
                 .position(x: 820, y: 400)
         }
-        .frame(width: 1200, height: 800, alignment: .center)
     }
 }
 
