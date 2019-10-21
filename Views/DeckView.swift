@@ -10,8 +10,37 @@ import Foundation
 import SwiftUI
 
 
+struct QuiteUgly: Hashable {
+    var card: Card
+    var x: CGFloat
+    var y: CGFloat
+}
+
+
 struct DeckView: View {
     let deck : Deck
+    var views = [AnyView]()
+    let foobar = ["Hello", "Goodbye"]
+    var uglyThings = [QuiteUgly]()
+    
+    
+    init(_ deckIn: Deck) {
+        deck = deckIn
+        
+        //For loop iterating over each type of card in the dictionary
+        //cardType stores the keys
+        let totalTypes = deck.cards.filter({ $0.1 > 0}).count
+        
+        //With a window size of 1200, we restrict the cards to occupying 1000 px
+        var currentPosition = Int(1000 / totalTypes)
+        for (card, count) in deck.cards where count > 0 {
+            for index in 0..<count {
+                uglyThings.append(QuiteUgly(card: card, x: CGFloat(100 + (index * 5) + currentPosition), y: CGFloat(400 + index * 5)))
+                
+                currentPosition += 1000 / totalTypes
+            }
+        }
+    }
     
     
     //------------------------------------------------------------------------------
@@ -19,25 +48,10 @@ struct DeckView: View {
     //------------------------------------------------------------------------------
     var body: some View {
         ZStack {
-            Text("Hello")
-            /*
-            //For loop iterating over each type of card in the dictionary
-            //cardType stores the keys
-            let totalTypes = deck.cards.values.count
-            
-            //With a window size of 1200, we restrict the cards to occupying 1000 px
-            var currentPosition = 1000/totalTypes
-            for cardType in deck.keys {
-                //For loop iterating through every card in one type of card
-                //deck(cardType) returns number of cards of that type
-                for cards in deck(cardType) {
-                    //Each card in a given type is 5 px up and to the right of the last one
-                    CardView(card: .cardType).position(x: (100+(cards*5)+currentPosition), y: (400+(cards*5)))
-                }
+            ForEach(uglyThings, id: \.self) { uglyThing in
+                CardView(card: uglyThing.card)
+                    .position(x: uglyThing.x, y: uglyThing.y)
             }
-            //Each different card type is a fraction of 1000 px away from the last one
-            currentPosition += (1000/totalTypes)
- */
         }
     }
 }
