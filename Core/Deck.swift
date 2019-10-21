@@ -37,6 +37,22 @@ class Deck {
     
     
     //------------------------------------------------------------------------------
+    // cardArray
+    // Returns our cards as an array of single cards
+    //------------------------------------------------------------------------------
+    var cardArray:[Card] {
+        var result = [Card]()
+        for (card, count) in cards where count > 0 {
+            for _ in 0..<count {
+                result.append(card)
+            }
+        }
+        
+        return result
+    }
+    
+    
+    //------------------------------------------------------------------------------
     // addCard
     // Adds a single card to this deck
     //------------------------------------------------------------------------------
