@@ -119,9 +119,9 @@
 			isa = PBXGroup;
 			children = (
 				FFD269D3235E0A7900572168 /* CardView.swift */,
+				FF6EDDD3235E07DE00744CAB /* ContentView.swift */,
 				F438C884235E334300DD143D /* DeckView.swift */,
 				F438C886235E4E0400DD143D /* OrderView.swift */,
-				FF6EDDD3235E07DE00744CAB /* ContentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
