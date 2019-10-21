@@ -30,15 +30,17 @@ struct DeckView: View {
         //For loop iterating over each type of card in the dictionary
         //cardType stores the keys
         let totalTypes = deck.cards.filter({ $0.1 > 0}).count
+        //print("total types are: \(totalTypes)")
         
         //With a window size of 1200, we restrict the cards to occupying 1000 px
-        var currentPosition = Int(1000 / totalTypes)
+        var currentPosition = Int(1200 / totalTypes)
+        
         for (card, count) in deck.cards where count > 0 {
+            //print("Card/count is: \(card) \(count)")
             for index in 0..<count {
-                uglyThings.append(QuiteUgly(card: card, x: CGFloat(100 + (index * 5) + currentPosition), y: CGFloat(400 + index * 5)))
-                
-                currentPosition += 1000 / totalTypes
+                uglyThings.append(QuiteUgly(card: card, x: CGFloat(100 - (index * 5) + currentPosition), y: CGFloat(400 + index * 5)))
             }
+            currentPosition += 1200 / totalTypes
         }
     }
     
