@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F438C885235E334300DD143D /* DeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F438C884235E334300DD143D /* DeckView.swift */; };
 		FF6EDDD2235E07DE00744CAB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6EDDD1235E07DE00744CAB /* AppDelegate.swift */; };
 		FF6EDDD4235E07DE00744CAB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6EDDD3235E07DE00744CAB /* ContentView.swift */; };
 		FF6EDDD6235E07DF00744CAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF6EDDD5235E07DF00744CAB /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F438C884235E334300DD143D /* DeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckView.swift; sourceTree = "<group>"; };
 		F4FD9D98235A8A6A0030DA5E /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		F4FD9D9A235A8AFE0030DA5E /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		F4FD9D9C235A8B6F0030DA5E /* MenuCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCategory.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				FFD269D3235E0A7900572168 /* CardView.swift */,
+				F438C884235E334300DD143D /* DeckView.swift */,
 				FFE04E7A235E3121002B953B /* Deck.swift */,
 				FF6EDDD3235E07DE00744CAB /* ContentView.swift */,
 			);
@@ -203,6 +206,7 @@
 				FFD269D7235E0B5400572168 /* CurrentOrder.swift in Sources */,
 				FFD269DB235E0B5400572168 /* Player.swift in Sources */,
 				FF6EDDD2235E07DE00744CAB /* AppDelegate.swift in Sources */,
+				F438C885235E334300DD143D /* DeckView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
