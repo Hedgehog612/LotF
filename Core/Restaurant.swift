@@ -20,7 +20,7 @@ class Restaurant {
     
     //------------------------------------------------------------------------------
     //------------------------------------------------------------------------------
-    init(image imageIn: String, name nameIn: String, subTitle subTitleIn: String, menuCategories menuCategoriesIn: [MenuCategory] smallDeck smallDeckIn: Deck, largeDeck largeDeckIn: Deck) {
+    init(image imageIn: String, name nameIn: String, subTitle subTitleIn: String, menuCategories menuCategoriesIn: [MenuCategory], smallDeck smallDeckIn: Deck, largeDeck largeDeckIn: Deck) {
         image = imageIn
         name = nameIn
         subTitle = subTitleIn
