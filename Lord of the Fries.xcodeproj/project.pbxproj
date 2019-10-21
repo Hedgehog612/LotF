@@ -78,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				F4FD9D98235A8A6A0030DA5E /* Card.swift */,
+				FFE04E7A235E3121002B953B /* Deck.swift */,
 				F4FD9DA4235A8EA00030DA5E /* CurrentOrder.swift */,
 				F4FD9DA2235A8DED0030DA5E /* Game.swift */,
 				F4FD9D9C235A8B6F0030DA5E /* MenuCategory.swift */,
@@ -114,7 +115,6 @@
 			isa = PBXGroup;
 			children = (
 				FFD269D3235E0A7900572168 /* CardView.swift */,
-				FFE04E7A235E3121002B953B /* Deck.swift */,
 				FF6EDDD3235E07DE00744CAB /* ContentView.swift */,
 			);
 			path = Views;

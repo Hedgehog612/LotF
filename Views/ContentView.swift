@@ -15,14 +15,20 @@ import SwiftUI
 //------------------------------------------------------------------------------
 struct ContentView: View {
     var body: some View {
-        ZStack {
-            CardView(card: .Cow)
+        let deck = Deck([.Cow: 4, .Fish: 3, .Bun: 2])
+        let player1Deck = Deck()
+        let player2Deck = Deck()
+        let player3Deck = Deck()
+        deck.shuffleAndDeal(recipients: [player1Deck, player2Deck, player3Deck])
+        
+        return ZStack {
+            CardView(card: player1Deck.aCard())
                 .position(x: 220, y: 400)
             
-            CardView(card: .Bun)
+            CardView(card: player2Deck.aCard())
                 .position(x: 520, y: 400)
             
-            CardView(card: .Fish)
+            CardView(card: player3Deck.aCard())
                 .position(x: 820, y: 400)
         }
         .frame(width: 1200, height: 800, alignment: .center)
