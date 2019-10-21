@@ -30,6 +30,9 @@ struct ContentView: View {
             
             CardView(card: player3Deck.aCard())
                 .position(x: 820, y: 400)
+            
+            DeckView(player1Deck)
+                .position(x: 400, y: 200)
         }
     }
 }

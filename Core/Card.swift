@@ -14,7 +14,7 @@ import SwiftUI
 // Card
 // A single ingredient card.
 //------------------------------------------------------------------------------
-enum Card: CaseIterable {
+enum Card: CaseIterable, Hashable {
     // These are actual cards that a player can have in their hand.
     case Bun
     case Sauce
