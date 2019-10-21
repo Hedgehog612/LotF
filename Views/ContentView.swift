@@ -31,7 +31,6 @@ struct ContentView: View {
             CardView(card: player3Deck.aCard())
                 .position(x: 820, y: 400)
         }
-        .frame(width: 1200, height: 800, alignment: .center)
     }
 }
 

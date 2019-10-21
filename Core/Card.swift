@@ -38,10 +38,10 @@ enum Card: CaseIterable {
     //------------------------------------------------------------------------------
     static let values: [Card: (name: String, score: Int, image: String, color: Color)] = [
         Bun:    ("Bun",         1,      "bunImage",         .yellow),
-        Sauce:  ("Sauce",       1,      "sauceImage",       .gray),
+        Sauce:  ("Sauce",       1,      "sauceImage",       .green),
         Fries:  ("Fries",       2,      "friesImage",       .pink),
         Drink:  ("Drink",       3,      "drinkImage",       .purple),
-        Vegetable:("Vegetable", 3,      "vegetableImage",   .green),
+        Vegetable:("Vegetable", 3,      "vegetableImage",   .gray),
         Cheese: ("Cheese",      4,      "cheeseImage",      .orange),
         Bird:   ("Bird",        5,      "birdImage",        .yellow),
         Fish:   ("Fish",        5,      "fishImage",        .blue),

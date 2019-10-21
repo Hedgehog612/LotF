@@ -14,14 +14,18 @@ class Restaurant {
     var name: String
     var subTitle: String
     var menuCategories: [MenuCategory]
+    var smallDeck: Deck
+    var largeDeck: Deck
     
     
     //------------------------------------------------------------------------------
     //------------------------------------------------------------------------------
-    init(image imageIn: String, name nameIn: String, subTitle subTitleIn: String, menuCategories menuCategoriesIn: [MenuCategory]) {
+    init(image imageIn: String, name nameIn: String, subTitle subTitleIn: String, menuCategories menuCategoriesIn: [MenuCategory], smallDeck smallDeckIn: Deck, largeDeck largeDeckIn: Deck) {
         image = imageIn
         name = nameIn
         subTitle = subTitleIn
         menuCategories = menuCategoriesIn
+        smallDeck = smallDeckIn
+        largeDeck = largeDeckIn
     }
 }

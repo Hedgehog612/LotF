@@ -50,4 +50,6 @@ var restrauntList = [
                     MenuItem(name: "Aertery Blocker", ingredients: [.Sauce:1, .Fries:1, .Drink:1, .Cheese:1]),
                     MenuItem(name: "Heart Pounder", ingredients: [.Sauce:1, .Drink:1, .Cow:1]),
                     MenuItem(name: "Synaptic Relay Deteriorator", ingredients: [.Drink:1, .Bird:1, .Fish:1]),
-                    MenuItem(name: "Lying Dead On the Floor", ingredients: [.Sauce:1, .Drink:1, .Bird:1, .Cow:1, .Fish:1])])])]
+                    MenuItem(name: "Lying Dead On the Floor", ingredients: [.Sauce:1, .Drink:1, .Bird:1, .Cow:1, .Fish:1])])],
+        smallDeck: Deck(cards: [.Bun:9, .Sauce:4, .Fries:3, .Drink:6, .Vegetable:6, .Cheese:6, .Cow:5, .Fish:5, .Bird:5, .Pie:3]),
+        largeDeck: Deck(cards: [.Bun:11, .Sauce:6, .Fries:5, .Drink:9, .Vegetable:8, .Cheese:8, .Cow:7, .Fish:6, .Bird:7, .Pie:4]))]
