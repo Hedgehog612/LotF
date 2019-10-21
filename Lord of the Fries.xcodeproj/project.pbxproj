@@ -7,32 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F4FD9D92235A89880030DA5E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9D91235A89880030DA5E /* main.swift */; };
-		F4FD9D99235A8A6A0030DA5E /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9D98235A8A6A0030DA5E /* Card.swift */; };
-		F4FD9D9B235A8AFE0030DA5E /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9D9A235A8AFE0030DA5E /* Restaurant.swift */; };
-		F4FD9D9D235A8B6F0030DA5E /* MenuCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9D9C235A8B6F0030DA5E /* MenuCategory.swift */; };
-		F4FD9D9F235A8CD30030DA5E /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9D9E235A8CD30030DA5E /* MenuItem.swift */; };
-		F4FD9DA1235A8D6F0030DA5E /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9DA0235A8D6F0030DA5E /* Player.swift */; };
-		F4FD9DA3235A8DED0030DA5E /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9DA2235A8DED0030DA5E /* Game.swift */; };
-		F4FD9DA5235A8EA00030DA5E /* CurrentOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9DA4235A8EA00030DA5E /* CurrentOrder.swift */; };
-		F4FD9DA7235A968D0030DA5E /* RestrauntInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9DA6235A968D0030DA5E /* RestrauntInfo.swift */; };
+		FF6EDDD2235E07DE00744CAB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6EDDD1235E07DE00744CAB /* AppDelegate.swift */; };
+		FF6EDDD4235E07DE00744CAB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6EDDD3235E07DE00744CAB /* ContentView.swift */; };
+		FF6EDDD6235E07DF00744CAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF6EDDD5235E07DF00744CAB /* Assets.xcassets */; };
+		FF6EDDD9235E07DF00744CAB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF6EDDD8235E07DF00744CAB /* Preview Assets.xcassets */; };
+		FF6EDDDC235E07DF00744CAB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF6EDDDA235E07DF00744CAB /* Main.storyboard */; };
+		FFD269D4235E0A7900572168 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD269D3235E0A7900572168 /* CardView.swift */; };
+		FFD269D5235E0B4C00572168 /* RestrauntInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9DA6235A968D0030DA5E /* RestrauntInfo.swift */; };
+		FFD269D6235E0B5400572168 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9D98235A8A6A0030DA5E /* Card.swift */; };
+		FFD269D7235E0B5400572168 /* CurrentOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9DA4235A8EA00030DA5E /* CurrentOrder.swift */; };
+		FFD269D8235E0B5400572168 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9DA2235A8DED0030DA5E /* Game.swift */; };
+		FFD269D9235E0B5400572168 /* MenuCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9D9C235A8B6F0030DA5E /* MenuCategory.swift */; };
+		FFD269DA235E0B5400572168 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9D9E235A8CD30030DA5E /* MenuItem.swift */; };
+		FFD269DB235E0B5400572168 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9DA0235A8D6F0030DA5E /* Player.swift */; };
+		FFD269DC235E0B5400572168 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9D9A235A8AFE0030DA5E /* Restaurant.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		F4FD9D8C235A89880030DA5E /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		F4FD9D8E235A89880030DA5E /* Lord of the Fries */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Lord of the Fries"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F4FD9D91235A89880030DA5E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		F4FD9D98235A8A6A0030DA5E /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		F4FD9D9A235A8AFE0030DA5E /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		F4FD9D9C235A8B6F0030DA5E /* MenuCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCategory.swift; sourceTree = "<group>"; };
@@ -41,10 +32,19 @@
 		F4FD9DA2235A8DED0030DA5E /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		F4FD9DA4235A8EA00030DA5E /* CurrentOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentOrder.swift; sourceTree = "<group>"; };
 		F4FD9DA6235A968D0030DA5E /* RestrauntInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestrauntInfo.swift; sourceTree = "<group>"; };
+		FF6EDDCF235E07DE00744CAB /* Lord of the Fries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lord of the Fries.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF6EDDD1235E07DE00744CAB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FF6EDDD3235E07DE00744CAB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		FF6EDDD5235E07DF00744CAB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FF6EDDD8235E07DF00744CAB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		FF6EDDDB235E07DF00744CAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FF6EDDDD235E07DF00744CAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF6EDDDE235E07DF00744CAB /* Lord_of_the_Fries.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Lord_of_the_Fries.entitlements; sourceTree = "<group>"; };
+		FFD269D3235E0A7900572168 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		F4FD9D8B235A89880030DA5E /* Frameworks */ = {
+		FF6EDDCC235E07DE00744CAB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -57,7 +57,9 @@
 		F4FD9D85235A89880030DA5E = {
 			isa = PBXGroup;
 			children = (
-				F4FD9D90235A89880030DA5E /* Lord of the Fries */,
+				F4FD9D90235A89880030DA5E /* Core */,
+				FF6EDDE2235E081500744CAB /* Views */,
+				FF6EDDD0235E07DE00744CAB /* Lord of the Fries */,
 				F4FD9D8F235A89880030DA5E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -65,15 +67,14 @@
 		F4FD9D8F235A89880030DA5E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F4FD9D8E235A89880030DA5E /* Lord of the Fries */,
+				FF6EDDCF235E07DE00744CAB /* Lord of the Fries.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F4FD9D90235A89880030DA5E /* Lord of the Fries */ = {
+		F4FD9D90235A89880030DA5E /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				F4FD9D91235A89880030DA5E /* main.swift */,
 				F4FD9D98235A8A6A0030DA5E /* Card.swift */,
 				F4FD9DA4235A8EA00030DA5E /* CurrentOrder.swift */,
 				F4FD9DA2235A8DED0030DA5E /* Game.swift */,
@@ -83,19 +84,49 @@
 				F4FD9D9A235A8AFE0030DA5E /* Restaurant.swift */,
 				F4FD9DA6235A968D0030DA5E /* RestrauntInfo.swift */,
 			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		FF6EDDD0235E07DE00744CAB /* Lord of the Fries */ = {
+			isa = PBXGroup;
+			children = (
+				FF6EDDD1235E07DE00744CAB /* AppDelegate.swift */,
+				FF6EDDD5235E07DF00744CAB /* Assets.xcassets */,
+				FF6EDDDA235E07DF00744CAB /* Main.storyboard */,
+				FF6EDDDD235E07DF00744CAB /* Info.plist */,
+				FF6EDDDE235E07DF00744CAB /* Lord_of_the_Fries.entitlements */,
+				FF6EDDD7235E07DF00744CAB /* Preview Content */,
+			);
 			path = "Lord of the Fries";
+			sourceTree = "<group>";
+		};
+		FF6EDDD7235E07DF00744CAB /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				FF6EDDD8235E07DF00744CAB /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		FF6EDDE2235E081500744CAB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FFD269D3235E0A7900572168 /* CardView.swift */,
+				FF6EDDD3235E07DE00744CAB /* ContentView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F4FD9D8D235A89880030DA5E /* Lord of the Fries */ = {
+		FF6EDDCE235E07DE00744CAB /* Lord of the Fries */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F4FD9D95235A89880030DA5E /* Build configuration list for PBXNativeTarget "Lord of the Fries" */;
+			buildConfigurationList = FF6EDDDF235E07DF00744CAB /* Build configuration list for PBXNativeTarget "Lord of the Fries" */;
 			buildPhases = (
-				F4FD9D8A235A89880030DA5E /* Sources */,
-				F4FD9D8B235A89880030DA5E /* Frameworks */,
-				F4FD9D8C235A89880030DA5E /* CopyFiles */,
+				FF6EDDCB235E07DE00744CAB /* Sources */,
+				FF6EDDCC235E07DE00744CAB /* Frameworks */,
+				FF6EDDCD235E07DE00744CAB /* Resources */,
 			);
 			buildRules = (
 			);
@@ -103,8 +134,8 @@
 			);
 			name = "Lord of the Fries";
 			productName = "Lord of the Fries";
-			productReference = F4FD9D8E235A89880030DA5E /* Lord of the Fries */;
-			productType = "com.apple.product-type.tool";
+			productReference = FF6EDDCF235E07DE00744CAB /* Lord of the Fries.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -112,12 +143,12 @@
 		F4FD9D86235A89880030DA5E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1100;
+				LastSwiftUpdateCheck = 1110;
 				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = "Marcus Bamberger";
 				TargetAttributes = {
-					F4FD9D8D235A89880030DA5E = {
-						CreatedOnToolsVersion = 11.0;
+					FF6EDDCE235E07DE00744CAB = {
+						CreatedOnToolsVersion = 11.1;
 					};
 				};
 			};
@@ -134,29 +165,55 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F4FD9D8D235A89880030DA5E /* Lord of the Fries */,
+				FF6EDDCE235E07DE00744CAB /* Lord of the Fries */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		FF6EDDCD235E07DE00744CAB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF6EDDDC235E07DF00744CAB /* Main.storyboard in Resources */,
+				FF6EDDD9235E07DF00744CAB /* Preview Assets.xcassets in Resources */,
+				FF6EDDD6235E07DF00744CAB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		F4FD9D8A235A89880030DA5E /* Sources */ = {
+		FF6EDDCB235E07DE00744CAB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4FD9D9D235A8B6F0030DA5E /* MenuCategory.swift in Sources */,
-				F4FD9D9B235A8AFE0030DA5E /* Restaurant.swift in Sources */,
-				F4FD9DA3235A8DED0030DA5E /* Game.swift in Sources */,
-				F4FD9D92235A89880030DA5E /* main.swift in Sources */,
-				F4FD9DA5235A8EA00030DA5E /* CurrentOrder.swift in Sources */,
-				F4FD9D99235A8A6A0030DA5E /* Card.swift in Sources */,
-				F4FD9DA7235A968D0030DA5E /* RestrauntInfo.swift in Sources */,
-				F4FD9DA1235A8D6F0030DA5E /* Player.swift in Sources */,
-				F4FD9D9F235A8CD30030DA5E /* MenuItem.swift in Sources */,
+				FFD269DC235E0B5400572168 /* Restaurant.swift in Sources */,
+				FFD269D9235E0B5400572168 /* MenuCategory.swift in Sources */,
+				FF6EDDD4235E07DE00744CAB /* ContentView.swift in Sources */,
+				FFD269D4235E0A7900572168 /* CardView.swift in Sources */,
+				FFD269D8235E0B5400572168 /* Game.swift in Sources */,
+				FFD269D6235E0B5400572168 /* Card.swift in Sources */,
+				FFD269D5235E0B4C00572168 /* RestrauntInfo.swift in Sources */,
+				FFD269DA235E0B5400572168 /* MenuItem.swift in Sources */,
+				FFD269D7235E0B5400572168 /* CurrentOrder.swift in Sources */,
+				FFD269DB235E0B5400572168 /* Player.swift in Sources */,
+				FF6EDDD2235E07DE00744CAB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FF6EDDDA235E07DF00744CAB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FF6EDDDB235E07DF00744CAB /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		F4FD9D93235A89880030DA5E /* Debug */ = {
@@ -209,7 +266,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -263,7 +320,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -272,19 +329,43 @@
 			};
 			name = Release;
 		};
-		F4FD9D96235A89880030DA5E /* Debug */ = {
+		FF6EDDE0235E07DF00744CAB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Lord of the Fries/Lord_of_the_Fries.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"Lord of the Fries/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Lord of the Fries/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.marcusbamberger.Lord-of-the-Fries";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
-		F4FD9D97235A89880030DA5E /* Release */ = {
+		FF6EDDE1235E07DF00744CAB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Lord of the Fries/Lord_of_the_Fries.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"Lord of the Fries/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Lord of the Fries/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.marcusbamberger.Lord-of-the-Fries";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -302,11 +383,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F4FD9D95235A89880030DA5E /* Build configuration list for PBXNativeTarget "Lord of the Fries" */ = {
+		FF6EDDDF235E07DF00744CAB /* Build configuration list for PBXNativeTarget "Lord of the Fries" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F4FD9D96235A89880030DA5E /* Debug */,
-				F4FD9D97235A89880030DA5E /* Release */,
+				FF6EDDE0235E07DF00744CAB /* Debug */,
+				FF6EDDE1235E07DF00744CAB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
