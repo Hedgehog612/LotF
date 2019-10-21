@@ -61,10 +61,8 @@ class Deck {
     // contain.
     //------------------------------------------------------------------------------
     func aCard() -> Card {
-        for (card, count) in cards {
-            if count > 0 {
-                return card
-            }
+        for (card, count) in cards where count > 0 {
+            return card
         }
         
         assert(false)
