@@ -39,10 +39,9 @@ struct ContentView: View {
             */
             DeckView(player1Deck)
                 .position(x: 400, y: 200)
-            /*
-            OrderView(currentOrder)
+
+            OrderView(currentOrder.content)
                 .position(x: 400, y: 50)
- */
         }
     }
 }

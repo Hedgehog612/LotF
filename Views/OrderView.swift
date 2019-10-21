@@ -9,7 +9,6 @@
 import Foundation
 import SwiftUI
 
-/*
 struct OrderView: View {
     let order : [Card]
     var views = [AnyView]()
@@ -19,6 +18,7 @@ struct OrderView: View {
     
     init(_ orderIn: [Card]) {
         order = orderIn
+        print("Real contents: \(order)")
     }
     
     
@@ -27,15 +27,14 @@ struct OrderView: View {
     //------------------------------------------------------------------------------
     var body: some View {
         ZStack {
-            ForEach(order, id: \.self) { card in
-                order[id]
-                .frame(width: 20, height: 20, alignment: .center)
-                .background(order.card.color)
-                .clipShape(Circle())
-                .position(x: (100 + 30 * id), y: 100)
+            ForEach(0..<self.order.count, id:\.self) { index in
+                Circle()
+                    .frame(width: 100, height: 100, alignment: .center)
+                    .position(x: CGFloat(100 + 100 * index), y: 100)
+                    .foregroundColor(self.order[index].color)
             }
         }
+        .frame(width: 400, height: 400, alignment: .leading)
+        .position(x: 400, y: 1000)
     }
 }
-
-*/
