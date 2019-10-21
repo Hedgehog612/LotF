@@ -36,7 +36,7 @@ struct DeckView: View {
         var currentPosition = Int(1200 / totalTypes)
         
         for (card, count) in deck.cards where count > 0 {
-            //print("Card/count is: \(card) \(count)")
+            print("Card/count is: \(card) \(count)")
             for index in 0..<count {
                 uglyThings.append(QuiteUgly(card: card, x: CGFloat(100 - (index * 5) + currentPosition), y: CGFloat(400 + index * 5)))
             }

@@ -43,6 +43,7 @@ struct ContentView: View {
             OrderView(currentOrder.content)
                 .position(x: 400, y: 50)
         }
+        .frame(width: 1600, height: 1200)
     }
 }
 
