@@ -30,6 +30,8 @@ enum Card: CaseIterable, Hashable {
     // These are recipe ingredients that don't exist as real cards
     case AnyMeat
     case AnyIngredient
+    //Short exists to fill out arrays of cards containing shorts
+    case Short
     
 
     //------------------------------------------------------------------------------
@@ -47,6 +49,7 @@ enum Card: CaseIterable, Hashable {
         Fish:   ("Fish",        5,      "fishImage",        .blue,      "fishSymbol"),
         Cow:    ("Cow",         5,      "cowImage",         .red,       "cowSymbol"),
         Pie:    ("Pie",         6,      "pieImage",         .purple,    "pieSymbol"),
+        Short:  ("Short",       0,      "shortImage",       .white,     "shortSymbol")
     ]
     
     var name: String { Card.values[self]!.name }

@@ -37,3 +37,5 @@ class Game {
         print("Can you fill the order? The order is\(currentOrder!.name) and it contains \(currentOrder?.content). It has been short \(currentOrder?.short) times.")
     }
 }
+
+

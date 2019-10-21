@@ -18,6 +18,7 @@ struct CurrentOrder {
     var name: String
     var originalOrder: MenuItem
     
+    //CurrentOrder fully initializes from a given menuItem and no other input
     init (originalOrder originalOrderIn: MenuItem) {
     
         originalOrder = originalOrderIn
@@ -26,9 +27,22 @@ struct CurrentOrder {
         short = 0
         content = []
         for card in originalOrder.ingredients.keys {
-            for count in 1...originalOrder.ingredients[card]! {
+            for _ in 1...originalOrder.ingredients[card]! {
                 content.append(card)
             }
         }
+    }
+    
+    //Takes an array of cards and evaluates if it can fill the order.
+    func orderMatch(submittedOrder: [Card]) -> Bool {
+        //We need at least necessaryMatch cards to match for the order to be valid
+        let neededMatches = content.count-short
+        var totalMatched = 0
+        for (index, card) in submittedOrder.enumerated() {
+            if card.matchesRequirement(requirement: content[index]) {
+                totalMatched += 1
+            }
+        }
+        return totalMatched >= neededMatches
     }
 }
