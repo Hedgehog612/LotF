@@ -12,14 +12,19 @@ import SwiftUI
 
 struct DeckView: View {
     let deck : Deck
+    
+    
     //------------------------------------------------------------------------------
     // body
     //------------------------------------------------------------------------------
     var body: some View {
         ZStack {
+            Text("Hello")
+            /*
             //For loop iterating over each type of card in the dictionary
             //cardType stores the keys
-            let totalTypes = deck.cards.values.count()
+            let totalTypes = deck.cards.values.count
+            
             //With a window size of 1200, we restrict the cards to occupying 1000 px
             var currentPosition = 1000/totalTypes
             for cardType in deck.keys {
@@ -32,6 +37,7 @@ struct DeckView: View {
             }
             //Each different card type is a fraction of 1000 px away from the last one
             currentPosition += (1000/totalTypes)
+ */
         }
     }
 }
