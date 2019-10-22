@@ -12,10 +12,10 @@ import Foundation
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
 class Player {
-    var hand: Deck
-    var score: Deck
     var name: String
     var image: String
+    var hand: Deck
+    var score: Deck
     var scoreTokens: Int
     var totalScore: Int
     var tempScore: Int
@@ -32,6 +32,8 @@ class Player {
         scoreTokens = 0
         totalScore = totalScoreIn
         tempScore = 0
+        
+        print("Adding player \(name)")
     }
     
     //The player filled an order and moves cards from hand into score
