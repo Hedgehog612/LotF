@@ -72,8 +72,12 @@ class GameUI {
     func pickRestaurant() -> Restaurant {
         return restaurantList[0]
     }
+
     
-    //Placeholder for choosing the number of rounds to play
+    //------------------------------------------------------------------------------
+    // pickNumberOfRounds
+    // How many rounds are we gonna play?
+    //------------------------------------------------------------------------------
     func pickNumberOfRounds() -> Int {
         return 4
     }

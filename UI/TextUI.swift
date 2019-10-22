@@ -67,8 +67,22 @@ class TextUI : GameUI {
         return restaurantList[pick!]
     }
     
+    
+    //------------------------------------------------------------------------------
+    // pickNumberOfRounds
+    //------------------------------------------------------------------------------
     override func pickNumberOfRounds() -> Int {
-        print("How many rounds will you play?")
-        return 4
+        print("\n\nHow many rounds will you play?")
+
+        var numberOfRounds: Int?
+        while numberOfRounds == nil || numberOfRounds! <= 0 {
+            var answer: String?
+            while answer == nil {
+                answer = readLine()
+            }
+            numberOfRounds = Int(answer!)
+        }
+        
+        return numberOfRounds!
     }
 }
