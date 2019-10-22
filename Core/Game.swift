@@ -22,6 +22,7 @@ class Game {
     var restaurant: Restaurant?
     var roundEnd: Bool
     var firstPlayer: Player?
+    var playerNames: String
     
 
     //------------------------------------------------------------------------------
@@ -36,6 +37,7 @@ class Game {
         restaurant = nil
         roundEnd = false
         rolledOrder = false
+        playerNames = ""
     }
     
 
@@ -48,7 +50,7 @@ class Game {
     
     //Placeholder function. This function should get the number of players, names of players, and current restaurant as user input once we have the UI more developed.
     func beginGame() {
-        
+        namePlayers()
     }
 
     //The main gameplay loop.
@@ -60,6 +62,14 @@ class Game {
             }
         }
         scoring()
+    }
+    
+    
+    func makePlayers() {
+        let nameComponents = playerNames.components(separatedBy: " ")
+        for name in nameComponents {
+            playerOrder.append(Player(name: name, image: "Placeholder image", totalScore: 0))
+        }
     }
     
     
