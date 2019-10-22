@@ -36,6 +36,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // Let's do this thing
         game.beginGame()
+        while game.currentRound <= game.numberOfRounds {
+            game.playRound()
+        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

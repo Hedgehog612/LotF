@@ -72,4 +72,8 @@ class GameUI {
     func pickRestaurant() -> Restaurant {
         return restaurantList[0]
     }
+    
+    func pickNumberOfRounds() -> Int {
+        return 4
+    }
 }

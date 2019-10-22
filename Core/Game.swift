@@ -24,6 +24,8 @@ class Game {
     var roundEnd: Bool
     var firstPlayer: Player?
     var playerNames: [String]
+    var numberOfRounds: Int
+    var currentRound: Int
     
 
     //------------------------------------------------------------------------------
@@ -40,6 +42,8 @@ class Game {
         roundEnd = false
         rolledOrder = false
         playerNames = []
+        numberOfRounds = 0
+        currentRound = 0
     }
     
 
@@ -57,8 +61,7 @@ class Game {
         for name in names {
             playerOrder.append(Player(name: name, image: "No image yet"))
         }
-        
-        gameUI.pickRestaurant()
+        restaurant = gameUI.pickRestaurant()
     }
     
 
@@ -193,5 +196,6 @@ class Game {
                 playerOrder.append(movePlayer)
             }
         }
+        currentRound += 1
     }
 }
