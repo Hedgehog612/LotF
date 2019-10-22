@@ -31,9 +31,9 @@ class Game {
         nullPile = []
         stewPot = []
         timer = 0
-        rolledOrder = false
         restaurant = nil
         roundEnd = false
+        rolledOrder = false
     }
     
 
@@ -73,16 +73,14 @@ class Game {
         print("Would you like to roll a random order or call an order?")
         //Placeholder decision: Need to accept user input to set rolledOrder
         switch rolledOrder {
-        case rolledOrder == false:
+        case false:
             print("Please select an order from the list.")
-        case rolledOrder == true:
+        case true:
             print("You have chosen to roll a random order.")
             let orderType = Int.random(in: 1..<6)
             let orderNumber = Int.random(in: 1..<6)
             currentOrder = CurrentOrder(originalOrder: restaurant!.menuCategories[orderType].menuItems[orderNumber])
             print("Your order is \(currentOrder!.name).")
-        default:
-            assert(false)
         }
         //After selecting the order, it's the next player's turn
         let activePlayer = playerOrder.remove(at: 0)
@@ -93,7 +91,6 @@ class Game {
     //Placeholder function. This function gives the current player a chance to fill the order or pass to the next player in line.
     //As the main gameplay loop, we also need to check if anyone's hand is empty at the end
     func orderToPlayer() {
-        let activePlayer = playerOrder[0]
         //Begin by checking if the order has become more short than it currently is
         if currentOrder!.timesPassed == playerOrder.count {
             currentOrder!.timesPassed = 0
@@ -104,14 +101,12 @@ class Game {
         print("The order is \(currentOrder!.name) and it contains \(currentOrder!.content). The order has been shortened by \(currentOrder!.short) items. Do you wish to fill or pass?")
         switch fillOrder {
             //If the order doesn't get filled, move the active player to the back of the order and keep going
-        case fillOrder == false:
+        case false:
             currentOrder!.timesPassed += 1
-            playerOrder.remove(at: 0)
+            let activePlayer = playerOrder.remove(at: 0)
             playerOrder.append(activePlayer)
-        case fillOrder == true:
+        case true:
             matchFood()
-        default:
-            assert(false)
         }
         for player in playerOrder {
             if player.hand.count == 0 {
@@ -157,7 +152,7 @@ class Game {
             player.tempScore = roundPoints
             print("\(player.name)'s score this round is \(roundPoints)")
             player.totalScore += roundPoints
-            print("This brings \(player.name)'s total score to \(player.totalScore).") 
+            print("This brings \(player.name)'s total score to \(player.totalScore).")
         }
     }
 }
