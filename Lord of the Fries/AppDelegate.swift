@@ -8,6 +8,7 @@
 
 import Cocoa
 import SwiftUI
+var game = Game()
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {

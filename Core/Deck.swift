@@ -30,6 +30,9 @@ class Deck {
     }
     
     
+    init() {
+    }
+    
     //------------------------------------------------------------------------------
     // cardCounts
     // Returns our contents as a dictionary of [Card : # of cards]

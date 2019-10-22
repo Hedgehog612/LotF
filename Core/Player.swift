@@ -12,8 +12,8 @@ import Foundation
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
 class Player {
-    var hand: [Card : Int]
-    var score: [Card : Int]
+    var hand: Deck
+    var score: Deck
     var name: String
     var image: String
     var scoreTokens: Int
@@ -25,8 +25,8 @@ class Player {
     //------------------------------------------------------------------------------
     //Score tracks the player's score in a given round as a dictionary of cards. TotalScore tracks the player's total score across all rounds played, and can be stored as an int.
     init(name nameIn: String, image imageIn: String, totalScore totalScoreIn: Int = 0) {
-        hand = [:]
-        score = [:]
+        hand = Deck()
+        score = Deck()
         name = nameIn
         image = imageIn
         scoreTokens = 0
@@ -39,10 +39,8 @@ class Player {
     //This takes the array of cards the player played, not the array of cards the order required, because the order could be short or substituted.
     func filledOrder(orderCards: [Card], tokens: Int = 0) {
         for card in orderCards {
-            hand[card]! -= 1
-            //You should never play a card you don't have
-            assert(hand[card]! >= 0)
-            score[card]! += 1
+            hand.removeCard(card)
+            score.addCard(card)
         }
         scoreTokens += tokens
     }

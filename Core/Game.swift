@@ -22,14 +22,14 @@ class Game {
     var restaurant: Restaurant?
     var roundEnd: Bool
     var firstPlayer: Player?
-    var playerNames: String
+    var playerNames: [String]
     
 
     //------------------------------------------------------------------------------
     //------------------------------------------------------------------------------
-    init(specialRule specialRuleIn: String, playerOrder playerOrderIn: [Player]) {
-        specialRule = specialRuleIn
-        playerOrder = playerOrderIn
+    init() {
+        specialRule = ""
+        playerOrder = []
         firstPlayer = nil
         nullPile = []
         stewPot = []
@@ -37,7 +37,7 @@ class Game {
         restaurant = nil
         roundEnd = false
         rolledOrder = false
-        playerNames = ""
+        playerNames = []
     }
     
 
@@ -66,8 +66,7 @@ class Game {
     
     
     func makePlayers() {
-        let nameComponents = playerNames.components(separatedBy: " ")
-        for name in nameComponents {
+        for name in playerNames {
             playerOrder.append(Player(name: name, image: "Placeholder image", totalScore: 0))
         }
     }
@@ -118,9 +117,9 @@ class Game {
         case false:
             //The player who passes gives a card to the player who rolled or the player to their left, depending
             if rolledOrder {
-                playerOrder[0].deck.deal(recipient: firstPlayer)
+                playerOrder[0].hand.deal(recipient: firstPlayer!.hand)
             } else {
-                playerOrder[0].deck.deal(recipient: playerOrder[1])
+                playerOrder[0].hand.deal(recipient: playerOrder[1].hand)
             }
             currentOrder!.timesPassed += 1
             let activePlayer = playerOrder.remove(at: 0)
@@ -129,7 +128,7 @@ class Game {
             matchFood()
         }
         for player in playerOrder {
-            if player.hand.count == 0 {
+            if player.hand.cards.count == 0 {
                 print("The round has ended!")
                 currentOrder = nil
                 roundEnd = true
@@ -155,18 +154,18 @@ class Game {
     
     //Placeholder function. This function tallies up the scores of each player at the end of the round.
     func scoring() {
-        var roundScores: [Int]
+        var roundScores = [Int]()
         for player in playerOrder {
             var roundPoints = 0
-            for card in player.score {
+            for card in player.score.cards {
                 //Score by multiplying the number of cards of each type by the point value of those cards
-                roundPoints += card.value * card.key.score
+                roundPoints += card.score
             }
             roundPoints += player.scoreTokens
             print("\(player.name) scored \(roundPoints) this round.")
             var lostPoints = 0
-            for card in player.hand {
-                lostPoints += card.value * card.key.score
+            for card in player.hand.cards {
+                lostPoints += card.score
             }
             print("\(player.name) has \(lostPoints) points still in hand.")
             roundPoints -= lostPoints
