@@ -70,13 +70,16 @@ class Deck {
         cards.remove(at: index)
     }
     
-    //Deal a card to another player
-    //Placeholder function that accepts user input to determine which card to deal
-    //This function will break until deck is rewritten to be an array
+    
+    //------------------------------------------------------------------------------
+    // deal
+    // Deal a card to another player
+    //------------------------------------------------------------------------------
     func deal(recipient: Deck) {
-        let dealtCard = self.remove(at:0)
-        recipient.append(dealtCard)
+        let dealtCard = cards.remove(at:0)
+        recipient.cards.append(dealtCard)
     }
+    
     
     //------------------------------------------------------------------------------
     // shuffleAndDeal
