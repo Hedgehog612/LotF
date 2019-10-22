@@ -17,6 +17,7 @@ struct CurrentOrder {
     var tokens: Int
     var name: String
     var originalOrder: MenuItem
+    var timesPassed: Int
     
     //CurrentOrder fully initializes from a given menuItem and no other input
     init (originalOrder originalOrderIn: MenuItem) {
@@ -26,6 +27,9 @@ struct CurrentOrder {
         tokens = 0
         short = 0
         content = []
+        //timesPassed is related to short: If timesPassed == playerOrder.count, timesPassed = 0 and short += 1.
+        //If short == content.count, terminate the order and move on.
+        timesPassed = 0
         for card in originalOrder.ingredients.keys {
             for _ in 1...originalOrder.ingredients[card]! {
                 content.append(card)

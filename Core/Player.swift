@@ -18,6 +18,7 @@ class Player {
     var image: String
     var scoreTokens: Int
     var totalScore: Int
+    var tempScore: Int
     
 
     //------------------------------------------------------------------------------
@@ -30,6 +31,7 @@ class Player {
         image = imageIn
         scoreTokens = 0
         totalScore = totalScoreIn
+        tempScore = 0
     }
     
     //The player filled an order and moves cards from hand into score
