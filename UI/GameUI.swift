@@ -73,6 +73,11 @@ class GameUI {
         return restaurantList[0]
     }
     
+    
+    //------------------------------------------------------------------------------
+    // pickNumberOfRounds
+    // How many rounds are we gonna play?
+    //------------------------------------------------------------------------------
     func pickNumberOfRounds() -> Int {
         return 4
     }

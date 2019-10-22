@@ -13,11 +13,4 @@ import Foundation
 //
 //------------------------------------------------------------------------------
 class FullUI : GameUI {
-    override func pickPlayers() -> [String] {
-        return []
-    }
-    
-    override func pickNumberOfRounds() -> Int {
-        return 4
-    }
 }
