@@ -13,7 +13,7 @@ import SwiftUI
 
 //Full of placeholders in place of proper UI right now
 //This function determines the number of players. It is called at the beginning of the game.
-struct namePlayers: View {
+struct NamePlayers: View {
     @State private var name1: String = "Name1"
     @State private var name2: String = "Name2"
     @State private var name3: String = "Name3"

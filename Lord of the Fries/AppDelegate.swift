@@ -20,6 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        let namePlayers = NamePlayers()
         // Create the SwiftUI view that provides the window contents.
         let contentView = ContentView()
 

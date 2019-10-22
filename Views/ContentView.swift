@@ -41,7 +41,6 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 
-//Todo: Get card types sorting by point value (l-r ascending)
-//Get cards vertically aligned on the bottom (high effort, low reward)
+//Todo: 
 //Set up a main class so currentOrder and restaurant stop being optional
-//game.scoring should make the player who scored the least points in a round the first player for the next round
+
