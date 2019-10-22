@@ -20,10 +20,14 @@ class TextUI : GameUI {
     
     override func pickRestaurant() -> Restaurant {
         print("What restaurant would you like?")
-        let restaurants = RestaurantInfo()
-        for restaurant in restaurants.restaurantList {
+        for restaurant in restaurantList {
             print(restaurant.name)
         }
-        return restaurants.restaurantList[0]
+        return restaurantList[0]
+    }
+    
+    override func pickNumberOfRounds() -> Int {
+        print("How many rounds will you play?")
+        return 4
     }
 }
