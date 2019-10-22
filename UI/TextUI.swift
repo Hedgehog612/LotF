@@ -15,7 +15,6 @@ import Foundation
 class TextUI : GameUI {
     override func pickPlayers() -> [String] {
         print("How many players would you like (3 - 8)?")
-        let number = readLine()
         return []
     }
 }

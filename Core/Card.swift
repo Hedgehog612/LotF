@@ -79,7 +79,7 @@ enum Card: CaseIterable, Hashable, Comparable {
     
     
     //------------------------------------------------------------------------------
-    // For Comparable
+    // < (for Comparable)
     //------------------------------------------------------------------------------
     static func < (lhs: Card, rhs: Card) -> Bool {
         if lhs.score == rhs.score {

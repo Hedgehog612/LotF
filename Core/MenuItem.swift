@@ -10,6 +10,8 @@ import Foundation
 
 
 //------------------------------------------------------------------------------
+// MenuItem
+// A single item on a menu.
 //------------------------------------------------------------------------------
 struct MenuItem {
     var name: String
@@ -18,6 +20,7 @@ struct MenuItem {
     
     
     //------------------------------------------------------------------------------
+    // init
     //------------------------------------------------------------------------------
     init(name nameIn: String, ingredients ingredientsIn: [Card:Int], cardsMustAllBeDifferent cardsMustAllBeDifferentIn: Bool = false) {
         name = nameIn

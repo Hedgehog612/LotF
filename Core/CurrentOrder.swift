@@ -10,37 +10,45 @@ import Foundation
 
 
 //------------------------------------------------------------------------------
+// CurrentOrder
+// Once the shift leader picks a menu item, it becomes a CurrentOrder. This tracks
+// what the customer ordered, whether it's short, etc.
 //------------------------------------------------------------------------------
 struct CurrentOrder {
-    var content: [Card]
+    var originalItem: MenuItem
     var short: Int
     var tokens: Int
-    var name: String
-    var originalOrder: MenuItem
     var timesPassed: Int
+    var content = [Card]()
     
-    //CurrentOrder fully initializes from a given menuItem and no other input
+
+    //------------------------------------------------------------------------------
+    // init
+    // Builds us based on a given menuItem
+    //------------------------------------------------------------------------------
     init (originalOrder originalOrderIn: MenuItem) {
-    
-        originalOrder = originalOrderIn
-        name = originalOrder.name
-        tokens = 0
-        short = 0
-        content = []
         //timesPassed is related to short: If timesPassed == playerOrder.count, timesPassed = 0 and short += 1.
         //If short == content.count, terminate the order and move on.
+        originalItem = originalOrderIn
+        tokens = 0
+        short = 0
         timesPassed = 0
-        for card in originalOrder.ingredients.keys {
-            for _ in 1...originalOrder.ingredients[card]! {
+
+        for card in originalItem.ingredients.keys {
+            for _ in 1...originalItem.ingredients[card]! {
                 content.append(card)
             }
         }
     }
     
-    //Takes an array of cards and evaluates if it can fill the order.
-    func orderMatch(submittedOrder: [Card]) -> Bool {
+    
+    //------------------------------------------------------------------------------
+    // doesOrderMatch
+    // Can a given array of cards fill this order?
+    //------------------------------------------------------------------------------
+    func doesOrderMatch(submittedOrder: [Card]) -> Bool {
         //We need at least necessaryMatch cards to match for the order to be valid
-        let neededMatches = content.count-short
+        let neededMatches = content.count - short
         var totalMatched = 0
         for (index, card) in submittedOrder.enumerated() {
             if card.matchesRequirement(requirement: content[index]) {

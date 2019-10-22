@@ -46,7 +46,7 @@ class Game {
     //------------------------------------------------------------------------------
     //------------------------------------------------------------------------------
     func fillOrder(player: Player) {
-        print("Can you fill the order? The order is\(currentOrder!.name) and it contains \(currentOrder?.content). It has been short \(currentOrder?.short) times.")
+        print("Can you fill the order? The order is\(currentOrder!.originalItem.name) and it contains \(currentOrder!.content). It has been short \(currentOrder!.short) times.")
     }
     
     
@@ -57,6 +57,7 @@ class Game {
             playerOrder.append(Player(name: name, image: "No image yet"))
         }
     }
+    
 
     //The main gameplay loop.
     func playRound() {
@@ -96,7 +97,7 @@ class Game {
             let orderType = Int.random(in: 1..<6)
             let orderNumber = Int.random(in: 1..<6)
             currentOrder = CurrentOrder(originalOrder: restaurant!.menuCategories[orderType].menuItems[orderNumber])
-            print("Your order is \(currentOrder!.name).")
+            print("Your order is \(currentOrder!.originalItem.name).")
             //For a rolled order, all passes go to this player
             firstPlayer = playerOrder[0]
         }
@@ -116,7 +117,7 @@ class Game {
         }
         //Placeholder decision: Need to accept user input to fill or pass order.
         let fillOrder = true
-        print("The order is \(currentOrder!.name) and it contains \(currentOrder!.content). The order has been shortened by \(currentOrder!.short) items. Do you wish to fill or pass?")
+        print("The order is \(currentOrder!.originalItem.name) and it contains \(currentOrder!.content). The order has been shortened by \(currentOrder!.short) items. Do you wish to fill or pass?")
         switch fillOrder {
             //If the order doesn't get filled, move the active player to the back of the order and keep going
         case false:
@@ -147,7 +148,7 @@ class Game {
         var playerFill: [Card]
         //Placeholder in place of user input
         playerFill = []
-        if (currentOrder!.orderMatch(submittedOrder: playerFill)) {
+        if (currentOrder!.doesOrderMatch(submittedOrder: playerFill)) {
             print("You have matched the order!")
             playerOrder[0].filledOrder(orderCards: playerFill, tokens: currentOrder!.tokens)
             currentOrder = nil

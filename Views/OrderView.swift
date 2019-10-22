@@ -18,7 +18,7 @@ struct OrderView: View {
     
     init(_ orderIn: [Card]) {
         order = orderIn
-        print("Real contents: \(order)")
+        print("Order contents: \(order)")
     }
     
     
