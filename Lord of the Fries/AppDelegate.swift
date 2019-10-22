@@ -8,7 +8,10 @@
 
 import Cocoa
 import SwiftUI
-var game = Game()
+
+
+var game = Game(gameUI: GameUI.makeUI(.automated))
+
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -30,6 +33,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.setFrameAutosaveName("Main Window")
         window.contentView = NSHostingView(rootView: contentView)
         window.makeKeyAndOrderFront(nil)
+        
+        // Let's do this thing
+        game.beginGame()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

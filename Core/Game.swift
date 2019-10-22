@@ -12,6 +12,7 @@ import Foundation
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
 class Game {
+    var gameUI: GameUI
     var currentOrder: CurrentOrder?
     var specialRule: String
     var playerOrder: [Player]
@@ -27,7 +28,8 @@ class Game {
 
     //------------------------------------------------------------------------------
     //------------------------------------------------------------------------------
-    init() {
+    init(gameUI gameUIIn: GameUI) {
+        gameUI = gameUIIn
         specialRule = ""
         playerOrder = []
         firstPlayer = nil
@@ -51,6 +53,10 @@ class Game {
     //Placeholder function. This function should get the number of players, names of players, and current restaurant as user input once we have the UI more developed.
     func beginGame() {
         NamePlayers()
+        let names = gameUI.pickPlayers()
+        for name in names {
+            playerOrder.append(Player(name: name, image: "No image yet"))
+        }
     }
 
     //The main gameplay loop.
