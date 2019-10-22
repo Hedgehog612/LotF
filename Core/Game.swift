@@ -50,7 +50,7 @@ class Game {
     
     //Placeholder function. This function should get the number of players, names of players, and current restaurant as user input once we have the UI more developed.
     func beginGame() {
-        namePlayers()
+        NamePlayers()
     }
 
     //The main gameplay loop.
