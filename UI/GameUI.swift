@@ -100,4 +100,8 @@ class GameUI {
         return false
     }
     
+    //Placeholder function to fill an order with cards from your hand
+    func pickCardsToFill() -> [Card] {
+        return []
+    }
 }
