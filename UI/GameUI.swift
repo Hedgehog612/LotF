@@ -83,8 +83,14 @@ class GameUI {
     }
     
     
+    //Placeholder for picking if you roll or call (Always calls)
+    func pickRollOrCall() -> Bool {
+        return false
+    }
+    
+    
     //Placeholder for choosing an item on the menu
-    func pickOrder(menu: [MenuCategory]) -> MenuItem {
+    func pickCallOrder(menu: [MenuCategory]) -> MenuItem {
         return menu[0].menuItems[0]
     }
     
