@@ -14,7 +14,7 @@ import SwiftUI
 // Card
 // A single ingredient card.
 //------------------------------------------------------------------------------
-enum Card: CaseIterable, Hashable {
+enum Card: CaseIterable, Hashable, Comparable {
     // These are actual cards that a player can have in their hand.
     case Bun
     case Sauce
@@ -75,5 +75,17 @@ enum Card: CaseIterable, Hashable {
         return requirement == self
             || requirement == .AnyMeat && self.isMeat()
             || requirement == .AnyIngredient
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // For Comparable
+    //------------------------------------------------------------------------------
+    static func < (lhs: Card, rhs: Card) -> Bool {
+        if lhs.score == rhs.score {
+            return lhs.name < rhs.name
+        }
+        
+        return lhs.score < rhs.score
     }
 }

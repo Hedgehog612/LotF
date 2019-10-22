@@ -18,9 +18,9 @@ struct ContentView: View {
         let player1Deck = Deck([.Cow: 3, .Fish: 2, .Bun: 1, .Sauce: 3, .Fries: 1])
         
         let currentOrder = CurrentOrder(originalOrder: MenuItem(name: "Fur Piece", ingredients: [.Bun:3, .Cow:2, .Pie:1]))
-        return ZStack {
-            DeckView(player1Deck)
-                .position(x: 800, y: 1020)
+        return GeometryReader { geometry in 
+            HandView(deck: player1Deck)
+                .position(x: 800, y: 1010)
 
             OrderView(currentOrder.content)
                 .position(x: 400, y: 50)

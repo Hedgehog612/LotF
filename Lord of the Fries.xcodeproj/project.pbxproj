@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F438C885235E334300DD143D /* DeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F438C884235E334300DD143D /* DeckView.swift */; };
+		F438C885235E334300DD143D /* HandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F438C884235E334300DD143D /* HandView.swift */; };
 		F438C887235E4E0400DD143D /* OrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F438C886235E4E0400DD143D /* OrderView.swift */; };
 		FF6EDDD2235E07DE00744CAB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6EDDD1235E07DE00744CAB /* AppDelegate.swift */; };
 		FF6EDDD4235E07DE00744CAB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6EDDD3235E07DE00744CAB /* ContentView.swift */; };
 		FF6EDDD6235E07DF00744CAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF6EDDD5235E07DF00744CAB /* Assets.xcassets */; };
 		FF6EDDD9235E07DF00744CAB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF6EDDD8235E07DF00744CAB /* Preview Assets.xcassets */; };
 		FF6EDDDC235E07DF00744CAB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF6EDDDA235E07DF00744CAB /* Main.storyboard */; };
+		FFA2EE7F235F6359003AE97A /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA2EE7E235F6359003AE97A /* StackView.swift */; };
 		FFD269D4235E0A7900572168 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD269D3235E0A7900572168 /* CardView.swift */; };
 		FFD269D5235E0B4C00572168 /* RestrauntInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9DA6235A968D0030DA5E /* RestrauntInfo.swift */; };
 		FFD269D6235E0B5400572168 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9D98235A8A6A0030DA5E /* Card.swift */; };
@@ -27,7 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F438C884235E334300DD143D /* DeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckView.swift; sourceTree = "<group>"; };
+		F438C884235E334300DD143D /* HandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandView.swift; sourceTree = "<group>"; };
 		F438C886235E4E0400DD143D /* OrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderView.swift; sourceTree = "<group>"; };
 		F4FD9D98235A8A6A0030DA5E /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		F4FD9D9A235A8AFE0030DA5E /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
@@ -45,6 +46,7 @@
 		FF6EDDDB235E07DF00744CAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FF6EDDDD235E07DF00744CAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF6EDDDE235E07DF00744CAB /* Lord_of_the_Fries.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Lord_of_the_Fries.entitlements; sourceTree = "<group>"; };
+		FFA2EE7E235F6359003AE97A /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
 		FFD269D3235E0A7900572168 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		FFE04E7A235E3121002B953B /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,8 +122,9 @@
 			children = (
 				FFD269D3235E0A7900572168 /* CardView.swift */,
 				FF6EDDD3235E07DE00744CAB /* ContentView.swift */,
-				F438C884235E334300DD143D /* DeckView.swift */,
+				F438C884235E334300DD143D /* HandView.swift */,
 				F438C886235E4E0400DD143D /* OrderView.swift */,
+				FFA2EE7E235F6359003AE97A /* StackView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFA2EE7F235F6359003AE97A /* StackView.swift in Sources */,
 				FFE04E7B235E3121002B953B /* Deck.swift in Sources */,
 				FFD269DC235E0B5400572168 /* Restaurant.swift in Sources */,
 				FFD269D9235E0B5400572168 /* MenuCategory.swift in Sources */,
@@ -210,7 +214,7 @@
 				FFD269DB235E0B5400572168 /* Player.swift in Sources */,
 				F438C887235E4E0400DD143D /* OrderView.swift in Sources */,
 				FF6EDDD2235E07DE00744CAB /* AppDelegate.swift in Sources */,
-				F438C885235E334300DD143D /* DeckView.swift in Sources */,
+				F438C885235E334300DD143D /* HandView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
