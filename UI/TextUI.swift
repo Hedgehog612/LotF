@@ -18,4 +18,13 @@ class TextUI : GameUI {
         let number = readLine()
         return []
     }
+    
+    override func pickRestaurant() -> Restaurant {
+        print("What restaurant would you like?")
+        let restaurants = RestaurantInfo()
+        for restaurant in restaurants.restaurantList {
+            print(restaurant.name)
+        }
+        return restaurants.restaurantList[0]
+    }
 }
