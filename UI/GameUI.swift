@@ -73,7 +73,21 @@ class GameUI {
         return restaurantList[0]
     }
     
+    //Placeholder for choosing the number of rounds to play
     func pickNumberOfRounds() -> Int {
         return 4
     }
+    
+    
+    //Placeholder for choosing an item on the menu
+    func pickOrder(menu: MenuCategory) -> MenuItem {
+        return menu.menuItems[0]
+    }
+    
+    
+    //Placeholder for choosing whether to fill or pass (Always passes)
+    func pickFillOrPass() -> Bool {
+        return false
+    }
+    
 }

@@ -43,7 +43,7 @@ class Game {
         rolledOrder = false
         playerNames = []
         numberOfRounds = 0
-        currentRound = 0
+        currentRound = 1
     }
     
 
@@ -62,6 +62,7 @@ class Game {
             playerOrder.append(Player(name: name, image: "No image yet"))
         }
         restaurant = gameUI.pickRestaurant()
+        numberOfRounds = gameUI.pickNumberOfRounds()
     }
     
 
