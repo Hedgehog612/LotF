@@ -10,7 +10,7 @@ import Cocoa
 import SwiftUI
 
 
-var game = Game(gameUI: GameUI())
+var game = Game(gameUI: GameUI.makeUI(.automated))
 
 
 @NSApplicationMain
