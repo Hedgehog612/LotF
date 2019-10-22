@@ -15,7 +15,7 @@ import SwiftUI
 //------------------------------------------------------------------------------
 struct ContentView: View {
     var body: some View {
-        let player1Deck = Deck([.Cow: 3, .Fish: 2, .Bun: 1, .Sauce: 3, .Fries: 1])
+        let player1Deck = Deck(cardCounts: [.Cow: 3, .Fish: 2, .Bun: 1, .Sauce: 3, .Fries: 1])
         
         let currentOrder = CurrentOrder(originalOrder: MenuItem(name: "Fur Piece", ingredients: [.Bun:3, .Cow:2, .Pie:1]))
         return GeometryReader { geometry in 
