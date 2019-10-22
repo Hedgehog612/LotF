@@ -37,7 +37,7 @@ class Restaurant {
 }
 
 
-var restrauntList = [
+var restaurantList = [
 Restaurant(
     image:      "Ratherbee's Zombie",
     name:       "Ratherbee's Steakhouse",

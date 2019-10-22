@@ -54,7 +54,6 @@ class GameUI {
     }
     
     func pickRestaurant() -> Restaurant {
-        let restaurants = RestaurantInfo()
-        return restaurants.restaurantList[0]
+        return restaurantList[0]
     }
 }
