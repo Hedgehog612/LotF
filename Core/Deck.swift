@@ -84,6 +84,13 @@ class Deck {
         assert(false)
     }
     
+    //Deal a card to another player
+    //Placeholder function that accepts user input to determine which card to deal
+    //This function will break until deck is rewritten to be an array
+    func deal(recipient: Deck) {
+        let dealtCard = self.remove(at:0)
+        recipient.append(dealtCard)
+    }
     
     //------------------------------------------------------------------------------
     // shuffleAndDeal

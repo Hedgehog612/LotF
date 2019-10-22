@@ -21,6 +21,7 @@ class Game {
     var rolledOrder: Bool
     var restaurant: Restaurant?
     var roundEnd: Bool
+    var firstPlayer: Player?
     
 
     //------------------------------------------------------------------------------
@@ -28,6 +29,7 @@ class Game {
     init(specialRule specialRuleIn: String, playerOrder playerOrderIn: [Player]) {
         specialRule = specialRuleIn
         playerOrder = playerOrderIn
+        firstPlayer = nil
         nullPile = []
         stewPot = []
         timer = 0
@@ -81,6 +83,8 @@ class Game {
             let orderNumber = Int.random(in: 1..<6)
             currentOrder = CurrentOrder(originalOrder: restaurant!.menuCategories[orderType].menuItems[orderNumber])
             print("Your order is \(currentOrder!.name).")
+            //For a rolled order, all passes go to this player
+            firstPlayer = playerOrder[0]
         }
         //After selecting the order, it's the next player's turn
         let activePlayer = playerOrder.remove(at: 0)
@@ -102,6 +106,12 @@ class Game {
         switch fillOrder {
             //If the order doesn't get filled, move the active player to the back of the order and keep going
         case false:
+            //The player who passes gives a card to the player who rolled or the player to their left, depending
+            if rolledOrder {
+                playerOrder[0].deck.deal(recipient: firstPlayer)
+            } else {
+                playerOrder[0].deck.deal(recipient: playerOrder[1])
+            }
             currentOrder!.timesPassed += 1
             let activePlayer = playerOrder.remove(at: 0)
             playerOrder.append(activePlayer)
@@ -135,6 +145,7 @@ class Game {
     
     //Placeholder function. This function tallies up the scores of each player at the end of the round.
     func scoring() {
+        var roundScores: [Int]
         for player in playerOrder {
             var roundPoints = 0
             for card in player.score {
@@ -150,9 +161,19 @@ class Game {
             print("\(player.name) has \(lostPoints) points still in hand.")
             roundPoints -= lostPoints
             player.tempScore = roundPoints
+            roundScores.append(player.tempScore)
             print("\(player.name)'s score this round is \(roundPoints)")
             player.totalScore += roundPoints
             print("This brings \(player.name)'s total score to \(player.totalScore).")
+        }
+        //Move the player with the smallest score to the front
+        let minScore = roundScores.min()!
+        var movePlayer: Player
+        for _ in 1...playerOrder.count {
+            if playerOrder[0].tempScore > minScore {
+                movePlayer = playerOrder.remove(at: 0)
+                playerOrder.append(movePlayer)
+            }
         }
     }
 }
