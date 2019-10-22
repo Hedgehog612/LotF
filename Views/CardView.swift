@@ -13,31 +13,47 @@ import SwiftUI
 // CardView
 // Displays a single card
 //------------------------------------------------------------------------------
-struct CardView: View {
+struct CardView: View, Hashable {
     let card: Card
+    let x: CGFloat
+    let y: CGFloat
+    
+    
+    //------------------------------------------------------------------------------
+    // init
+    //------------------------------------------------------------------------------
+    init(card cardIn: Card, x xIn: CGFloat, y yIn: CGFloat) {
+        card = cardIn
+        x = xIn
+        y = yIn
+    }
     
 
     //------------------------------------------------------------------------------
     // body
     //------------------------------------------------------------------------------
     var body: some View {
-        ZStack {
-            Text(card.name)
-                .font(.headline)
-                .frame(width: 200, height: 25, alignment: .center)
-                .position(x: 100, y: 25)
-            
-            Text(String(card.score))
-                .font(.subheadline)
-                .frame(width: 30, height: 30, alignment: .center)
-                .position(x: 170, y: 270)
+        GeometryReader { geometry1 in
+            GeometryReader { geometry2 in
+                Text(self.card.name)
+                    .font(.headline)
+                    .position(x: 100, y: 18)
+                    .frame(width: 200, height: 36, alignment: .center)
+                    
+                Text(String(self.card.score))
+                    .position(x: 170, y: 270)
+                    .frame(width: 30, height: 30, alignment: .center)
+                    .font(.subheadline)
+            }
+            .frame(width: 200, height: 300, alignment: .center)
+            .background(self.card.color)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.black))
         }
-        .frame(width: 200, height: 300, alignment: .center)
-        .background(card.color)
-        .clipShape(RoundedRectangle(cornerRadius: 10))
-        .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.black))
+    .position(x: self.x, y: self.y)
+    .frame(width: 200, height: 300, alignment: .center)
     }
 }
 
@@ -47,6 +63,6 @@ struct CardView: View {
 //------------------------------------------------------------------------------
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(card: .Bird)
+        CardView(card: .Bird, x: 100, y: 150)
     }
 }
