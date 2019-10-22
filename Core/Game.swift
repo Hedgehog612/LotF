@@ -124,6 +124,11 @@ class Game {
             currentOrder!.timesPassed = 0
             currentOrder!.short += 1
         }
+        if currentOrder!.short == currentOrder!.content.count {
+            print("The order is too short and cannot be filled! Choose a new order.")
+            currentOrder = nil
+            return
+        }
         //Placeholder decision: Need to accept user input to fill or pass order.
         let fillOrPass = gameUI.pickFillOrPass()
         print("The order is \(currentOrder!.originalItem.name) and it contains \(currentOrder!.content). The order has been shortened by \(currentOrder!.short) items. Do you wish to fill or pass?")
