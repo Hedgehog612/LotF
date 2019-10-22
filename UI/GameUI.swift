@@ -84,8 +84,8 @@ class GameUI {
     
     
     //Placeholder for choosing an item on the menu
-    func pickOrder(menu: MenuCategory) -> MenuItem {
-        return menu.menuItems[0]
+    func pickOrder(menu: [MenuCategory]) -> MenuItem {
+        return menu[0].menuItems[0]
     }
     
     

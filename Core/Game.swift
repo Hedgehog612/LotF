@@ -99,6 +99,7 @@ class Game {
         switch rolledOrder {
         case false:
             print("Please select an order from the list.")
+            currentOrder = CurrentOrder(originalOrder: gameUI.pickOrder(menu: restaurant!.menuCategories))
         case true:
             print("You have chosen to roll a random order.")
             let orderType = Int.random(in: 1..<6)
@@ -123,7 +124,7 @@ class Game {
             currentOrder!.short += 1
         }
         //Placeholder decision: Need to accept user input to fill or pass order.
-        let fillOrder = true
+        let fillOrder = gameUI.pickFillOrPass()
         print("The order is \(currentOrder!.originalItem.name) and it contains \(currentOrder!.content). The order has been shortened by \(currentOrder!.short) items. Do you wish to fill or pass?")
         switch fillOrder {
             //If the order doesn't get filled, move the active player to the back of the order and keep going
