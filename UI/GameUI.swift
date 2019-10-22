@@ -52,4 +52,9 @@ class GameUI {
         let numberOfPlayers = Int.random(in: 3...8)
         return Array(names.prefix(numberOfPlayers))
     }
+    
+    func pickRestaurant() -> Restaurant {
+        let restaurants = RestaurantInfo()
+        return restaurants.restaurantList[0]
+    }
 }
