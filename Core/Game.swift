@@ -57,6 +57,8 @@ class Game {
         for name in names {
             playerOrder.append(Player(name: name, image: "No image yet"))
         }
+        
+        gameUI.pickRestaurant()
     }
     
 
