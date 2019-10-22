@@ -85,4 +85,47 @@ class TextUI : GameUI {
         
         return numberOfRounds!
     }
+    
+    
+    //------------------------------------------------------------------------------
+    // rollThisOrder
+    //------------------------------------------------------------------------------
+    override func rollThisOrder() -> Bool {
+        print("\n\nIt's time to pick the next order.")
+        print("Y to roll randomly, or N to pick from the menu")
+
+        while true {
+            var answer: String?
+            while answer == nil {
+                answer = readLine()
+                if answer == "Y" || answer == "y" { return true }
+                if answer == "N" || answer == "n" { return false }
+            }
+        }
+    }
+
+
+    //------------------------------------------------------------------------------
+    // pickOrder
+    //------------------------------------------------------------------------------
+    override func pickOrder(restaurant: Restaurant) -> MenuItem {
+        print("\n\nIt is time to select a new order.")
+        print("The orders available in \(restaurant.name) are:")
+        for menuCategory in restaurant.menuCategories {
+            print("\(menuCategory.name):")
+            for (index, item) in menuCategory.menuItems.enumerated() {
+                print("\(index): \(item)")
+            }
+        }
+
+        return restaurant.menuCategories[0].menuItems[0]
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // pickFillOrPass
+    //------------------------------------------------------------------------------
+    override func pickFillOrPass() -> Bool {
+        return false
+    }
 }

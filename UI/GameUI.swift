@@ -83,13 +83,28 @@ class GameUI {
     }
     
     
-    //Placeholder for choosing an item on the menu
-    func pickOrder(menu: [MenuCategory]) -> MenuItem {
-        return menu[0].menuItems[0]
+    //------------------------------------------------------------------------------
+    // rollThisOrder
+    // Do we want to roll to pick this order? (Otherwise, pick it)
+    //------------------------------------------------------------------------------
+    func rollThisOrder() -> Bool {
+        return false
+    }
+
+
+    //------------------------------------------------------------------------------
+    // pickOrder
+    // Placeholder for choosing an item on the menu
+    //------------------------------------------------------------------------------
+    func pickOrder(restaurant: Restaurant) -> MenuItem {
+        return restaurant.menuCategories[0].menuItems[0]
     }
     
     
-    //Placeholder for choosing whether to fill or pass (Always passes)
+    //------------------------------------------------------------------------------
+    // pickFillOrPass
+    // Placeholder for choosing whether to fill or pass (Always passes)
+    //------------------------------------------------------------------------------
     func pickFillOrPass() -> Bool {
         return false
     }

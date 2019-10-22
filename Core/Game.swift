@@ -87,19 +87,10 @@ class Game {
     
     //Placeholder function. This function should display all orders in the current restraunt and either allow a rolled or called order with user input.
     func makeOrder() {
-        print("It is time to select a new order. The orders available in \(restaurant!.name) are the following:")
-        for menuCategory in restaurant!.menuCategories {
-            print("\(menuCategory.name): (\(menuCategory.range)).")
-            for (index, item) in menuCategory.menuItems.enumerated() {
-                print("\(index): \(item)")
-            }
-        }
-        print("Would you like to roll a random order or call an order?")
-        //Placeholder decision: Need to accept user input to set rolledOrder
+        rolledOrder = gameUI.rollThisOrder()
         switch rolledOrder {
         case false:
-            print("Please select an order from the list.")
-            currentOrder = CurrentOrder(originalOrder: gameUI.pickOrder(menu: restaurant!.menuCategories))
+            currentOrder = CurrentOrder(originalOrder: gameUI.pickOrder(restaurant: restaurant!))
         case true:
             print("You have chosen to roll a random order.")
             let orderType = Int.random(in: 1..<6)
