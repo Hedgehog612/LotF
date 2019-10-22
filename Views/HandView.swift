@@ -32,7 +32,7 @@ struct HandView: View {
     var body: some View {
         // Create a StackView for each type of card
         var stackViews = [StackView]()
-        let typesToShow = deck.cards.filter({ $0.1 > 0}).sorted(by: { $0 < $1 })
+        let typesToShow = deck.cardCounts.filter({ $0.1 > 0}).sorted(by: { $0 < $1 })
         for (stackIndex, (card, count)) in typesToShow.enumerated() {
             let stackX = 20 + 130 + 260 * stackIndex    // 20 border + Stack width / 2 + Stack width * index
             var cards = [Card]()

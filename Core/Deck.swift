@@ -15,37 +15,34 @@ import Foundation
 // card type rather than an actual array of cards.
 //------------------------------------------------------------------------------
 class Deck {
-    var cards: [Card : Int]     // How many cards of each type do we contain?
+    var cards = [Card]()
     
     
     //------------------------------------------------------------------------------
     // init
     //------------------------------------------------------------------------------
-    init(_ cardsIn: [Card: Int] = [:]) {
-        cards = [:]
-        
-        // Set our count of all possible cards to zero
-        for card in Card.allCases {
-            cards[card] = 0
-        }
-        
-        // Add any specified cards to the deck
-        for (card, count) in cardsIn {
-            cards[card] = count
+    init(cardCounts: [Card: Int] = [:]) {
+        for (card, count) in cardCounts {
+            for _ in 0..<count {
+                cards.append(card)
+            }
         }
     }
     
     
     //------------------------------------------------------------------------------
-    // cardArray
-    // Returns our cards as an array of single cards
+    // cardCounts
+    // Returns our contents as a dictionary of [Card : # of cards]
+    // We return 0 for every possible Card if we don't contain any of them.
     //------------------------------------------------------------------------------
-    var cardArray:[Card] {
-        var result = [Card]()
-        for (card, count) in cards where count > 0 {
-            for _ in 0..<count {
-                result.append(card)
-            }
+    var cardCounts: [Card: Int] {
+        var result = [Card: Int]()
+        for card in Card.allCases {
+            result[card] = 0
+        }
+        
+        for card in cards {
+            result[card]! += 1
         }
         
         return result
@@ -57,7 +54,7 @@ class Deck {
     // Adds a single card to this deck
     //------------------------------------------------------------------------------
     func addCard(_ card: Card) {
-        cards[card]! += 1
+        cards.append(card)
     }
     
     
@@ -66,31 +63,23 @@ class Deck {
     // Removes a single card from this deck
     //------------------------------------------------------------------------------
     func removeCard(_ card: Card) {
-        assert(cards[card]! > 0)
-        cards[card]! -= 1
-    }
-    
-    
-    //------------------------------------------------------------------------------
-    // aCard
-    // Silly helper function that should go away soon. Returns some card that we
-    // contain.
-    //------------------------------------------------------------------------------
-    func aCard() -> Card {
-        for (card, count) in cards where count > 0 {
-            return card
+        guard let index = cards.firstIndex(of: card) else {
+            assert(false)
         }
         
-        assert(false)
+        cards.remove(at: index)
     }
     
-    //Deal a card to another player
-    //Placeholder function that accepts user input to determine which card to deal
-    //This function will break until deck is rewritten to be an array
+    
+    //------------------------------------------------------------------------------
+    // deal
+    // Deal a card to another player
+    //------------------------------------------------------------------------------
     func deal(recipient: Deck) {
-        let dealtCard = self.remove(at:0)
-        recipient.append(dealtCard)
+        let dealtCard = cards.remove(at:0)
+        recipient.cards.append(dealtCard)
     }
+    
     
     //------------------------------------------------------------------------------
     // shuffleAndDeal
@@ -99,10 +88,8 @@ class Deck {
     func shuffleAndDeal(recipients: [Deck]) {
         // Create an array of individual cards and sort them by random number
         var individualCards = [(card: Card, order: Double)]()
-        for (card, count) in cards where count > 0 {
-            for _ in 1...count {
-                individualCards.append((card: card, order: Double.random(in: 0..<1)))
-            }
+        for card in cards {
+            individualCards.append((card: card, order: Double.random(in: 0..<1)))
         }
         var sortedCards = individualCards.sorted(by: { $0.order < $1.order })
         
