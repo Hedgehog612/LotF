@@ -175,7 +175,7 @@ class Game {
         if (currentOrder!.doesOrderMatch(submittedOrder: playerFill)) {
             print("You have matched the order!")
             //Ghicciaroni's orders are always worth the same amount of points, even if they're missing items
-            if currentOrder!.originalItem.name == "Ghicciaroni's" {
+            if restaurant!.name == "Ghicciaroni's" {
                 var playerScore = 0
                 var orderScore = 0
                 for card in playerFill {
@@ -185,6 +185,10 @@ class Game {
                     orderScore += card.score
                 }
                 currentOrder!.tokens += (orderScore - playerScore)
+            }
+            //Replace "any meat" matches with non-scoring "any meat" cards
+            if restaurant!.name == "Montezuma's Mexi-Deli" {
+                playerFill = currentOrder!.montezumaMatch(playerCards: playerFill)
             }
             playerOrder[0].filledOrder(orderCards: playerFill, tokens: currentOrder!.tokens)
             currentOrder = nil

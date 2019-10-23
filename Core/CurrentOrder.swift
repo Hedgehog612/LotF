@@ -53,8 +53,25 @@ struct CurrentOrder {
         for (index, card) in submittedOrder.enumerated() {
             if card.matchesRequirement(requirement: content[index]) {
                 totalMatched += 1
+            } else if game.restaurant!.name == "Montezuma's Mexi-Deli" && card.isMeat() && content[index].isMeat() {
+                totalMatched += 1
             }
         }
         return totalMatched >= neededMatches
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // montezumaMatch
+    // For Montezuma's restaurant: Replace any meat matches with 0-point AnyMeat cards.
+    //------------------------------------------------------------------------------
+    func montezumaMatch(playerCards: [Card]) -> [Card] {
+        var newOrder = playerCards
+        for (index, card) in newOrder.enumerated() {
+            if !card.matchesRequirement(requirement: content[index]) && card.isMeat() && content[index].isMeat() {
+                newOrder[index] = .AnyMeat
+            }
+        }
+        return newOrder
     }
 }

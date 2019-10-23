@@ -38,7 +38,7 @@ class Restaurant {
     }
 }
 
-
+//Four restaurants and six point five special rules (McPubihan's has the stew pot but not the option to use it) have been built.
 var restaurantList = [
 Restaurant(
     image:      "Ratherbee's Zombie",
@@ -49,7 +49,8 @@ Restaurant(
             name: "Appetizers",
             range: 1...2,
             menuItems: [
-                MenuItem(name: "Donner Pass", ingredients: [:]),
+                MenuItem(name: "Donner Pass", ingredients:
+                    [:]),
                 MenuItem(name: "Clam Before the Storm", ingredients:
                     [.Fish:1]),
                 MenuItem(name: "Mighty Cholesterol Onion", ingredients:
@@ -123,7 +124,8 @@ Restaurant(
             name: "Stuffers",
             range: 1...2,
             menuItems: [
-                MenuItem(name: "David Copperfield", ingredients: [.Cheese:1]),
+                MenuItem(name: "David Copperfield", ingredients:
+                    [.Cheese:1]),
                 MenuItem(name: "Nicholas Nickleby", ingredients:
                     [.Fries:1]),
                 MenuItem(name: "Little Match Girl", ingredients:
@@ -198,7 +200,8 @@ Restaurant(
             name: "Side Orders",
             range: 1...2,
             menuItems: [
-                MenuItem(name: "Small Fry", ingredients: [.Fries:1]),
+                MenuItem(name: "Small Fry", ingredients:
+                    [.Fries:1]),
                 MenuItem(name: "Small Drink", ingredients:
                     [.Drink:1]),
                 MenuItem(name: "Cod Piece", ingredients:
@@ -262,4 +265,81 @@ Restaurant(
         cardCounts: [.Bun:8, .Fries:8, .Drink:8, .Cheese:5, .Cow:4, .Fish:4, .Bird:4, .Pie:1]),
     largeDeck: Deck(
         cardCounts: [.Bun:12, .Fries:12, .Drink:12, .Cheese:8, .Cow:6, .Fish:6, .Bird:6, .Pie:1]),
-    specialRule: "The last category on the menu is Special Orders, which add ingredients to regular orders. Special Orders can only be rolled, not called.")]
+    specialRule: "The last category on the menu is Special Orders, which add ingredients to regular orders. Special Orders can only be rolled, not called."),
+    
+    Restaurant(
+    image:      "LLL's Zombie",
+    name:       "Love's Labours Lunch",
+    subTitle:   "Delicate and Edible English Cuisine",
+    menuCategories: [
+        MenuCategory(
+            name: "Starters",
+            range: 1...2,
+            menuItems: [
+                MenuItem(name: "Spanish Inquisition", ingredients:
+                    [.Fries:1]),
+                MenuItem(name: "Black Death", ingredients:
+                    [.Cheese:1, .Fish:1]),
+                MenuItem(name: "Trafalgar Squares", ingredients:
+                    [.Vegetable:1, .Cheese:1]),
+                MenuItem(name: "One S'More into the Breach", ingredients:
+                    [.Cow:1, .Pie:1]),
+                MenuItem(name: "English Breakfast", ingredients:
+                    [.Fries:1, .Cheese:1, .Cow:1]),
+                MenuItem(name: "Bunday Floody Bunday", ingredients:
+                    [.Bun:2, .Drink:2])]),
+        MenuCategory(
+            name: "Soups",
+            range: 3...4,
+            menuItems: [
+                MenuItem(name: "Just Barley Soup", ingredients:
+                    [.Vegetable:1]),
+                MenuItem(name: "An Unbearable Likeness of Beans", ingredients:
+                    [.Vegetable:1, .Bird: 1]),
+                MenuItem(name: "Grey Stuff in a Pot", ingredients:
+                    [.Vegetable:1, .Cow:1]),
+                MenuItem(name: "Brown Stuff in a Pot", ingredients:
+                    [.Vegetable:1, .Cheese:1, .Fish:1]),
+                MenuItem(name: "Crown Gruel", ingredients:
+                    [.Drink:1, .Cheese:1, .Cow:1]),
+                MenuItem(name: "Bovine Spongiform Yum, Yum, Yum!", ingredients:
+                    [.Bun:2, .Drink:1, .Cow:1])]),
+        MenuCategory(
+            name: "Sandwiches",
+            range: 5...5,
+            menuItems: [
+                MenuItem(name: "High Road", ingredients:
+                    [.Bun:1, .Cow:1]),
+                MenuItem(name: "Low Road", ingredients:
+                    [.Bun:1, .Fish:1]),
+                MenuItem(name: "Guy Fawkes", ingredients:
+                    [.Bun:1, .Cheese:1, .Bird:1]),
+                MenuItem(name: "Rozencrantz & Guildenstern", ingredients:
+                    [.Bun:1, .Fries:2]),
+                MenuItem(name: "Two Gentlemen of Verona", ingredients:
+                    [.Bun:1, .Bird:2]),
+                MenuItem(name: "Star Cross'd Lovers", ingredients:
+                    [.Bun:1, .Cheese:1, .Cow:1, .Fish:1])]),
+        MenuCategory(
+            name: "Main Courses",
+            range: 6...6,
+            canCall: false,
+            menuItems: [
+                MenuItem(name: "Mutton Jeff", ingredients:
+                    [.Fries:1, .Drink:1, .Vegetable:1, .Cow:1]),
+                MenuItem(name: "Frying Dutchman", ingredients:
+                    [.Fries:1, .Drink:1, .Fish:2, .Pie:1]),
+                MenuItem(name: "Winston Churchill", ingredients:
+                    [.Bun:1, .Fries:1, .Drink:1, .Cheese:1, .Cow:1, .Pie:1]),
+                MenuItem(name: "White Man's Bird 'n Cheese", ingredients:
+                    [.Bun:1, .Fries:1, .Drink:1, .Cheese:1, .Bird:1, .Pie:1]),
+                MenuItem(name: "Madness of King George III", ingredients:
+                    [.Bun:1, .Drink:6]),
+                MenuItem(name: "Magna Carda with a side of Fries", ingredients:
+                    [.Bun:1, .Fries:1, .Drink:1, .Vegetable:1, .Cheese:1, .Bird:1, .Fish:1, .Pie:1])])],
+    smallDeck: Deck(
+        cardCounts: [.Bun:7, .Fries:5, .Drink:7, .Vegetable:5, .Cheese:6, .Cow:6, .Fish:4, .Bird:3, .Pie:3]),
+    largeDeck: Deck(
+        cardCounts: [.Bun:10, .Fries:7, .Drink:10, .Vegetable:7, .Cheese:8, .Cow:8, .Fish:6, .Bird:5, .Pie:4]),
+    specialRule: "Each time an order goes around the table unfilled, it becomes worth five extra points. These points are tracked with tokens.")
+]

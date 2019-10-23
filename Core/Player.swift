@@ -46,8 +46,15 @@ class Player {
     //------------------------------------------------------------------------------
     func filledOrder(orderCards: [Card], tokens: Int = 0) {
         for card in orderCards {
-            hand.removeCard(card)
-            score.addCard(card)
+            if card == .AnyMeat {
+                hand.removeCard(card)
+                game.nullPile.addCard(card)
+            } else if card == .Short {
+                hand.removeCard(card)
+            } else {
+                hand.removeCard(card)
+                score.addCard(card)
+            }
         }
         scoreTokens += tokens
     }
