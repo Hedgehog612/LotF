@@ -96,6 +96,13 @@ class Game {
                 deck.deal(recipient: stewPot)
             }
         }
+        while deck.cards.count > 0 {
+            for player in playerOrder {
+                if deck.cards.count > 0 {
+                    deck.deal(recipient: player.hand)
+                }
+            }
+        }
 
         gameUI.pickNumberOfRounds()
     }
@@ -163,7 +170,7 @@ class Game {
             currentOrder = CurrentOrder(originalOrder: restaurant!.menuCategories[orderType].menuItems[orderNumber])
             //Special order rules go here
             if restaurant!.menuCategories[orderType].name == "Special Orders" {
-                currentOrder = specialOrder(currentOrder: currentOrder)
+                currentOrder = specialOrder(oldOrder: currentOrder)
             }
             //Donner pass ends your turn
             if currentOrder!.originalItem.name == "Donner Pass" {
@@ -274,18 +281,18 @@ class Game {
                 roundPoints += card.score
             }
             roundPoints += player.scoreTokens
-            print("\(player.name) scored \(roundPoints) this round.")
+            //print("\(player.name) scored \(roundPoints) this round.")
             var lostPoints = 0
             for card in player.hand.cards {
                 lostPoints += card.score
             }
-            print("\(player.name) has \(lostPoints) points still in hand.")
+            //print("\(player.name) has \(lostPoints) points still in hand.")
             roundPoints -= lostPoints
             player.tempScore = roundPoints
             roundScores.append(player.tempScore)
-            print("\(player.name)'s score this round is \(roundPoints)")
+            //print("\(player.name)'s score this round is \(roundPoints)")
             player.totalScore += roundPoints
-            print("This brings \(player.name)'s total score to \(player.totalScore).")
+            //print("This brings \(player.name)'s total score to \(player.totalScore).")
         }
         //Move the player with the smallest score to the front
         let minScore = roundScores.min()!
@@ -305,12 +312,12 @@ class Game {
     }
     
     //This function handles special orders
-    func specialOrder(currentOrder: CurrentOrder!) -> CurrentOrder {
-        var newOrder = currentOrder
+    func specialOrder(oldOrder: CurrentOrder!) -> CurrentOrder {
+        var newOrder = oldOrder
         var secondOrder: CurrentOrder
-        let orderType = Int.random(in: 1..<6)
-        let orderNumber = Int.random(in: 1..<6)
-        switch currentOrder.originalItem.name {
+        let orderType = Int.random(in: 0..<5)
+        let orderNumber = Int.random(in: 0..<5)
+        switch oldOrder.originalItem.name {
         case "Add one Bun",
              "Add one Cheese",
              "Add one Meat",
@@ -318,26 +325,35 @@ class Game {
              "Add one Fish":
             secondOrder = CurrentOrder(originalOrder: restaurant!.menuCategories[orderType].menuItems[orderNumber])
             if restaurant!.menuCategories[orderType].name == "Special Orders" {
-                secondOrder = specialOrder(currentOrder: currentOrder!)
+                secondOrder = specialOrder(oldOrder: secondOrder)
             }
-            newOrder!.content += secondOrder.content
+            for card in secondOrder.content {
+                newOrder!.content.append(card)
+            }
         case "Roll two Side Orders",
              "Roll two Stuffers",
              "Roll two Mainstays":
             var thirdOrder: CurrentOrder
-            secondOrder = CurrentOrder(originalOrder: restaurant!.menuCategories[currentOrder.originalItem.specialOrderLink].menuItems[orderNumber])
-            thirdOrder = CurrentOrder(originalOrder: restaurant!.menuCategories[currentOrder.originalItem.specialOrderLink].menuItems[orderType])
-            newOrder!.content += secondOrder.content
-            newOrder!.content += thirdOrder.content
+            secondOrder = CurrentOrder(originalOrder: restaurant!.menuCategories[oldOrder!.originalItem.specialOrderLink].menuItems[orderNumber])
+            thirdOrder = CurrentOrder(originalOrder: restaurant!.menuCategories[oldOrder!.originalItem.specialOrderLink].menuItems[orderType])
+            for card in secondOrder.content {
+                newOrder!.content.append(card)
+            }
+            for card in thirdOrder.content {
+                newOrder!.content.append(card)
+
+            }
         case "Roll a Main Dish, add one Drink",
              "Roll a Combo, add one Fries":
-             secondOrder = CurrentOrder(originalOrder: restaurant!.menuCategories[currentOrder.originalItem.specialOrderLink].menuItems[orderNumber])
-             newOrder!.content += secondOrder.content
+             secondOrder = CurrentOrder(originalOrder: restaurant!.menuCategories[oldOrder!.originalItem.specialOrderLink].menuItems[orderNumber])
+             for card in secondOrder.content {
+                 newOrder!.content.append(card)
+             }
         case "Holiday Potluck":
             newOrder!.content = gameUI.pickThreeCards()
         default:
             assert(false)
         }
-        return currentOrder
+        return newOrder!
     }
 }

@@ -35,8 +35,8 @@ class Tests {
         cardTesting()
         scoreTesting()
         menuTesting()
-        specialRuleTesting()
-        playerTesting()
+        //specialRuleTesting()
+        gameTesting()
         UITesting()
         testReport()
     }
@@ -164,23 +164,66 @@ class Tests {
             }
         }
     }
+    //TODO: Test complete range set
+    //
     
     
     //------------------------------------------------------------------------------
     //specialRuleTesting
     //make sure the special rules are working correctly
     //------------------------------------------------------------------------------
+    /*
     func specialRuleTesting() {
-        
+        game.restaurant = restaurantList[1]
+        var specialTest: CurrentOrder
+        specialTest = game.specialOrder(oldOrder: CurrentOrder(originalOrder: MenuItem(name: "Add one Fish", ingredients:
+        [.Fish:1])))
+        doTest(result: specialTest.content.count > 1, comment: "Special order test: Add one item")
+        specialTest = game.specialOrder(oldOrder: CurrentOrder(originalOrder: MenuItem(name: "Roll two Mainstays", ingredients:
+            [:], specialOrderLink: 3)))
+        doTest(result: specialTest.content.count > 5, comment: "Special order test: Roll two")
+        for card in specialTest.content {
+            print(card.name)
+        }
     }
+ */
     
     
     //------------------------------------------------------------------------------
-    //playerTesting
-    //make sure the player functions are working
+    //gameTesting
+    //run through a very crude mock game, testing to make sure everything works as expected
     //------------------------------------------------------------------------------
-    func playerTesting() {
-        game.playerOrder = [Player(name: "Test player 1", image: "Test image 1", totalScore:0, score: 10)]
+    func gameTesting() {
+        game.playerOrder = [Player(name: "Test player 1", image: "Test image 1", totalScore:0),
+                            Player(name: "Test player 2", image: "Test image 2", totalScore:0),
+                            Player(name: "Test player 3", image: "Test image 3", totalScore:0),
+                            Player(name: "Test player 4", image: "Test image 4", totalScore:0)]
+        game.onRestaurantSelected(restaurantList[0])
+        for player in game.playerOrder {
+            doTest(result: player.hand.cards.count == 13, comment: "Small deck deal to players")
+        }
+        game.playerOrder = [Player(name: "Test player 1", image: "Test image 1", totalScore:0),
+                            Player(name: "Test player 2", image: "Test image 2", totalScore:0),
+                            Player(name: "Test player 3", image: "Test image 3", totalScore:0),
+                            Player(name: "Test player 4", image: "Test image 4", totalScore:0),
+                            Player(name: "Test player 5", image: "Test image 5", totalScore:0),
+                            Player(name: "Test player 6", image: "Test image 6", totalScore:0)]
+        game.onRestaurantSelected(restaurantList[0])
+        for player in game.playerOrder {
+            doTest(result: player.hand.cards.count == 11 || player.hand.cards.count == 12, comment: "Large deck deal to players")
+        }
+        
+        game.playerOrder = [
+            Player(name: "Test player 1", image: "Test image 1", totalScore:0, score: Deck(cardCounts: [.Bird:8])),
+            Player(name: "Test player 2", image: "Test image 2", totalScore:0, score: Deck(cardCounts: [.Bird:6])),
+            Player(name: "Test player 3", image: "Test image 3", totalScore:0, score: Deck(cardCounts: [.Bird:4])),
+            Player(name: "Test player 4", image: "Test image 4", totalScore:0, score: Deck(cardCounts: [.Bird:2]))]
+        
+        game.scoring()
+        doTest(result: game.playerOrder[0].name == "Test player 4", comment: "Scoring player order")
+        doTest(result: game.playerOrder[1].name == "Test player 1", comment: "Scoring player order")
+        doTest(result: game.playerOrder[2].name == "Test player 2", comment: "Scoring player order")
+        doTest(result: game.playerOrder[3].name == "Test player 3", comment: "Scoring player order")
     }
     
     

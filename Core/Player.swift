@@ -26,7 +26,7 @@ class Player {
     //------------------------------------------------------------------------------
     // init
     //------------------------------------------------------------------------------
-    init(name nameIn: String, image imageIn: String, totalScore totalScoreIn: Int = 0) {
+    init(name nameIn: String, image imageIn: String, totalScore totalScoreIn: Int = 0, score scoreIn: Deck = Deck()) {
         hand = Deck()
         score = Deck()
         name = nameIn
@@ -34,6 +34,7 @@ class Player {
         scoreTokens = 0
         totalScore = totalScoreIn
         tempScore = 0
+        score = scoreIn
     }
 
     
