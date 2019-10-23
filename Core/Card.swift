@@ -49,6 +49,8 @@ enum Card: CaseIterable, Hashable, Comparable {
         Fish:   ("Fish",        5,      "fishImage",        .blue,      "fishSymbol"),
         Cow:    ("Cow",         5,      "cowImage",         .red,       "cowSymbol"),
         Pie:    ("Pie",         6,      "pieImage",         .purple,    "pieSymbol"),
+        AnyMeat:("Any Meat",    0,      "anyMeatImage",     .white,     "anyMeatSymbol"),
+        AnyIngredient: ("Any Ingredient", 0, "AnyIngredientImage", .white, "AnyIngredientSymbol"),
         Short:  ("Short",       0,      "shortImage",       .white,     "shortSymbol")
     ]
     

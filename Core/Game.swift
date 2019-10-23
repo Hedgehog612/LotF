@@ -96,6 +96,9 @@ class Game {
             let orderType = Int.random(in: 1..<6)
             let orderNumber = Int.random(in: 1..<6)
             currentOrder = CurrentOrder(originalOrder: restaurant!.menuCategories[orderType].menuItems[orderNumber])
+            if restaurant!.menuCategories[orderType].name == "Special Orders" {
+                currentOrder = specialOrder(currentOrder: currentOrder)
+            }
             print("Your order is \(currentOrder!.originalItem.name).")
             //For a rolled order, all passes go to this player
             firstPlayer = playerOrder[0]
@@ -201,5 +204,47 @@ class Game {
             }
         }
         currentRound += 1
+        //Reset tempScore, scoreTokens for next round
+        for player in playerOrder {
+            player.tempScore = 0
+            player.scoreTokens = 0
+        }
+    }
+    
+    //This function handles special orders
+    func specialOrder(currentOrder: CurrentOrder!) -> CurrentOrder {
+        var newOrder = currentOrder
+        var secondOrder: CurrentOrder
+        let orderType = Int.random(in: 1..<6)
+        let orderNumber = Int.random(in: 1..<6)
+        switch currentOrder.originalItem.name {
+        case "Add one Bun",
+             "Add one Cheese",
+             "Add one Meat",
+             "Add one Drink",
+             "Add one Fish":
+            secondOrder = CurrentOrder(originalOrder: restaurant!.menuCategories[orderType].menuItems[orderNumber])
+            if restaurant!.menuCategories[orderType].name == "Special Orders" {
+                secondOrder = specialOrder(currentOrder: currentOrder!)
+            }
+            newOrder!.content += secondOrder.content
+        case "Roll two Side Orders",
+             "Roll two Stuffers",
+             "Roll two Mainstays":
+            var thirdOrder: CurrentOrder
+            secondOrder = CurrentOrder(originalOrder: restaurant!.menuCategories[currentOrder.originalItem.specialOrderLink].menuItems[orderNumber])
+            thirdOrder = CurrentOrder(originalOrder: restaurant!.menuCategories[currentOrder.originalItem.specialOrderLink].menuItems[orderType])
+            newOrder!.content += secondOrder.content
+            newOrder!.content += thirdOrder.content
+        case "Roll a Main Dish, add one Drink",
+             "Roll a Combo, add one Fries":
+             secondOrder = CurrentOrder(originalOrder: restaurant!.menuCategories[currentOrder.originalItem.specialOrderLink].menuItems[orderNumber])
+             newOrder!.content += secondOrder.content
+        case "Holiday Potluck":
+            newOrder!.content = gameUI.pickThreeCards()
+        default:
+            assert(false)
+        }
+        return currentOrder
     }
 }
