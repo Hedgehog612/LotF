@@ -16,29 +16,16 @@ var game = Game(gameUI: GameUI.makeUI(.text))
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    var window: NSWindow!
-
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        let namePlayers = NamePlayers()
-        // Create the SwiftUI view that provides the window contents.
-        let contentView = ContentView()
-
-        // Create the window and set the content view. 
-        window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 1600, height: 1200),
-            styleMask: [.titled, .closable, .miniaturizable, .resizable],
-            backing: .buffered, defer: false)
-        window.center()
-        window.setFrameAutosaveName("Main Window")
-        window.contentView = NSHostingView(rootView: contentView)
-        window.makeKeyAndOrderFront(nil)
-        
         // Let's do this thing
         game.beginGame()
+        
+        /*
         while game.currentRound <= game.numberOfRounds {
             game.playRound()
         }
+ */
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

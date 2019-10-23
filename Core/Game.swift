@@ -54,15 +54,42 @@ class Game {
     }
     
     
-    //Placeholder function. This function should get the number of players, names of players, and current restaurant as user input once we have the UI more developed.
+    //------------------------------------------------------------------------------
+    // beginGame
+    // Start running the game.
+    //------------------------------------------------------------------------------
     func beginGame() {
-        NamePlayers()
-        let names = gameUI.pickPlayers()
+        gameUI.pickPlayers()
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // onPlayersSelected
+    // Called when the UI has picked the players.
+    //------------------------------------------------------------------------------
+    func onPlayersSelected(names: [String]) {
         for name in names {
             playerOrder.append(Player(name: name, image: "No image yet"))
         }
-        restaurant = gameUI.pickRestaurant()
-        numberOfRounds = gameUI.pickNumberOfRounds()
+        gameUI.pickRestaurant()
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // onRestaurantSelected
+    //------------------------------------------------------------------------------
+    func onRestaurantSelected(_ restaurantIn: Restaurant) {
+        restaurant = restaurantIn
+        
+        gameUI.pickNumberOfRounds()
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // onNumberOfRoundsPicked
+    //------------------------------------------------------------------------------
+    func onNumberOfRoundsPicked(_ numberOfRoundsIn: Int) {
+        numberOfRounds = numberOfRoundsIn
     }
     
 

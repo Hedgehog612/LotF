@@ -49,19 +49,22 @@ class GameUI {
     // pickPlayers
     // Sets the number of players and their names.
     //------------------------------------------------------------------------------
-    func pickPlayers() -> [String] {
-        let names = [
-            "Albertus",
-            "Bartholomew",
-            "Candoodle",
-            "Diddlywump",
-            "Ethelred",
-            "Fnordigan",
-            "Gobblesmack",
-            "Hootenbart"
-        ]
-        let numberOfPlayers = Int.random(in: 3...8)
-        return Array(names.prefix(numberOfPlayers))
+    func pickPlayers() {
+        DispatchQueue.main.async {
+            let names = [
+                "Albertus",
+                "Bartholomew",
+                "Candoodle",
+                "Diddlywump",
+                "Ethelred",
+                "Fnordigan",
+                "Gobblesmack",
+                "Hootenbart"
+            ]
+            let numberOfPlayers = Int.random(in: 3...8)
+
+            game.onPlayersSelected(names: Array(names.prefix(numberOfPlayers)))
+        }
     }
     
 
@@ -69,8 +72,10 @@ class GameUI {
     // pickRestaurant
     // Which restaurant do we want for this shift?
     //------------------------------------------------------------------------------
-    func pickRestaurant() -> Restaurant {
-        return restaurantList[0]
+    func pickRestaurant() {
+        DispatchQueue.main.async {
+            game.onRestaurantSelected(restaurantList[0])
+        }
     }
 
     
@@ -78,8 +83,10 @@ class GameUI {
     // pickNumberOfRounds
     // How many rounds are we gonna play?
     //------------------------------------------------------------------------------
-    func pickNumberOfRounds() -> Int {
-        return 4
+    func pickNumberOfRounds() {
+        DispatchQueue.main.async {
+            game.onNumberOfRoundsPicked(4)
+        }
     }
     
     
@@ -94,7 +101,7 @@ class GameUI {
 
     //------------------------------------------------------------------------------
     // pickOrder
-    // Placeholder for choosing an item on the menu
+    // Choose an item on the menu
     //------------------------------------------------------------------------------
     func pickOrder(restaurant: Restaurant) -> MenuItem {
         return restaurant.menuCategories[0].menuItems[0]
@@ -103,7 +110,7 @@ class GameUI {
     
     //------------------------------------------------------------------------------
     // pickFillOrPass
-    // Placeholder for choosing whether to fill or pass (Always passes)
+    // Choose whether to fill or pass (Always passes)
     //------------------------------------------------------------------------------
     func pickFillOrPass() -> Bool {
         return false
@@ -112,7 +119,7 @@ class GameUI {
     
     //------------------------------------------------------------------------------
     // pickCardsToFill
-    // Placeholder function to fill an order with cards from your hand
+    // Fill an order with cards from your hand
     //------------------------------------------------------------------------------
     func pickCardsToFill() -> [Card] {
         return []
