@@ -206,4 +206,5 @@ class GameUI {
     //------------------------------------------------------------------------------
     func addToQueue(_ task: @escaping () -> ()) {
         executionQueue.append(task)
+    }
 }
