@@ -59,7 +59,7 @@ class TextUI : GameUI {
             }
             
             var pick: Int?
-            while pick == nil || pick! <= 0 || pick! >= restaurantList.count {
+            while pick == nil || pick! <= 0 || pick! > restaurantList.count {
                 var answer: String?
                 while answer == nil {
                     answer = readLine()
@@ -91,6 +91,17 @@ class TextUI : GameUI {
             game.onNumberOfRoundsPicked(numberOfRounds!)
         }
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     //------------------------------------------------------------------------------
