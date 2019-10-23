@@ -18,7 +18,7 @@ class TextUI : GameUI {
     // pickPlayers
     //------------------------------------------------------------------------------
     override func pickPlayers() {
-        DispatchQueue.main.async {
+        addToQueue {
             print("\n\nWelcome to Lord of the Fries!")
             print("How many players would you like (3 - 8)?")
             
@@ -52,7 +52,7 @@ class TextUI : GameUI {
     // pickRestaurant
     //------------------------------------------------------------------------------
     override func pickRestaurant() {
-        DispatchQueue.main.async {
+        addToQueue {
             print("\n\nWhere would you like to dine tonight?")
             for (index, restaurant) in restaurantList.enumerated() {
                 print("\(index + 1): \(restaurant.name)")
@@ -76,7 +76,7 @@ class TextUI : GameUI {
     // pickNumberOfRounds
     //------------------------------------------------------------------------------
     override func pickNumberOfRounds() {
-        DispatchQueue.main.async {
+        addToQueue {
             print("\n\nHow many rounds will you play?")
 
             var numberOfRounds: Int?

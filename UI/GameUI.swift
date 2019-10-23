@@ -16,6 +16,10 @@ import Foundation
 // a command line UI, and a full graphical UI.
 //------------------------------------------------------------------------------
 class GameUI {
+    //==============================================================================
+    // Class factory
+    //==============================================================================
+
     //------------------------------------------------------------------------------
     // UIType
     // What kind of UI do we want today?
@@ -23,7 +27,7 @@ class GameUI {
     enum UIType {
         case automated          // Fully automated. The default, provided by this class
         case text               // Command-line UI, provided by the TextUI subclass
-        case full           // Full graphical UI, provided by the FullUI subclass
+        case full               // Full graphical UI, provided by the FullUI subclass
     }
     
     
@@ -32,25 +36,37 @@ class GameUI {
     // Factory for producing a GameUI instance.
     //------------------------------------------------------------------------------
     class func makeUI(_ type: UIType) -> GameUI {
+        var newInstance: GameUI!
+        
         switch type {
         case .automated:
-            return GameUI()
+            newInstance = GameUI()
+            newInstance.beginExecutionQueue()
     
         case .text:
-            return TextUI()
+            newInstance = TextUI()
+            newInstance.beginExecutionQueue()
             
         case .full:
-            return FullUI()
+            newInstance = FullUI()
         }
+        
+        return newInstance
     }
     
     
+    
+    
+    //==============================================================================
+    // Core functionality
+    //==============================================================================
+
     //------------------------------------------------------------------------------
     // pickPlayers
     // Sets the number of players and their names.
     //------------------------------------------------------------------------------
     func pickPlayers() {
-        DispatchQueue.main.async {
+        addToQueue {
             let names = [
                 "Albertus",
                 "Bartholomew",
@@ -73,7 +89,7 @@ class GameUI {
     // Which restaurant do we want for this shift?
     //------------------------------------------------------------------------------
     func pickRestaurant() {
-        DispatchQueue.main.async {
+        addToQueue {
             game.onRestaurantSelected(restaurantList[0])
         }
     }
@@ -84,7 +100,7 @@ class GameUI {
     // How many rounds are we gonna play?
     //------------------------------------------------------------------------------
     func pickNumberOfRounds() {
-        DispatchQueue.main.async {
+        addToQueue {
             game.onNumberOfRoundsPicked(4)
         }
     }
@@ -123,5 +139,53 @@ class GameUI {
     //------------------------------------------------------------------------------
     func pickCardsToFill() -> [Card] {
         return []
+    }
+    
+    
+    
+    
+    
+    //==============================================================================
+    // Concurrency support
+    // We have an awkward concurrency issue: sometimes we run a SwifUI interface
+    // (which is asynchronous and message-based) and sometimes we run a command
+    // line or automated interface (which is synchronous). To allow us to have a single
+    // coherent interface to both, we impose a simple message-passing architecture
+    // on top of the automated and text versions.
+    //
+    // The basic idea is that every time you are making a call that would be initiated
+    // by a message in SwiftUI, you should add that call to our execution queue.
+    //==============================================================================
+    var executionQueue = [(() -> ())]()
+    
+    
+    //------------------------------------------------------------------------------
+    // beginExecutionQueue
+    // Fires up our message-passing system.
+    //------------------------------------------------------------------------------
+    func beginExecutionQueue() {
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { timer in self.executeQueue() })
+    }
+
+
+    //------------------------------------------------------------------------------
+    // executeQueue
+    // Called repeatedly by a timer, this checks our execution queue and if there's
+    // anything in it, executes the next item.
+    //------------------------------------------------------------------------------
+    func executeQueue() {
+        if executionQueue.count > 0 {
+            let task = executionQueue.removeFirst()
+            task()
+        }
+    }
+
+    
+    //------------------------------------------------------------------------------
+    // addToQueue
+    // Adds a task to the execution queue.
+    //------------------------------------------------------------------------------
+    func addToQueue(_ task: @escaping () -> ()) {
+        executionQueue.append(task)
     }
 }

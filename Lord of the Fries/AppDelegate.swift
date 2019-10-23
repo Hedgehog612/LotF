@@ -20,18 +20,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Let's do this thing
         game.beginGame()
-        
-        /*
-        while game.currentRound <= game.numberOfRounds {
-            game.playRound()
-        }
- */
     }
-
+    
+    
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
-
-
 }
 
