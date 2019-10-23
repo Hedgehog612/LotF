@@ -33,6 +33,13 @@ class Deck {
     init() {
     }
     
+    
+    init(inputCards: [Card]) {
+        for card in inputCards {
+            cards.append(card)
+        }
+    }
+    
     //------------------------------------------------------------------------------
     // cardCounts
     // Returns our contents as a dictionary of [Card : # of cards]

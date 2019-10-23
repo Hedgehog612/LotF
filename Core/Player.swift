@@ -50,7 +50,7 @@ class Player {
                 hand.removeCard(card)
                 game.nullPile.addCard(card)
             } else if card == .Short {
-                hand.removeCard(card)
+                
             } else {
                 hand.removeCard(card)
                 score.addCard(card)

@@ -42,5 +42,9 @@ struct ContentView_Previews: PreviewProvider {
 
 
 //Todo: 
-//Set up a main class so currentOrder and restaurant stop being optional
+//Add the remaining four restaurants
+//Code in the special rules for Friedey's Long Wok and McPubihan's restaurants.
+//Add tests to make sure everything runs properly
+//Get the game to a playable state and begin testing everything for bugs
+//
 

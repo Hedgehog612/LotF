@@ -113,7 +113,7 @@ Restaurant(
         cardCounts: [.Bun:9, .Sauce:4, .Fries:3, .Drink:6, .Vegetable:6, .Cheese:6, .Cow:5, .Fish:5, .Bird:5, .Pie:3]),
     largeDeck: Deck(
         cardCounts: [.Bun:11, .Sauce:6, .Fries:5, .Drink:9, .Vegetable:8, .Cheese:8, .Cow:7, .Fish:6, .Bird:7, .Pie:4]),
-    specialRule: "Yes, the Donner Pass is nothing. If it's the order, the leader passes to the left. No, you can't get rid of the Pie."),
+    specialRule: "Yes, the Donner Pass is nothing. If it's the order, the leader passes to the left."),
 
     Restaurant(
     image:      "Friedey's Holiday Zombie",

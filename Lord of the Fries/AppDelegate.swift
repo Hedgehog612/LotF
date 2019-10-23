@@ -11,13 +11,12 @@ import SwiftUI
 
 
 var game = Game(gameUI: GameUI.makeUI(.text))
-
+var gameTester = Tests()
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     var window: NSWindow!
-
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         let namePlayers = NamePlayers()
@@ -35,6 +34,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.makeKeyAndOrderFront(nil)
         
         // Let's do this thing
+        gameTester.runAllTests()
         game.beginGame()
         while game.currentRound <= game.numberOfRounds {
             game.playRound()
