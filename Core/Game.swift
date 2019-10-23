@@ -10,8 +10,13 @@ import Foundation
 
 
 //------------------------------------------------------------------------------
+// Game
+// This is a giant monster class that runs our core gameplay.
 //------------------------------------------------------------------------------
 class Game {
+    //==============================================================================
+    // Core functionality
+    //==============================================================================
     var gameUI: GameUI
     var currentOrder: CurrentOrder?
     var playerOrder: [Player]
@@ -22,13 +27,13 @@ class Game {
     var restaurant: Restaurant?
     var roundEnd: Bool
     var firstPlayer: Player?
-    var playerNames: [String]
     var numberOfRounds: Int
     var currentRound: Int
     var deck: Deck
     
 
     //------------------------------------------------------------------------------
+    // init
     //------------------------------------------------------------------------------
     init(gameUI gameUIIn: GameUI) {
         gameUI = gameUIIn
@@ -40,20 +45,18 @@ class Game {
         restaurant = nil
         roundEnd = false
         rolledOrder = false
-        playerNames = []
         numberOfRounds = 0
         currentRound = 1
         deck = Deck()
     }
     
-
-    //------------------------------------------------------------------------------
-    //------------------------------------------------------------------------------
-    func fillOrder(player: Player) {
-        print("Can you fill the order? The order is\(currentOrder!.originalItem.name) and it contains \(currentOrder!.content). It has been short \(currentOrder!.short) times.")
-    }
     
     
+    
+    
+    //==============================================================================
+    // Game startup
+    //==============================================================================
     //------------------------------------------------------------------------------
     // beginGame
     // Start running the game.
@@ -77,6 +80,7 @@ class Game {
     
     //------------------------------------------------------------------------------
     // onRestaurantSelected
+    // TODO: Restaurant selection should happen at the beginning of each round.
     //------------------------------------------------------------------------------
     func onRestaurantSelected(_ restaurantIn: Restaurant) {
         restaurant = restaurantIn
@@ -102,9 +106,38 @@ class Game {
     //------------------------------------------------------------------------------
     func onNumberOfRoundsPicked(_ numberOfRoundsIn: Int) {
         numberOfRounds = numberOfRoundsIn
+        startGame()
     }
     
+    
+    
+    
+    
+    //==============================================================================
+    // Core game loop
+    //==============================================================================
+    
+    //------------------------------------------------------------------------------
+    // startGame
+    // We've chosen players, etc. Now it's time to fire up the game.
+    //------------------------------------------------------------------------------
+    func startGame() {
+        gameUI.startMainUI()
+    }
+    
+    
+    
 
+
+    
+
+    //------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------
+    func fillOrder(player: Player) {
+        print("Can you fill the order? The order is\(currentOrder!.originalItem.name) and it contains \(currentOrder!.content). It has been short \(currentOrder!.short) times.")
+    }
+    
+    
     //The main gameplay loop.
     func playRound() {
         while roundEnd == false {
@@ -114,13 +147,6 @@ class Game {
             }
         }
         scoring()
-    }
-    
-    
-    func makePlayers() {
-        for name in playerNames {
-            playerOrder.append(Player(name: name, image: "Placeholder image", totalScore: 0))
-        }
     }
     
     

@@ -34,8 +34,6 @@ class Player {
         scoreTokens = 0
         totalScore = totalScoreIn
         tempScore = 0
-        
-        print("Adding player \(name)")
     }
 
     
