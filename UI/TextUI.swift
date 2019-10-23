@@ -11,138 +11,266 @@ import Foundation
 
 //------------------------------------------------------------------------------
 // TextUI
-// Provides a command line interface to the game
+// Provides a command line interface to the game. FullUI subclasses this to provide
+// a rich graphical UI.
 //------------------------------------------------------------------------------
-class TextUI : GameUI {
+class TextUI {
+    //------------------------------------------------------------------------------
+    // init
+    //------------------------------------------------------------------------------
+    init() {
+        beginExecutionQueue()
+    }
+    
+
+
+
+
+    //==============================================================================
+    // Game start
+    //==============================================================================
+
     //------------------------------------------------------------------------------
     // pickPlayers
+    // Sets the number of players and their names.
     //------------------------------------------------------------------------------
-    override func pickPlayers() {
+    func pickPlayers() {
+        print("\n\nWelcome to Lord of the Fries!")
+        print("How many players would you like (3 - 8)?")
+        
+        // How many players?
+        var numberOfPlayers: Int?
+        while numberOfPlayers == nil {
+            var answer: String?
+            while answer == nil {
+                answer = readLine()
+            }
+            numberOfPlayers = Int(answer!)
+        }
+        
+        // Now get their names
+        var names = [String]()
+        while names.count < numberOfPlayers! {
+            print("What is player \(names.count + 1) called?")
+            var answer: String?
+            while answer == nil {
+                answer = readLine()
+            }
+            names.append(answer!)
+        }
+        
         addToQueue {
-            print("\n\nWelcome to Lord of the Fries!")
-            print("How many players would you like (3 - 8)?")
-            
-            // How many players?
-            var numberOfPlayers: Int?
-            while numberOfPlayers == nil {
-                var answer: String?
-                while answer == nil {
-                    answer = readLine()
-                }
-                numberOfPlayers = Int(answer!)
-            }
-            
-            // Now get their names
-            var names = [String]()
-            while names.count < numberOfPlayers! {
-                print("What is player \(names.count + 1) called?")
-                var answer: String?
-                while answer == nil {
-                    answer = readLine()
-                }
-                names.append(answer!)
-            }
-            
             game.onPlayersSelected(names: names)
         }
     }
 
 
     //------------------------------------------------------------------------------
-    // pickRestaurant
+    // pickNumberOfRounds
+    // How many rounds are we gonna play?
     //------------------------------------------------------------------------------
-    override func pickRestaurant() {
-        addToQueue {
-            print("\n\nWhere would you like to dine tonight?")
-            for (index, restaurant) in restaurantList.enumerated() {
-                print("\(index + 1): \(restaurant.name)")
-            }
-            
-            var pick: Int?
-            while pick == nil || pick! <= 0 || pick! > restaurantList.count {
-                var answer: String?
-                while answer == nil {
-                    answer = readLine()
-                }
-                pick = Int(answer!)
-            }
+    func pickNumberOfRounds() {
+        print("\n\nHow many rounds will you play?")
 
+        var numberOfRounds: Int?
+        while numberOfRounds == nil || numberOfRounds! <= 0 {
+            var answer: String?
+            while answer == nil {
+                answer = readLine()
+            }
+            numberOfRounds = Int(answer!)
+        }
+        
+        addToQueue {
+            game.onNumberOfRoundsPicked(numberOfRounds!)
+        }
+    }
+    
+    
+
+
+
+    //==============================================================================
+    // Main game loop
+    //==============================================================================
+
+    //------------------------------------------------------------------------------
+    // startMainUI
+    // Bring up the UI for the main gameplay loop.
+    //------------------------------------------------------------------------------
+    func startMainUI() {
+        print("\n\n\nStarting the main game UI")
+        print("\(game.numberOfRounds) rounds.")
+        print("Players:")
+        for player in game.players {
+            print("   \(player.name)")
+        }
+    }
+
+
+    //------------------------------------------------------------------------------
+    // pickRestaurant
+    // Which restaurant do we want for this shift?
+    //------------------------------------------------------------------------------
+    func pickRestaurant() {
+        print("\n\nStarting round \(game.currentRound).")
+        print("Which restaurant would you like?")
+        for (index, restaurant) in restaurantList.enumerated() {
+            print("\(index + 1): \(restaurant.name)")
+        }
+        
+        var pick: Int?
+        while pick == nil || pick! <= 0 || pick! > restaurantList.count {
+            var answer: String?
+            while answer == nil {
+                answer = readLine()
+            }
+            pick = Int(answer!)
+        }
+
+        addToQueue {
             game.onRestaurantSelected(restaurantList[pick! - 1])
         }
     }
     
     
     //------------------------------------------------------------------------------
-    // pickNumberOfRounds
+    // pickRollThisOrder
+    // Do we want to roll this order? (Otherwise, choose it ourselves)
     //------------------------------------------------------------------------------
-    override func pickNumberOfRounds() {
-        addToQueue {
-            print("\n\nHow many rounds will you play?")
-
-            var numberOfRounds: Int?
-            while numberOfRounds == nil || numberOfRounds! <= 0 {
-                var answer: String?
-                while answer == nil {
-                    answer = readLine()
-                }
-                numberOfRounds = Int(answer!)
-            }
-            
-            game.onNumberOfRoundsPicked(numberOfRounds!)
-        }
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    //------------------------------------------------------------------------------
-    // rollThisOrder
-    //------------------------------------------------------------------------------
-    override func rollThisOrder() -> Bool {
-        print("\n\nIt's time to pick the next order.")
-        print("Y to roll randomly, or N to pick from the menu")
+    func pickRollThisOrder() {
+        print("\n\n\(game.shiftLeader.name), you are the shift leader.")
+        print("Y to roll this order, or N to pick from the menu")
 
         while true {
             var answer: String?
             while answer == nil {
                 answer = readLine()
-                if answer == "Y" || answer == "y" { return true }
-                if answer == "N" || answer == "n" { return false }
+                if answer == "Y" || answer == "y" {
+                    addToQueue { game.onPickRollThisOrder(true) }
+                    return
+                }
+                if answer == "N" || answer == "n" {
+                    addToQueue { game.onPickRollThisOrder(false) }
+                    return
+                }
             }
         }
     }
-
-
+    
+    
     //------------------------------------------------------------------------------
     // pickOrder
+    // Choose an item on the menu
     //------------------------------------------------------------------------------
-    override func pickOrder(restaurant: Restaurant) -> MenuItem {
-        print("\n\nIt is time to select a new order.")
-        print("The orders available in \(restaurant.name) are:")
-        for menuCategory in restaurant.menuCategories {
+    func pickOrder() {
+        print("\n\nHere's the menu for \(game.restaurant.name):")
+        for menuCategory in game.restaurant.menuCategories {
             print("\(menuCategory.name):")
             for (index, item) in menuCategory.menuItems.enumerated() {
                 print("\(index): \(item)")
             }
         }
 
-        return restaurant.menuCategories[0].menuItems[0]
+        addToQueue {
+            game.onPickedOrder(game.restaurant.menuCategories[0].menuItems[0])
+        }
     }
     
     
     //------------------------------------------------------------------------------
-    // pickFillOrPass
+    // displayRolledOrder
+    // We've rolled an order: tell the user what it is
     //------------------------------------------------------------------------------
-    override func pickFillOrPass() -> Bool {
+    func displayRolledOrder(_ currentOrder: CurrentOrder) {
+        print("You rolled: \(currentOrder.originalItem.name)")
+        addToQueue {
+            game.doneWithOrderPicking()
+        }
+    }
+
+
+    //------------------------------------------------------------------------------
+    // pickFillOrPass
+    // Choose whether to fill or pass (Always passes)
+    //------------------------------------------------------------------------------
+    func pickFillOrPass() -> Bool {
         return false
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // pickCardsToFill
+    // Fill an order with cards from your hand
+    //------------------------------------------------------------------------------
+    func pickCardsToFill() -> [Card] {
+        return []
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // pickCardToDeal
+    // Placeholder function to choose which card to deal from hand when you pass
+    // Returns the index of the chosen card
+    //------------------------------------------------------------------------------
+    func pickCardToDeal(hand: Deck) -> Int {
+        return 0
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // pickCardsToFill
+    // Placeholder function to pick three cards for the Holiday Potluck and return an array of those three cards
+    //------------------------------------------------------------------------------
+    func pickThreeCards() -> [Card] {
+        return [.Bird, .Cheese, .Cow]
+    }
+
+    
+    
+    
+    
+    //==============================================================================
+    // Concurrency support
+    // We have an awkward concurrency issue: sometimes we run a SwifUI interface
+    // (which is asynchronous and message-based) and sometimes we run a command
+    // line or automated interface (which is synchronous). To allow us to have a single
+    // coherent interface to both, we impose a simple message-passing architecture
+    // on top of the automated and text versions.
+    //
+    // The basic idea is that every time you are making a call that would be initiated
+    // by a message in SwiftUI, you should add that call to our execution queue.
+    //==============================================================================
+    var executionQueue = [(() -> ())]()
+    
+    
+    //------------------------------------------------------------------------------
+    // beginExecutionQueue
+    // Fires up our message-passing system.
+    //------------------------------------------------------------------------------
+    func beginExecutionQueue() {
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { timer in self.executeQueue() })
+    }
+
+
+    //------------------------------------------------------------------------------
+    // executeQueue
+    // Called repeatedly by a timer, this checks our execution queue and if there's
+    // anything in it, executes the next item.
+    //------------------------------------------------------------------------------
+    func executeQueue() {
+        if executionQueue.count > 0 {
+            let task = executionQueue.removeFirst()
+            task()
+        }
+    }
+
+    
+    //------------------------------------------------------------------------------
+    // addToQueue
+    // Adds a task to the execution queue.
+    //------------------------------------------------------------------------------
+    func addToQueue(_ task: @escaping () -> ()) {
+        executionQueue.append(task)
     }
 }

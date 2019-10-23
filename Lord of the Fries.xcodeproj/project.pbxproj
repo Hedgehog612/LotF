@@ -26,7 +26,6 @@
 		FFD269DB235E0B5400572168 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9DA0235A8D6F0030DA5E /* Player.swift */; };
 		FFD269DC235E0B5400572168 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD9D9A235A8AFE0030DA5E /* Restaurant.swift */; };
 		FFE04E7B235E3121002B953B /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE04E7A235E3121002B953B /* Deck.swift */; };
-		FFF03BBC235F9920006417B7 /* GameUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF03BBB235F9920006417B7 /* GameUI.swift */; };
 		FFF03BBE235F9BB0006417B7 /* FullUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF03BBD235F9BB0006417B7 /* FullUI.swift */; };
 		FFF03BC0235F9C01006417B7 /* TextUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF03BBF235F9C01006417B7 /* TextUI.swift */; };
 /* End PBXBuildFile section */
@@ -54,7 +53,6 @@
 		FFA2EE7E235F6359003AE97A /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
 		FFD269D3235E0A7900572168 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		FFE04E7A235E3121002B953B /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
-		FFF03BBB235F9920006417B7 /* GameUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUI.swift; sourceTree = "<group>"; };
 		FFF03BBD235F9BB0006417B7 /* FullUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullUI.swift; sourceTree = "<group>"; };
 		FFF03BBF235F9C01006417B7 /* TextUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextUI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -142,7 +140,6 @@
 		FFF03BBA235F9906006417B7 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				FFF03BBB235F9920006417B7 /* GameUI.swift */,
 				FFF03BBF235F9C01006417B7 /* TextUI.swift */,
 				FFF03BBD235F9BB0006417B7 /* FullUI.swift */,
 			);
@@ -227,7 +224,6 @@
 				FFD269DC235E0B5400572168 /* Restaurant.swift in Sources */,
 				FFD269D9235E0B5400572168 /* MenuCategory.swift in Sources */,
 				FF6EDDD4235E07DE00744CAB /* ContentView.swift in Sources */,
-				FFF03BBC235F9920006417B7 /* GameUI.swift in Sources */,
 				FFF03BBE235F9BB0006417B7 /* FullUI.swift in Sources */,
 				FFD269D4235E0A7900572168 /* CardView.swift in Sources */,
 				FFD269D8235E0B5400572168 /* Game.swift in Sources */,
