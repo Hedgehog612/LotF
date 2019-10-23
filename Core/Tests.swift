@@ -41,6 +41,16 @@ class Tests {
         testReport()
     }
     
+    func doTest(result: Bool, comment: String = "", line: Int = #line) {
+        totalTests += 1
+        
+        if result {
+            passedTests += 1
+        } else {
+            failedTests.append("Line \(line), \(comment)")
+        }
+    }
+    
     //------------------------------------------------------------------------------
     //passedTest
     //Call this if the test passed
@@ -107,30 +117,23 @@ class Tests {
     //Test card comparison, isMeat
     //------------------------------------------------------------------------------
     func cardTesting() {
-        let deck1 = Deck(cardCounts: [.Bun:1, .Sauce:1, .Fries:1, .Bird:1, .Cow:1, .Fish:1])
-        for index in 1..<deck1.cards.count {
-            if deck1.cards[index] <= deck1.cards[index-1] {
-                self.failedTest("Card comparison")
-            } else {
-                self.passedTest()
-            }
+        let testingCards = Deck(cardCounts: [.Bun:1, .Sauce:1, .Fries:1, .Bird:1, .Cow:1, .Fish:1]).sortedCards
+        
+        for index in 1..<testingCards.count {
+            doTest(result: testingCards[index] > testingCards[index-1], comment: "Card comparison")
         }
         for index in 0...2 {
-            if deck1.cards[index].isMeat() {
+            if testingCards[index].isMeat() {
                 self.failedTest("Is meat")
-                print(deck1.cards[index])
             } else {
                 self.passedTest()
-                print(deck1.cards[index])
             }
         }
         for index in 3...5 {
-            if deck1.cards[index].isMeat() {
+            if testingCards[index].isMeat() {
                 self.passedTest()
-                print(deck1.cards[index])
             } else {
                 self.failedTest("Is meat")
-                print(deck1.cards[index])
             }
         }
     }
