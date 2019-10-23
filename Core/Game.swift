@@ -14,7 +14,6 @@ import Foundation
 class Game {
     var gameUI: GameUI
     var currentOrder: CurrentOrder?
-    var specialRule: String
     var playerOrder: [Player]
     var nullPile: Deck
     var stewPot: Deck
@@ -33,7 +32,6 @@ class Game {
     //------------------------------------------------------------------------------
     init(gameUI gameUIIn: GameUI) {
         gameUI = gameUIIn
-        specialRule = ""
         playerOrder = []
         firstPlayer = nil
         nullPile = Deck()
@@ -84,7 +82,6 @@ class Game {
         restaurant = restaurantIn
 
         // Set up the restaurant
-        specialRule = restaurant!.specialRule
         if playerOrder.count <= 5 {
             deck = restaurant!.smallDeck
         } else {

@@ -96,19 +96,18 @@ class Tests {
         let deck2 = Deck()
         for index in 1...5 {
             deck1.deal(recipient: deck2)
-                if deck1.cards.count == 5-index && deck2.cards.count == index {
-                    passedTest()
-                } else {
-                    failedTest("Deal test")
-                }
-            }
-        deck2.deal(recipient: deck1)
-        let testOrder = CurrentOrder(originalOrder: MenuItem(name: "Carillon", ingredients: [.Bun:4]))
-        if testOrder.doesOrderMatch(submittedOrder: deck2.cards) {
-            passedTest()
-        } else {
-            failedTest("Order match test")
+            doTest(result: deck1.cards.count == 5-index && deck2.cards.count == index, comment: "Deal test")
         }
+        deck2.deal(recipient: deck1)
+        var testOrder = CurrentOrder(originalOrder: MenuItem(name: "Carillon", ingredients: [.Bun:4]))
+        doTest(result: testOrder.doesOrderMatch(submittedOrder: deck2.cards), comment: "Order match test")
+        deck2.deal(recipient: deck1)
+        deck2.deal(recipient: deck1)
+        testOrder = CurrentOrder(originalOrder: MenuItem(name: "Super Amazing Meatless Burger", ingredients: [.Bun:2]))
+        doTest(result: testOrder.doesOrderMatch(submittedOrder: deck2.cards), comment: "Order match test")
+        deck2.deal(recipient: deck1)
+        testOrder = CurrentOrder(originalOrder: MenuItem(name: "Amazing Meatless Burger", ingredients: [.Bun:1]))
+        doTest(result: testOrder.doesOrderMatch(submittedOrder: deck2.cards), comment: "Order match test")
     }
     
     
@@ -117,25 +116,18 @@ class Tests {
     //Test card comparison, isMeat
     //------------------------------------------------------------------------------
     func cardTesting() {
-        let testingCards = Deck(cardCounts: [.Bun:1, .Sauce:1, .Fries:1, .Bird:1, .Cow:1, .Fish:1]).sortedCards
+        let testingCards = Deck(cardCounts: [.Bun:1, .Sauce:1, .Fries:1, .Vegetable:1, .Cheese:1, .Bird:1, .Cow:1, .Fish:1, .Pie:1]).sortedCards
         
         for index in 1..<testingCards.count {
             doTest(result: testingCards[index] > testingCards[index-1], comment: "Card comparison")
         }
-        for index in 0...2 {
-            if testingCards[index].isMeat() {
-                self.failedTest("Is meat")
-            } else {
-                self.passedTest()
-            }
+        for index in 0...4 {
+            doTest(result: !testingCards[index].isMeat(), comment: "Is not meat")
         }
-        for index in 3...5 {
-            if testingCards[index].isMeat() {
-                self.passedTest()
-            } else {
-                self.failedTest("Is meat")
-            }
+        for index in 5...7 {
+            doTest(result: testingCards[index].isMeat(), comment: "Is meat")
         }
+        doTest(result: !testingCards[8].isMeat(), comment: "Is not meat")
     }
     
     
@@ -147,25 +139,13 @@ class Tests {
         let testPlayer = Player(name: "Test player", image: "Test image", totalScore: 15)
         testPlayer.hand = Deck(cardCounts: [.AnyMeat:2, .Sauce:1, .Short:1, .Bird:1, .Cow:1])
         testPlayer.filledOrder(orderCards: [.AnyMeat, .AnyMeat, .Sauce, .Short, .Bird, .Cow], tokens: 3)
-        if testPlayer.score.cards.count == 3 {
-            passedTest()
-        } else {
-            failedTest("Cards moved to score")
-        }
+        doTest(result: testPlayer.score.cards.count == 3, comment: "Cards moved to score")
         var totalScore = 0
         for card in testPlayer.score.cards {
             totalScore += card.score
         }
-        if totalScore == 11 {
-            passedTest()
-        } else {
-            failedTest("Score points")
-        }
-        if testPlayer.scoreTokens == 3 {
-            passedTest()
-        } else {
-            failedTest("Token scoring")
-        }
+        doTest(result: totalScore == 11, comment: "Score points")
+        doTest(result: testPlayer.scoreTokens == 3, comment: "Token scoring")
     }
     
     
@@ -178,11 +158,7 @@ class Tests {
             for menuCategory in restaurant.menuCategories {
                 for menuItem in menuCategory.menuItems {
                     for ingredients in menuItem.ingredients {
-                        if ingredients.value < 1 {
-                            failedTest("Incorrect menu value")
-                        } else {
-                            passedTest()
-                        }
+                        doTest(result: ingredients.value >= 1, comment: "Incorrect menu value")
                     }
                 }
             }
@@ -195,7 +171,7 @@ class Tests {
     //make sure the special rules are working correctly
     //------------------------------------------------------------------------------
     func specialRuleTesting() {
-
+        
     }
     
     
@@ -204,7 +180,7 @@ class Tests {
     //make sure the player functions are working
     //------------------------------------------------------------------------------
     func playerTesting() {
-        
+        game.playerOrder = [Player(name: "Test player 1", image: "Test image 1", totalScore:0, score: 10)]
     }
     
     
