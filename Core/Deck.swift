@@ -102,7 +102,7 @@ class Deck {
     // Deal a card to another player
     //------------------------------------------------------------------------------
     func deal(recipient: Deck) {
-        let dealtCard = cards.remove(at: game.gameUI.pickCardToDeal(hand: self))
+        let dealtCard = cards.remove(at: game.ui.pickCardToDeal(hand: self))
         recipient.cards.append(dealtCard)
     }
     

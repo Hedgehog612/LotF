@@ -17,36 +17,37 @@ class Game {
     //==============================================================================
     // Core functionality
     //==============================================================================
-    var gameUI: GameUI
-    var currentOrder: CurrentOrder?
-    var playerOrder: [Player]
+    var ui: TextUI
+    var players: [Player]
     var nullPile: Deck
     var stewPot: Deck
     var timer: Int
-    var rolledOrder: Bool
-    var restaurant: Restaurant?
-    var roundEnd: Bool
-    var firstPlayer: Player?
-    var numberOfRounds: Int
-    var currentRound: Int
     var deck: Deck
-    
+
+    // Curent round
+    var numberOfRounds = 0
+    var currentRound = 0
+    var roundEnd = false
+    var restaurant: Restaurant!
+    var specialRule: String
+
+    // Current shift
+    var shiftLeader: Player!
+    var currentOrder: CurrentOrder!
+    var rolledOrder: Bool
+
 
     //------------------------------------------------------------------------------
     // init
     //------------------------------------------------------------------------------
-    init(gameUI gameUIIn: GameUI) {
-        gameUI = gameUIIn
-        playerOrder = []
-        firstPlayer = nil
+    init(ui uiIn: TextUI) {
+        ui = uiIn
+        specialRule = ""
+        players = []
         nullPile = Deck()
         stewPot = Deck()
         timer = 0
-        restaurant = nil
-        roundEnd = false
         rolledOrder = false
-        numberOfRounds = 0
-        currentRound = 1
         deck = Deck()
     }
     
@@ -62,7 +63,7 @@ class Game {
     // Start running the game.
     //------------------------------------------------------------------------------
     func beginGame() {
-        gameUI.pickPlayers()
+        ui.pickPlayers()
     }
     
     
@@ -72,39 +73,9 @@ class Game {
     //------------------------------------------------------------------------------
     func onPlayersSelected(names: [String]) {
         for name in names {
-            playerOrder.append(Player(name: name, image: "No image yet"))
+            players.append(Player(name: name, image: "No image yet"))
         }
-        gameUI.pickRestaurant()
-    }
-    
-    
-    //------------------------------------------------------------------------------
-    // onRestaurantSelected
-    // TODO: Restaurant selection should happen at the beginning of each round.
-    //------------------------------------------------------------------------------
-    func onRestaurantSelected(_ restaurantIn: Restaurant) {
-        restaurant = restaurantIn
-
-        // Set up the restaurant
-        if playerOrder.count <= 5 {
-            deck = restaurant!.smallDeck
-        } else {
-            deck = restaurant!.largeDeck
-        }
-        if restaurant!.name == "McPubihan's" {
-            for _ in 1...6 {
-                deck.deal(recipient: stewPot)
-            }
-        }
-        while deck.cards.count > 0 {
-            for player in playerOrder {
-                if deck.cards.count > 0 {
-                    deck.deal(recipient: player.hand)
-                }
-            }
-        }
-
-        gameUI.pickNumberOfRounds()
+        ui.pickNumberOfRounds()
     }
     
     
@@ -129,10 +100,121 @@ class Game {
     // We've chosen players, etc. Now it's time to fire up the game.
     //------------------------------------------------------------------------------
     func startGame() {
-        gameUI.startMainUI()
+        ui.startMainUI()
+        startRound(round: 1)
     }
     
     
+    //------------------------------------------------------------------------------
+    // startRound
+    // Begin a new round.
+    //------------------------------------------------------------------------------
+    func startRound(round: Int) {
+        currentRound = round
+        roundEnd = false
+        ui.pickRestaurant()
+    }
+    
+
+    //------------------------------------------------------------------------------
+    // onRestaurantSelected
+    // TODO: Restaurant selection should happen at the beginning of each round.
+    //------------------------------------------------------------------------------
+    func onRestaurantSelected(_ restaurantIn: Restaurant) {
+        restaurant = restaurantIn
+
+        // Set up the restaurant
+        specialRule = restaurant!.specialRule
+        if players.count <= 5 {
+            deck = restaurant!.smallDeck
+        } else {
+            deck = restaurant!.largeDeck
+        }
+        if restaurant!.name == "McPubihan's" {
+            for _ in 1...6 {
+                deck.deal(recipient: stewPot)
+            }
+        }
+        
+        //Deals cards now we know what the deck should be
+        while deck.cards.count > 0 {
+            for player in players {
+                if deck.cards.count > 0 {
+                    deck.deal(recipient: player.hand)
+                }
+            }
+        }
+        
+        startNewShift()
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // startNewShift
+    // Begin a new shift
+    //------------------------------------------------------------------------------
+    func startNewShift() {
+        shiftLeader = players[0]
+        ui.pickRollThisOrder()
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // onPickRollThisOrder
+    // The shift leader has decided whether to roll or pick.
+    //------------------------------------------------------------------------------
+    func onPickRollThisOrder(_ roll: Bool) {
+        rolledOrder = roll
+        
+        if roll {
+            // TODO: add dice to current order, display to user
+            let greenDie = Int.random(in: 1..<6)
+            let category = restaurant.menuCategories.first(where: { $0.range.contains(greenDie) })!
+            
+            let blackDie = Int.random(in: 1..<6)
+            let menuItem = category.menuItems[blackDie - 1]
+            
+            currentOrder = CurrentOrder(originalOrder: menuItem)
+            
+            //Special order rules go here
+            if category.name == "Special Orders" {
+                currentOrder = specialOrder(oldOrder: currentOrder)
+            }
+            /*
+             TODO: need to fix Donner Pass
+            //Donner pass ends your turn
+            if currentOrder!.originalItem.name == "Donner Pass" {
+                currentOrder = nil
+                let activePlayer = players.remove(at: 0)
+                players.append(activePlayer)
+                return
+            }
+            */
+            
+            ui.displayRolledOrder(currentOrder)
+        } else {
+            ui.pickOrder()
+        }
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // onPickOrder
+    // We've picked an order for this shift.
+    //------------------------------------------------------------------------------
+    func onPickedOrder(_ menuItem: MenuItem) {
+        currentOrder = CurrentOrder(originalOrder: menuItem)
+        doneWithOrderPicking()
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // doneWithOrderPicking
+    // The order has been picked or rolled and we're ready to start cookin'
+    //------------------------------------------------------------------------------
+    func doneWithOrderPicking() {
+        
+    }
     
 
 
@@ -148,7 +230,7 @@ class Game {
     //The main gameplay loop.
     func playRound() {
         while roundEnd == false {
-            makeOrder()
+            // makeOrder()
             while currentOrder != nil {
                 orderToPlayer()
             }
@@ -157,43 +239,11 @@ class Game {
     }
     
     
-    //Placeholder function. This function should display all orders in the current restraunt and either allow a rolled or called order with user input.
-    func makeOrder() {
-        rolledOrder = gameUI.rollThisOrder()
-        switch rolledOrder {
-        case false:
-            currentOrder = CurrentOrder(originalOrder: gameUI.pickOrder(restaurant: restaurant!))
-        case true:
-            print("You have chosen to roll a random order.")
-            let orderType = Int.random(in: 1..<6)
-            let orderNumber = Int.random(in: 1..<6)
-            currentOrder = CurrentOrder(originalOrder: restaurant!.menuCategories[orderType].menuItems[orderNumber])
-            //Special order rules go here
-            if restaurant!.menuCategories[orderType].name == "Special Orders" {
-                currentOrder = specialOrder(oldOrder: currentOrder)
-            }
-            //Donner pass ends your turn
-            if currentOrder!.originalItem.name == "Donner Pass" {
-                currentOrder = nil
-                let activePlayer = playerOrder.remove(at: 0)
-                playerOrder.append(activePlayer)
-                return
-            }
-            print("Your order is \(currentOrder!.originalItem.name).")
-            //For a rolled order, all passes go to this player
-            firstPlayer = playerOrder[0]
-        }
-        //After selecting the order, it's the next player's turn
-        let activePlayer = playerOrder.remove(at: 0)
-        playerOrder.append(activePlayer)
-    }
-    
-    
     //Placeholder function. This function gives the current player a chance to fill the order or pass to the next player in line.
     //As the main gameplay loop, we also need to check if anyone's hand is empty at the end
     func orderToPlayer() {
         //Begin by checking if the order has become more short than it currently is
-        if currentOrder!.timesPassed == playerOrder.count {
+        if currentOrder!.timesPassed == players.count {
             currentOrder!.timesPassed = 0
             currentOrder!.short += 1
             //Love's Labours Lunch adds tokens when it gets short
@@ -207,7 +257,7 @@ class Game {
             currentOrder = nil
             return
         }
-        let fillOrPass = gameUI.pickFillOrPass()
+        let fillOrPass = ui.pickFillOrPass()
         print("The order is \(currentOrder!.originalItem.name) and it contains \(currentOrder!.content). The order has been shortened by \(currentOrder!.short) items. Do you wish to fill or pass?")
         switch fillOrPass {
             //If the order doesn't get filled, move the active player to the back of the order and keep going
@@ -216,7 +266,7 @@ class Game {
         case true:
             matchFood()
         }
-        for player in playerOrder {
+        for player in players {
             if player.hand.cards.count == 0 {
                 print("The round has ended!")
                 currentOrder = nil
@@ -230,7 +280,7 @@ class Game {
         print("You have chosen to fill the order. Please match your cards with the cards in the order.")
         var playerFill: [Card]
         //Placeholder in place of user input
-        playerFill = gameUI.pickCardsToFill()
+        playerFill = ui.pickCardsToFill()
         if (currentOrder!.doesOrderMatch(submittedOrder: playerFill)) {
             print("You have matched the order!")
             //Ghicciaroni's orders are always worth the same amount of points, even if they're missing items
@@ -249,7 +299,7 @@ class Game {
             if restaurant!.name == "Montezuma's Mexi-Deli" {
                 playerFill = currentOrder!.montezumaMatch(playerCards: playerFill)
             }
-            playerOrder[0].filledOrder(orderCards: playerFill, tokens: currentOrder!.tokens)
+            players[0].filledOrder(orderCards: playerFill, tokens: currentOrder!.tokens)
             currentOrder = nil
         } else {
             print("You fail to match the order and must pass the order!")
@@ -261,20 +311,20 @@ class Game {
     func passTheOrder() {
         //The player who passes gives a card to the player who rolled or the player to their left, depending on if the order was rolled or called
         if rolledOrder {
-            playerOrder[0].hand.deal(recipient: firstPlayer!.hand)
+            players[0].hand.deal(recipient: shiftLeader!.hand)
         } else {
-            playerOrder[0].hand.deal(recipient: playerOrder[1].hand)
+            players[0].hand.deal(recipient: players[1].hand)
         }
         currentOrder!.timesPassed += 1
-        let activePlayer = playerOrder.remove(at: 0)
-        playerOrder.append(activePlayer)
+        let activePlayer = players.remove(at: 0)
+        players.append(activePlayer)
     }
     
     
     //Placeholder function. This function tallies up the scores of each player at the end of the round.
     func scoring() {
         var roundScores = [Int]()
-        for player in playerOrder {
+        for player in players {
             var roundPoints = 0
             for card in player.score.cards {
                 //Score by multiplying the number of cards of each type by the point value of those cards
@@ -297,15 +347,15 @@ class Game {
         //Move the player with the smallest score to the front
         let minScore = roundScores.min()!
         var movePlayer: Player
-        for _ in 1...playerOrder.count {
-            if playerOrder[0].tempScore > minScore {
-                movePlayer = playerOrder.remove(at: 0)
-                playerOrder.append(movePlayer)
+        for _ in 1...players.count {
+            if players[0].tempScore > minScore {
+                movePlayer = players.remove(at: 0)
+                players.append(movePlayer)
             }
         }
         currentRound += 1
         //Reset tempScore, scoreTokens for next round
-        for player in playerOrder {
+        for player in players {
             player.tempScore = 0
             player.scoreTokens = 0
         }
@@ -350,7 +400,7 @@ class Game {
                  newOrder!.content.append(card)
              }
         case "Holiday Potluck":
-            newOrder!.content = gameUI.pickThreeCards()
+            newOrder!.content = ui.pickThreeCards()
         default:
             assert(false)
         }

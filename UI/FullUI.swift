@@ -15,7 +15,7 @@ import SwiftUI
 // FullUI
 // The graphical version of our UI. Wisely or not, this uses SwiftUI.
 //------------------------------------------------------------------------------
-class FullUI : GameUI {
+class FullUI : TextUI {
     var window: NSWindow!
 
     
