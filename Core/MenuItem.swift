@@ -17,14 +17,15 @@ struct MenuItem {
     var name: String
     var ingredients: [Card:Int]
     var cardsMustAllBeDifferent: Bool
-    
+    var specialOrderLink: Int
     
     //------------------------------------------------------------------------------
     // init
     //------------------------------------------------------------------------------
-    init(name nameIn: String, ingredients ingredientsIn: [Card:Int], cardsMustAllBeDifferent cardsMustAllBeDifferentIn: Bool = false) {
+    init(name nameIn: String, ingredients ingredientsIn: [Card:Int], cardsMustAllBeDifferent cardsMustAllBeDifferentIn: Bool = false, specialOrderLink specialOrderLinkIn: Int = 0) {
         name = nameIn
         ingredients = ingredientsIn
         cardsMustAllBeDifferent = cardsMustAllBeDifferentIn
+        specialOrderLink = specialOrderLinkIn
     }
 }

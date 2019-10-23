@@ -33,6 +33,13 @@ class Deck {
     init() {
     }
     
+    
+    init(inputCards: [Card]) {
+        for card in inputCards {
+            cards.append(card)
+        }
+    }
+    
     //------------------------------------------------------------------------------
     // cardCounts
     // Returns our contents as a dictionary of [Card : # of cards]
@@ -79,7 +86,7 @@ class Deck {
     // Deal a card to another player
     //------------------------------------------------------------------------------
     func deal(recipient: Deck) {
-        let dealtCard = cards.remove(at:0)
+        let dealtCard = cards.remove(at: game.gameUI.pickCardToDeal(hand: self))
         recipient.cards.append(dealtCard)
     }
     

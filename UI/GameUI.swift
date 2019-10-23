@@ -142,6 +142,25 @@ class GameUI {
     }
     
     
+    //------------------------------------------------------------------------------
+    // pickCardToDeal
+    // Placeholder function to choose which card to deal from hand when you pass
+    // Returns the index of the chosen card
+    //------------------------------------------------------------------------------
+    func pickCardToDeal(hand: Deck) -> Int {
+        return 0
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // pickCardsToFill
+    // Placeholder function to pick three cards for the Holiday Potluck and return an array of those three cards
+    //------------------------------------------------------------------------------
+    func pickThreeCards() -> [Card] {
+        return [.Bird, .Cheese, .Cow]
+    }
+
+    
     
     
     
@@ -187,5 +206,4 @@ class GameUI {
     //------------------------------------------------------------------------------
     func addToQueue(_ task: @escaping () -> ()) {
         executionQueue.append(task)
-    }
 }

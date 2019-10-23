@@ -15,6 +15,8 @@ import SwiftUI
 // A single ingredient card.
 //------------------------------------------------------------------------------
 enum Card: CaseIterable, Hashable, Comparable {
+    
+    
     // These are actual cards that a player can have in their hand.
     case Bun
     case Sauce
@@ -39,17 +41,19 @@ enum Card: CaseIterable, Hashable, Comparable {
     // access them with helper functions.
     //------------------------------------------------------------------------------
     static let values: [Card: (name: String, score: Int, image: String, color: Color, symbol: String)] = [
-        Bun:    ("Bun",         1,      "bunImage",         .yellow,    "bunSymbol"),
-        Sauce:  ("Sauce",       1,      "sauceImage",       .green,     "sauceSymbol"),
-        Fries:  ("Fries",       2,      "friesImage",       .pink,      "friesSymbol"),
-        Drink:  ("Drink",       3,      "drinkImage",       .purple,    "drinkSymbol"),
-        Vegetable:("Vegetable", 3,      "vegetableImage",   .gray,      "vegetableSymbol"),
-        Cheese: ("Cheese",      4,      "cheeseImage",      .orange,    "cheeseSymbol"),
-        Bird:   ("Bird",        5,      "birdImage",        .yellow,    "birdSymbol"),
-        Fish:   ("Fish",        5,      "fishImage",        .blue,      "fishSymbol"),
-        Cow:    ("Cow",         5,      "cowImage",         .red,       "cowSymbol"),
-        Pie:    ("Pie",         6,      "pieImage",         .purple,    "pieSymbol"),
-        Short:  ("Short",       0,      "shortImage",       .white,     "shortSymbol")
+        Bun:            ("Bun",             1,      "bunImage",             .yellow,    "bunSymbol"),
+        Sauce:          ("Sauce",           1,      "sauceImage",           .green,     "sauceSymbol"),
+        Fries:          ("Fries",           2,      "friesImage",           .pink,      "friesSymbol"),
+        Drink:          ("Drink",           3,      "drinkImage",           .purple,    "drinkSymbol"),
+        Vegetable:      ("Vegetable",       3,      "vegetableImage",       .init(red: 0.6, green: 0.4, blue: 0.2), "vegetableSymbol"),
+        Cheese:         ("Cheese",          4,      "cheeseImage",          .orange,    "cheeseSymbol"),
+        Bird:           ("Bird",            5,      "birdImage",            .yellow,    "birdSymbol"),
+        Fish:           ("Fish",            5,      "fishImage",            .blue,      "fishSymbol"),
+        Cow:            ("Cow",             5,      "cowImage",             .red,       "cowSymbol"),
+        Pie:            ("Pie",             6,      "pieImage",             .purple,    "pieSymbol"),
+        AnyMeat:        ("Any Meat",        0,      "anyMeatImage",         .gray,     "anyMeatSymbol"),
+        AnyIngredient:  ("Any Ingredient",  0,      "AnyIngredientImage",   .gray,     "AnyIngredientSymbol"),
+        Short:          ("Short",           0,      "shortImage",           .gray,     "shortSymbol")
     ]
     
     var name: String { Card.values[self]!.name }

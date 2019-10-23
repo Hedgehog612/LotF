@@ -16,8 +16,8 @@ class Game {
     var currentOrder: CurrentOrder?
     var specialRule: String
     var playerOrder: [Player]
-    var nullPile: [Card]
-    var stewPot: [Card]
+    var nullPile: Deck
+    var stewPot: Deck
     var timer: Int
     var rolledOrder: Bool
     var restaurant: Restaurant?
@@ -26,6 +26,7 @@ class Game {
     var playerNames: [String]
     var numberOfRounds: Int
     var currentRound: Int
+    var deck: Deck
     
 
     //------------------------------------------------------------------------------
@@ -35,8 +36,8 @@ class Game {
         specialRule = ""
         playerOrder = []
         firstPlayer = nil
-        nullPile = []
-        stewPot = []
+        nullPile = Deck()
+        stewPot = Deck()
         timer = 0
         restaurant = nil
         roundEnd = false
@@ -44,6 +45,7 @@ class Game {
         playerNames = []
         numberOfRounds = 0
         currentRound = 1
+        deck = Deck()
     }
     
 
@@ -80,7 +82,20 @@ class Game {
     //------------------------------------------------------------------------------
     func onRestaurantSelected(_ restaurantIn: Restaurant) {
         restaurant = restaurantIn
-        
+
+        // Set up the restaurant
+        specialRule = restaurant!.specialRule
+        if playerOrder.count <= 5 {
+            deck = restaurant!.smallDeck
+        } else {
+            deck = restaurant!.largeDeck
+        }
+        if restaurant!.name == "McPubihan's" {
+            for _ in 1...6 {
+                deck.deal(recipient: stewPot)
+            }
+        }
+
         gameUI.pickNumberOfRounds()
     }
     
@@ -123,6 +138,17 @@ class Game {
             let orderType = Int.random(in: 1..<6)
             let orderNumber = Int.random(in: 1..<6)
             currentOrder = CurrentOrder(originalOrder: restaurant!.menuCategories[orderType].menuItems[orderNumber])
+            //Special order rules go here
+            if restaurant!.menuCategories[orderType].name == "Special Orders" {
+                currentOrder = specialOrder(currentOrder: currentOrder)
+            }
+            //Donner pass ends your turn
+            if currentOrder!.originalItem.name == "Donner Pass" {
+                currentOrder = nil
+                let activePlayer = playerOrder.remove(at: 0)
+                playerOrder.append(activePlayer)
+                return
+            }
             print("Your order is \(currentOrder!.originalItem.name).")
             //For a rolled order, all passes go to this player
             firstPlayer = playerOrder[0]
@@ -140,6 +166,10 @@ class Game {
         if currentOrder!.timesPassed == playerOrder.count {
             currentOrder!.timesPassed = 0
             currentOrder!.short += 1
+            //Love's Labours Lunch adds tokens when it gets short
+            if currentOrder!.originalItem.name == "Love's Labours Lunch" {
+                currentOrder?.tokens += 5
+            }
         }
         //Cancel the order if it's completely short
         if currentOrder!.short == currentOrder!.content.count {
@@ -173,6 +203,22 @@ class Game {
         playerFill = gameUI.pickCardsToFill()
         if (currentOrder!.doesOrderMatch(submittedOrder: playerFill)) {
             print("You have matched the order!")
+            //Ghicciaroni's orders are always worth the same amount of points, even if they're missing items
+            if restaurant!.name == "Ghicciaroni's" {
+                var playerScore = 0
+                var orderScore = 0
+                for card in playerFill {
+                    playerScore += card.score
+                }
+                for card in currentOrder!.content {
+                    orderScore += card.score
+                }
+                currentOrder!.tokens += (orderScore - playerScore)
+            }
+            //Replace "any meat" matches with non-scoring "any meat" cards
+            if restaurant!.name == "Montezuma's Mexi-Deli" {
+                playerFill = currentOrder!.montezumaMatch(playerCards: playerFill)
+            }
             playerOrder[0].filledOrder(orderCards: playerFill, tokens: currentOrder!.tokens)
             currentOrder = nil
         } else {
@@ -228,5 +274,47 @@ class Game {
             }
         }
         currentRound += 1
+        //Reset tempScore, scoreTokens for next round
+        for player in playerOrder {
+            player.tempScore = 0
+            player.scoreTokens = 0
+        }
+    }
+    
+    //This function handles special orders
+    func specialOrder(currentOrder: CurrentOrder!) -> CurrentOrder {
+        var newOrder = currentOrder
+        var secondOrder: CurrentOrder
+        let orderType = Int.random(in: 1..<6)
+        let orderNumber = Int.random(in: 1..<6)
+        switch currentOrder.originalItem.name {
+        case "Add one Bun",
+             "Add one Cheese",
+             "Add one Meat",
+             "Add one Drink",
+             "Add one Fish":
+            secondOrder = CurrentOrder(originalOrder: restaurant!.menuCategories[orderType].menuItems[orderNumber])
+            if restaurant!.menuCategories[orderType].name == "Special Orders" {
+                secondOrder = specialOrder(currentOrder: currentOrder!)
+            }
+            newOrder!.content += secondOrder.content
+        case "Roll two Side Orders",
+             "Roll two Stuffers",
+             "Roll two Mainstays":
+            var thirdOrder: CurrentOrder
+            secondOrder = CurrentOrder(originalOrder: restaurant!.menuCategories[currentOrder.originalItem.specialOrderLink].menuItems[orderNumber])
+            thirdOrder = CurrentOrder(originalOrder: restaurant!.menuCategories[currentOrder.originalItem.specialOrderLink].menuItems[orderType])
+            newOrder!.content += secondOrder.content
+            newOrder!.content += thirdOrder.content
+        case "Roll a Main Dish, add one Drink",
+             "Roll a Combo, add one Fries":
+             secondOrder = CurrentOrder(originalOrder: restaurant!.menuCategories[currentOrder.originalItem.specialOrderLink].menuItems[orderNumber])
+             newOrder!.content += secondOrder.content
+        case "Holiday Potluck":
+            newOrder!.content = gameUI.pickThreeCards()
+        default:
+            assert(false)
+        }
+        return currentOrder
     }
 }
