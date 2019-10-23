@@ -108,5 +108,13 @@ class GameUI {
     func pickFillOrPass() -> Bool {
         return false
     }
+
     
+    //------------------------------------------------------------------------------
+    // pickCardsToFill
+    // Placeholder function to fill an order with cards from your hand
+    //------------------------------------------------------------------------------
+    func pickCardsToFill() -> [Card] {
+        return []
+    }
 }

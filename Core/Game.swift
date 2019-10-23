@@ -114,21 +114,18 @@ class Game {
             currentOrder!.timesPassed = 0
             currentOrder!.short += 1
         }
-        //Placeholder decision: Need to accept user input to fill or pass order.
-        let fillOrder = gameUI.pickFillOrPass()
+        //Cancel the order if it's completely short
+        if currentOrder!.short == currentOrder!.content.count {
+            print("The order is too short and cannot be filled! Choose a new order.")
+            currentOrder = nil
+            return
+        }
+        let fillOrPass = gameUI.pickFillOrPass()
         print("The order is \(currentOrder!.originalItem.name) and it contains \(currentOrder!.content). The order has been shortened by \(currentOrder!.short) items. Do you wish to fill or pass?")
-        switch fillOrder {
+        switch fillOrPass {
             //If the order doesn't get filled, move the active player to the back of the order and keep going
         case false:
-            //The player who passes gives a card to the player who rolled or the player to their left, depending
-            if rolledOrder {
-                playerOrder[0].hand.deal(recipient: firstPlayer!.hand)
-            } else {
-                playerOrder[0].hand.deal(recipient: playerOrder[1].hand)
-            }
-            currentOrder!.timesPassed += 1
-            let activePlayer = playerOrder.remove(at: 0)
-            playerOrder.append(activePlayer)
+            passTheOrder()
         case true:
             matchFood()
         }
@@ -146,14 +143,28 @@ class Game {
         print("You have chosen to fill the order. Please match your cards with the cards in the order.")
         var playerFill: [Card]
         //Placeholder in place of user input
-        playerFill = []
+        playerFill = gameUI.pickCardsToFill()
         if (currentOrder!.doesOrderMatch(submittedOrder: playerFill)) {
             print("You have matched the order!")
             playerOrder[0].filledOrder(orderCards: playerFill, tokens: currentOrder!.tokens)
             currentOrder = nil
         } else {
-            print("You cannot match the order!")
+            print("You fail to match the order and must pass the order!")
+            passTheOrder()
         }
+    }
+    
+    
+    func passTheOrder() {
+        //The player who passes gives a card to the player who rolled or the player to their left, depending on if the order was rolled or called
+        if rolledOrder {
+            playerOrder[0].hand.deal(recipient: firstPlayer!.hand)
+        } else {
+            playerOrder[0].hand.deal(recipient: playerOrder[1].hand)
+        }
+        currentOrder!.timesPassed += 1
+        let activePlayer = playerOrder.remove(at: 0)
+        playerOrder.append(activePlayer)
     }
     
     
