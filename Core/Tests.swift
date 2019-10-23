@@ -194,36 +194,36 @@ class Tests {
     //run through a very crude mock game, testing to make sure everything works as expected
     //------------------------------------------------------------------------------
     func gameTesting() {
-        game.playerOrder = [Player(name: "Test player 1", image: "Test image 1", totalScore:0),
+        game.players = [Player(name: "Test player 1", image: "Test image 1", totalScore:0),
                             Player(name: "Test player 2", image: "Test image 2", totalScore:0),
                             Player(name: "Test player 3", image: "Test image 3", totalScore:0),
                             Player(name: "Test player 4", image: "Test image 4", totalScore:0)]
         game.onRestaurantSelected(restaurantList[0])
-        for player in game.playerOrder {
+        for player in game.players {
             doTest(result: player.hand.cards.count == 13, comment: "Small deck deal to players")
         }
-        game.playerOrder = [Player(name: "Test player 1", image: "Test image 1", totalScore:0),
+        game.players = [Player(name: "Test player 1", image: "Test image 1", totalScore:0),
                             Player(name: "Test player 2", image: "Test image 2", totalScore:0),
                             Player(name: "Test player 3", image: "Test image 3", totalScore:0),
                             Player(name: "Test player 4", image: "Test image 4", totalScore:0),
                             Player(name: "Test player 5", image: "Test image 5", totalScore:0),
                             Player(name: "Test player 6", image: "Test image 6", totalScore:0)]
         game.onRestaurantSelected(restaurantList[0])
-        for player in game.playerOrder {
+        for player in game.players {
             doTest(result: player.hand.cards.count == 11 || player.hand.cards.count == 12, comment: "Large deck deal to players")
         }
         
-        game.playerOrder = [
+        game.players = [
             Player(name: "Test player 1", image: "Test image 1", totalScore:0, score: Deck(cardCounts: [.Bird:8])),
             Player(name: "Test player 2", image: "Test image 2", totalScore:0, score: Deck(cardCounts: [.Bird:6])),
             Player(name: "Test player 3", image: "Test image 3", totalScore:0, score: Deck(cardCounts: [.Bird:4])),
             Player(name: "Test player 4", image: "Test image 4", totalScore:0, score: Deck(cardCounts: [.Bird:2]))]
         
         game.scoring()
-        doTest(result: game.playerOrder[0].name == "Test player 4", comment: "Scoring player order")
-        doTest(result: game.playerOrder[1].name == "Test player 1", comment: "Scoring player order")
-        doTest(result: game.playerOrder[2].name == "Test player 2", comment: "Scoring player order")
-        doTest(result: game.playerOrder[3].name == "Test player 3", comment: "Scoring player order")
+        doTest(result: game.players[0].name == "Test player 4", comment: "Scoring player order")
+        doTest(result: game.players[1].name == "Test player 1", comment: "Scoring player order")
+        doTest(result: game.players[2].name == "Test player 2", comment: "Scoring player order")
+        doTest(result: game.players[3].name == "Test player 3", comment: "Scoring player order")
     }
     
     
