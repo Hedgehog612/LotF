@@ -72,6 +72,17 @@ enum Card: CaseIterable, Hashable, Comparable {
     
     
     //------------------------------------------------------------------------------
+    // isRealCard
+    // Is this a real card type (i.e. Cow) as opposed to a placeholder type (i.e. AnyMeat)
+    //------------------------------------------------------------------------------
+    func isRealCard() -> Bool {
+        return self == .Bun || self == .Sauce || self == .Fries || self == .Drink
+        || self == .Vegetable || self == .Cheese || self == .Bird || self == .Fish
+        || self == .Cow || self == .Pie
+    }
+    
+    
+    //------------------------------------------------------------------------------
     // matchesRequirement
     // Does this card match a required ingredient?
     //------------------------------------------------------------------------------
