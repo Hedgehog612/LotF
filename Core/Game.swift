@@ -30,6 +30,7 @@ class Game {
     var roundEnd = false
     var restaurant: Restaurant!
     var specialRule: String
+    var cardsToFill: [Card]
 
     // Current shift
     var shiftLeader: Player!
@@ -49,6 +50,7 @@ class Game {
         timer = 0
         rolledOrder = false
         deck = Deck()
+        cardsToFill = []
     }
     
     
@@ -125,17 +127,21 @@ class Game {
         // Set up the restaurant
         specialRule = restaurant!.specialRule
         if players.count <= 5 {
+            print("You'll be using the small deck.")
             deck = restaurant!.smallDeck
         } else {
+            print("You'll be using the large deck.")
             deck = restaurant!.largeDeck
         }
         if restaurant!.name == "McPubihan's" {
+            print("Making the stew pot.")
             for _ in 1...6 {
                 deck.deal(recipient: stewPot)
             }
         }
         
         //Deals cards now we know what the deck should be
+        print("Dealing everyone's cards.")
         while deck.cards.count > 0 {
             for player in players {
                 if deck.cards.count > 0 {
@@ -172,9 +178,8 @@ class Game {
             
             let blackDie = Int.random(in: 1..<6)
             let menuItem = category.menuItems[blackDie - 1]
-            
+            print("Rolled a \(greenDie) and a \(blackDie)")
             currentOrder = CurrentOrder(originalOrder: menuItem)
-            
             //Special order rules go here
             if category.name == "Special Orders" {
                 currentOrder = specialOrder(oldOrder: currentOrder)
@@ -212,7 +217,14 @@ class Game {
     // The order has been picked or rolled and we're ready to start cookin'
     //------------------------------------------------------------------------------
     func doneWithOrderPicking() {
-        mainLoop()
+        //Donner pass special rule
+        if currentOrder.originalItem.name == "Donner Pass" {
+            let passPlayer = players.remove(at: 0)
+            players.append(passPlayer)
+            ui.pickRollThisOrder()
+        } else {
+            mainLoop()
+        }
     }
     
     
@@ -262,17 +274,33 @@ class Game {
         }
     }
     
+    //------------------------------------------------------------------------------
+    // addToFill
+    // Hold cards as the player builds the cards to fill
+    //------------------------------------------------------------------------------
+    func addToFill(card: Card) {
+        cardsToFill.append(card)
+        if card.name != "Short" {
+            players[0].hand.removeCard(card)
+        }
+    }
+    
+    
     
     //------------------------------------------------------------------------------
     // fillTheOrder
     // Verify that the submitted cards can fill the provided order
     //------------------------------------------------------------------------------
-    func fillTheOrder(playerCards: [Card]) {
-        if currentOrder.doesOrderMatch(submittedOrder: playerCards) {
-            orderFilled(fillCards: playerCards)
+    func fillTheOrder() {
+        if currentOrder.doesOrderMatch(submittedOrder: cardsToFill) {
+            orderFilled(fillCards: cardsToFill)
         } else {
-            // TODO: pick the correct player
             // TODO: should try again
+            //Return cards from cardsToFill into player hand and pass the turn
+            for card in cardsToFill {
+                players[0].hand.cards.append(card)
+            }
+            cardsToFill = []
             ui.passTheOrder()
         }
     }
@@ -311,7 +339,6 @@ class Game {
     //------------------------------------------------------------------------------
     func orderFilled(fillCards: [Card]) {
         for card in fillCards {
-            players[0].hand.removeCard(card)
             players[0].score.cards.append(card)
         }
         players[0].scoreTokens += currentOrder.tokens

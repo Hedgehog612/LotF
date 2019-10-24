@@ -16,7 +16,6 @@ import SwiftUI
 //------------------------------------------------------------------------------
 enum Card: CaseIterable, Hashable, Comparable {
     
-    
     // These are actual cards that a player can have in their hand.
     case Bun
     case Sauce
