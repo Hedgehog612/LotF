@@ -243,7 +243,8 @@ class Game {
         if fillOrder {
             ui.pickCardsToFill()
         } else {
-            ui.passTheOrder()
+            // TODO: pick the correct player
+            ui.passTheOrder(recipient: players[0])
         }
     }
     
@@ -256,7 +257,9 @@ class Game {
         if currentOrder.doesOrderMatch(submittedOrder: playerCards) {
             orderFilled(fillCards: playerCards)
         } else {
-            ui.passTheOrder()
+            // TODO: pick the correct player
+            // TODO: should try again
+            ui.passTheOrder(recipient: players[0])
         }
     }
     
@@ -266,7 +269,7 @@ class Game {
     // Move a card from the player's hand to the appropriate recipient
     // Move the player to the end of the order
     //------------------------------------------------------------------------------
-    func orderPassed(passCard: Card) {
+    func passTheOrder(card: Card) {
         currentOrder.timesPassed += 1
         if currentOrder.timesPassed == players.count {
             currentOrder.timesPassed = 0
@@ -476,6 +479,7 @@ class Game {
             for card in secondOrder.content {
                 newOrder!.content.append(card)
             }
+            /*
         case "Roll two Side Orders",
              "Roll two Stuffers",
              "Roll two Mainstays":
@@ -497,6 +501,7 @@ class Game {
              }
         case "Holiday Potluck":
             newOrder!.content = ui.pickThreeCards()
+            */
         default:
             assert(false)
         }

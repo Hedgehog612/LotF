@@ -114,8 +114,8 @@ class TextUI {
     //------------------------------------------------------------------------------
     func pickRestaurant() {
         let textMenu = TextMenu(prompt: """
-        Starting round \(game.currentRound).
-        Which restaurant would you like?
+            Starting round \(game.currentRound).
+            Which restaurant would you like?
         """)
         
         for restaurant in restaurantList {
@@ -132,8 +132,8 @@ class TextUI {
     //------------------------------------------------------------------------------
     func pickRollThisOrder() {
         let textMenu = TextMenu(prompt: """
-        \(game.shiftLeader.name), you are the shift leader.
-        Would you like to pick an order or roll randomly?
+            \(game.shiftLeader.name), you are the shift leader.
+            Would you like to pick an order or roll randomly?
         """)
         
         textMenu.addChoice("Pick an order", onSelect: { game.onPickRollThisOrder(false) })
@@ -149,8 +149,8 @@ class TextUI {
     //------------------------------------------------------------------------------
     func pickOrder() {
         let textMenu = TextMenu(prompt: """
-        Here's the menu for \(game.restaurant.name):
-        What's the next order?
+            Here's the menu for \(game.restaurant.name):
+            What's the next order?
         """)
 
         for menuCategory in game.restaurant.menuCategories {
@@ -183,14 +183,9 @@ class TextUI {
     //
     //------------------------------------------------------------------------------
     func sendOrderToPlayer() {
-        print("""
-            \(game.players[0].name), it's your turn.
-            The order is\(game.currentOrder.originalItem.name), which contains
-            """)
-        for item in game.currentOrder.content {
-            print(item.name)
-        }
         let textMenu = TextMenu(prompt: """
+            \(game.players[0].name), it's your turn.
+            The order is\(game.currentOrder.originalItem.name).
             It has been short \(game.currentOrder.short) times.
             Would you like to fill this order?
             """
@@ -208,6 +203,14 @@ class TextUI {
     // Fill an order with cards from your hand
     //------------------------------------------------------------------------------
     func pickCardsToFill() {
+        let textMenu = TextMenu(prompt: """
+            The order is\(game.currentOrder.originalItem.name).
+            It has been short \(game.currentOrder.short) times.
+        """)
+        
+        textMenu.addChoice("Huh", onSelect: { game.fillTheOrder(cards: [Card]() )})
+        
+        textMenu.execute()
     }
     
     
@@ -217,7 +220,17 @@ class TextUI {
     // to the player on their left (if the order was called) or the shift leader (if
     // the order was rolled).
     //------------------------------------------------------------------------------
-    func passTheOrder() {
+    func passTheOrder(recipient: Player) {
+        let textMenu = TextMenu(prompt: """
+            Because you're passing, you need to pass one card to \(recipient.name).
+            Which card would you like to pass?
+        """)
+        
+        for card in game.players[0].hand.cards {
+            textMenu.addChoice(card.name, onSelect: { game.passTheOrder(card: card) })
+        }
+        
+        textMenu.execute()
     }
     
     
@@ -225,7 +238,13 @@ class TextUI {
     // pickThreeCards
     // Special function for the Holiday Potluck: choose three ingredients.
     //------------------------------------------------------------------------------
+    var threeCards = [Card]()
     func pickThreeCards() {
+        threeCards = []
+        pickThreeCardsHelper()
+    }
+    
+    func pickThreeCardsHelper() {
     }
 
     
