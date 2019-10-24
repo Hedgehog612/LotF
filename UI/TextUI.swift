@@ -177,6 +177,25 @@ class TextUI {
             game.doneWithOrderPicking()
         }
     }
+    
+    
+    //------------------------------------------------------------------------------
+    //
+    //------------------------------------------------------------------------------
+    func sendOrderToPlayer() {
+        let textMenu = TextMenu(prompt: """
+        \(game.players[0].name), it's your turn.
+        The order is\(game.currentOrder.originalItem.name), which contains \(game.currentOrder!.content).
+        It has been short \(game.currentOrder.short) times.
+        Would you like to fill this order?
+        """
+        )
+        
+        textMenu.addChoice("Fill the order", onSelect: { game.pickedFillOrder(true) })
+        textMenu.addChoice("Pass", onSelect: { game.pickedFillOrder(false) })
+        
+        textMenu.execute()
+    }
 
 
     //------------------------------------------------------------------------------
