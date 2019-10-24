@@ -235,6 +235,20 @@ class Game {
     
     
     //------------------------------------------------------------------------------
+    // playerToPassTo
+    // Who do you pass a card to?
+    //------------------------------------------------------------------------------
+    func playerToPassTo() -> Player {
+        if rolledOrder == true {
+            return shiftLeader
+        } else {
+            return players[1]
+        }
+    }
+    
+    
+    
+    //------------------------------------------------------------------------------
     // pickedFillOrder
     // The current player has decided whether or not to fill the order.
     //------------------------------------------------------------------------------
@@ -276,11 +290,7 @@ class Game {
             currentOrder.short += 1
         }
         players[0].hand.removeCard(card)
-        if rolledOrder {
-            shiftLeader.hand.cards.append(card)
-        } else {
-            players[1].hand.cards.append(card)
-        }
+        playerToPassTo().hand.cards.append(card)
         let passedPlayer = players.remove(at: 0)
         players.append(passedPlayer)
         if passedPlayer.hand.cards.count == 0 {
