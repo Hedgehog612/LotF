@@ -118,7 +118,6 @@ class Game {
 
     //------------------------------------------------------------------------------
     // onRestaurantSelected
-    // TODO: Restaurant selection should happen at the beginning of each round.
     //------------------------------------------------------------------------------
     func onRestaurantSelected(_ restaurantIn: Restaurant) {
         restaurant = restaurantIn
@@ -243,8 +242,9 @@ class Game {
         if fillOrder {
             ui.pickCardsToFill()
         } else {
-            // TODO: pick the correct player
-            ui.passTheOrder(recipient: players[0])
+            //TODO: Should have option to try again
+            //TODO: Determine if you can fill ahead of time
+            ui.passTheOrder()
         }
     }
     
@@ -259,7 +259,7 @@ class Game {
         } else {
             // TODO: pick the correct player
             // TODO: should try again
-            ui.passTheOrder(recipient: players[0])
+            ui.passTheOrder()
         }
     }
     
@@ -269,7 +269,7 @@ class Game {
     // Move a card from the player's hand to the appropriate recipient
     // Move the player to the end of the order
     //------------------------------------------------------------------------------
-    func passTheOrder(card: Card) {
+    func orderPassed(card: Card) {
         currentOrder.timesPassed += 1
         if currentOrder.timesPassed == players.count {
             currentOrder.timesPassed = 0
