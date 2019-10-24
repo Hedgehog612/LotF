@@ -457,46 +457,6 @@ class Game {
     }
     
     
-    //Placeholder function. This function tallies up the scores of each player at the end of the round.
-    func scoring() {
-        var roundScores = [Int]()
-        for player in players {
-            var roundPoints = 0
-            for card in player.score.cards {
-                //Score by multiplying the number of cards of each type by the point value of those cards
-                roundPoints += card.score
-            }
-            roundPoints += player.scoreTokens
-            //print("\(player.name) scored \(roundPoints) this round.")
-            var lostPoints = 0
-            for card in player.hand.cards {
-                lostPoints += card.score
-            }
-            //print("\(player.name) has \(lostPoints) points still in hand.")
-            roundPoints -= lostPoints
-            player.tempScore = roundPoints
-            roundScores.append(player.tempScore)
-            //print("\(player.name)'s score this round is \(roundPoints)")
-            player.totalScore += roundPoints
-            //print("This brings \(player.name)'s total score to \(player.totalScore).")
-        }
-        //Move the player with the smallest score to the front
-        let minScore = roundScores.min()!
-        var movePlayer: Player
-        for _ in 1...players.count {
-            if players[0].tempScore > minScore {
-                movePlayer = players.remove(at: 0)
-                players.append(movePlayer)
-            }
-        }
-        currentRound += 1
-        //Reset tempScore, scoreTokens for next round
-        for player in players {
-            player.tempScore = 0
-            player.scoreTokens = 0
-        }
-    }
-    
     //This function handles special orders
     func specialOrder(oldOrder: CurrentOrder!) -> CurrentOrder {
         var newOrder = oldOrder
@@ -521,7 +481,7 @@ class Game {
              "Roll two Stuffers",
              "Roll two Mainstays":
             var thirdOrder: CurrentOrder
-            secondOrder = CurrentOrder(originalOrder: game.restaurant.menuCategories.first(where: { $0.range.contains(oldOrder!.originalItem.specialOrderLink) })!.menuItems[orderNumber])
+            //secondOrder = CurrentOrder(originalOrder: game.restaurant.menuCategories.first(where: { $0.range.contains(oldOrder!.originalItem.specialOrderLink) })!.menuItems[orderNumber])
             thirdOrder = CurrentOrder(originalOrder: game.restaurant.menuCategories.first(where: { $0.range.contains(oldOrder!.originalItem.specialOrderLink) })!.menuItems[orderType])
             for card in secondOrder.content {
                 newOrder!.content.append(card)
@@ -532,7 +492,7 @@ class Game {
             }
         case "Roll a Main Dish, add one Drink",
              "Roll a Combo, add one Fries":
-             secondOrder = CurrentOrder(originalOrder: game.restaurant.menuCategories.first(where: { $0.range.contains(oldOrder!.originalItem.specialOrderLink) })!.menuItems[orderNumber])
+             //secondOrder = CurrentOrder(originalOrder: game.restaurant.menuCategories.first(where: { $0.range.contains(oldOrder!.originalItem.specialOrderLink) })!.menuItems[orderNumber])
              for card in secondOrder.content {
                  newOrder!.content.append(card)
              }
