@@ -219,23 +219,36 @@ class TextUI {
     //Then, submit that and see if it works.
     //------------------------------------------------------------------------------
     func pickCardsToFill() {
+        var totalCards = 0
         let kludgeDeck = Deck(cardCounts: [.Short:1])
-        for card in game.currentOrder!.content {
-            let textMenu = TextMenu(prompt: """
-                The next card in the order is \(card).
-                How would you like to fill it?
-            """)
-            for card in game.players[0].hand.cards {
-                textMenu.addChoice("Fill with \(card.name)", onSelect: { game.addToFill(card: card) })
+        cardsToFillHelper()
+    }
+    
+    
+    func cardsToFillHelper() {
+        while game.totalCards < game.currentOrder.content.count {
+            for card in game.currentOrder!.content {
+                let textMenu = TextMenu(prompt: """
+                    The next card in the order is \(card).
+                    How would you like to fill it?
+                """)
+                for card in game.players[0].hand.cards {
+                    textMenu.addChoice("Fill with \(card.name)", onSelect: { game.addToFill(card: card) })
+                }
+                textMenu.addChoice("Do not fill this card", onSelect: { game.addToFill(card: kludgeDeck.cards[0]) })
+                textMenu.execute()
             }
-            textMenu.addChoice("Do not fill this card", onSelect: { game.addToFill(card: kludgeDeck.cards[0]) })
-            textMenu.execute()
-        }
-        print("You are trying to fill the order with:")
-        for card in game.cardsToFill {
-            print(card.name)
+            print("You are trying to fill the order with:")
+            for card in game.cardsToFill {
+                print(card.name)
+            }
         }
         game.fillTheOrder()
+    }
+    
+    
+    func filledACard() {
+        
     }
     
     

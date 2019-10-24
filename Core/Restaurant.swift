@@ -370,12 +370,12 @@ Restaurant(
             menuItems: [
                 MenuItem(name: "Chicken al Friedey's", ingredients:
                     [.Sauce:1, .Cheese:1, .Bird:1]),
-                MenuItem(name: "An Unbearable Likeness of Beans", ingredients:
-                    [.Vegetable:1, .Bird: 1]),
-                MenuItem(name: "Grey Stuff in a Pot", ingredients:
-                    [.Vegetable:1, .Cow:1]),
-                MenuItem(name: "Brown Stuff in a Pot", ingredients:
-                    [.Vegetable:1, .Cheese:1, .Fish:1]),
+                MenuItem(name: "Cowabungini", ingredients:
+                    [.Bun:1, .Sauce: 1, .Cow:1]),
+                MenuItem(name: "Carpe de Diem", ingredients:
+                    [.Sauce:1, .Vegetable:1, .Fish:1]),
+                MenuItem(name: "Sheep wit' da Fishes", ingredients:
+                    [.Cheese:1, .Cow:1, .Fish:2]),
                 MenuItem(name: "Crown Gruel", ingredients:
                     [.Drink:1, .Cheese:1, .Cow:1]),
                 MenuItem(name: "Bovine Spongiform Yum, Yum, Yum!", ingredients:
