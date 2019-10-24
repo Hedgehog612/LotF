@@ -208,6 +208,7 @@ class TextUI {
             It has been short \(game.currentOrder.short) times.
         """)
         
+        // TODO: Need to actually pick some cards
         textMenu.addChoice("Huh", onSelect: { game.fillTheOrder(playerCards: [Card]() )})
         
         textMenu.execute()
@@ -245,6 +246,41 @@ class TextUI {
     }
     
     func pickThreeCardsHelper() {
+        var whichCard = ""
+        switch threeCards.count {
+        case 0:
+            whichCard = "first"
+        case 1:
+            whichCard = "second"
+        case 2:
+            whichCard = "third"
+        default:
+            assert(false)
+        }
+        
+        let textMenu = TextMenu(prompt: """
+            The Holiday Potluck requires three different ingredients.
+            Pick the \(whichCard) ingredient:
+        """)
+        
+        for card in Card.allCases {
+            if !threeCards.contains(card) && card.isRealCard() {
+                textMenu.addChoice(card.name, onSelect: { self.pickedOneOfThreeCards(card) })
+            }
+        }
+        
+        textMenu.execute()
+    }
+    
+    func pickedOneOfThreeCards(_ card: Card) {
+        threeCards.append(card)
+        if threeCards.count < 3 {
+            pickThreeCardsHelper()
+        }
+        
+        addToQueue {
+            game.pickedThreeCards(self.threeCards)
+        }
     }
 
     
