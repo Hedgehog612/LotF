@@ -183,12 +183,17 @@ class TextUI {
     //
     //------------------------------------------------------------------------------
     func sendOrderToPlayer() {
+        print("""
+            \(game.players[0].name), it's your turn.
+            The order is\(game.currentOrder.originalItem.name), which contains
+            """)
+        for item in game.currentOrder.content {
+            print(item.name)
+        }
         let textMenu = TextMenu(prompt: """
-        \(game.players[0].name), it's your turn.
-        The order is\(game.currentOrder.originalItem.name), which contains \(game.currentOrder!.content).
-        It has been short \(game.currentOrder.short) times.
-        Would you like to fill this order?
-        """
+            It has been short \(game.currentOrder.short) times.
+            Would you like to fill this order?
+            """
         )
         
         textMenu.addChoice("Fill the order", onSelect: { game.pickedFillOrder(true) })
@@ -211,8 +216,8 @@ class TextUI {
         let textMenu = TextMenu(prompt: """
         Would you like to fill or pass?
         """)
-        textMenu.addChoice("Fill", onSelect: { game.onFillOrder })
-        textMenu.addChoice("Pass", onSelect: { game.onPassOrder })
+        textMenu.addChoice("Fill the order", onSelect: { game.pickedFillOrder(true) })
+        textMenu.addChoice("Pass", onSelect: { game.pickedFillOrder(false) })
     }
     
     
@@ -222,6 +227,15 @@ class TextUI {
     //------------------------------------------------------------------------------
     func pickCardsToFill() -> [Card] {
         return []
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // passTheOrder
+    // Choose cards to pass to another player
+    //------------------------------------------------------------------------------
+    func passTheOrder() {
+        
     }
     
     

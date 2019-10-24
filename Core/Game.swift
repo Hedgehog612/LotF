@@ -240,7 +240,11 @@ class Game {
     // The current player has decided whether or not to fill the order.
     //------------------------------------------------------------------------------
     func pickedFillOrder(_ fillOrder: Bool) {
-        
+        if fillOrder {
+            ui.pickCardsToFill()
+        } else {
+            ui.passTheOrder()
+        }
     }
     
     
