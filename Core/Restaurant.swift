@@ -341,5 +341,81 @@ Restaurant(
         cardCounts: [.Bun:7, .Fries:5, .Drink:7, .Vegetable:5, .Cheese:6, .Cow:6, .Fish:4, .Bird:3, .Pie:3]),
     largeDeck: Deck(
         cardCounts: [.Bun:10, .Fries:7, .Drink:10, .Vegetable:7, .Cheese:8, .Cow:8, .Fish:6, .Bird:5, .Pie:4]),
+    specialRule: "Each time an order goes around the table unfilled, it becomes worth five extra points. These points are tracked with tokens."),
+    
+    Restaurant(
+    image:      "Ghicciaroni's Zombie",
+    name:       "Ghicciaroni's",
+    subTitle:   "Italian Full-Service Buffet",
+    menuCategories: [
+        MenuCategory(
+            name: "Antipasto",
+            range: 1...2,
+            menuItems: [
+                MenuItem(name: "Friend of Mine", ingredients:
+                    [.Bird:1]),
+                MenuItem(name: "Friend of Ours", ingredients:
+                    [.Fish:1]),
+                MenuItem(name: "Caesar's Ghost", ingredients:
+                    [.Vegetable:1, .Cheese:1, .Pie:1]),
+                MenuItem(name: "Amerigo Vespucci", ingredients:
+                    [.Bun:1, .Sauce:1]),
+                MenuItem(name: "Cosi Fan Tutte", ingredients:
+                    [.Bird:1, .Pie:1]),
+                MenuItem(name: "The Old Republic", ingredients:
+                    [.Vegetable:2, .Cow:1])]),
+        MenuCategory(
+            name: "Pasta",
+            range: 3...3,
+            menuItems: [
+                MenuItem(name: "Chicken al Friedey's", ingredients:
+                    [.Sauce:1, .Cheese:1, .Bird:1]),
+                MenuItem(name: "An Unbearable Likeness of Beans", ingredients:
+                    [.Vegetable:1, .Bird: 1]),
+                MenuItem(name: "Grey Stuff in a Pot", ingredients:
+                    [.Vegetable:1, .Cow:1]),
+                MenuItem(name: "Brown Stuff in a Pot", ingredients:
+                    [.Vegetable:1, .Cheese:1, .Fish:1]),
+                MenuItem(name: "Crown Gruel", ingredients:
+                    [.Drink:1, .Cheese:1, .Cow:1]),
+                MenuItem(name: "Bovine Spongiform Yum, Yum, Yum!", ingredients:
+                    [.Bun:2, .Drink:1, .Cow:1])]),
+        MenuCategory(
+            name: "Sandwiches",
+            range: 5...5,
+            menuItems: [
+                MenuItem(name: "High Road", ingredients:
+                    [.Bun:1, .Cow:1]),
+                MenuItem(name: "Low Road", ingredients:
+                    [.Bun:1, .Fish:1]),
+                MenuItem(name: "Guy Fawkes", ingredients:
+                    [.Bun:1, .Cheese:1, .Bird:1]),
+                MenuItem(name: "Rozencrantz & Guildenstern", ingredients:
+                    [.Bun:1, .Fries:2]),
+                MenuItem(name: "Two Gentlemen of Verona", ingredients:
+                    [.Bun:1, .Bird:2]),
+                MenuItem(name: "Star Cross'd Lovers", ingredients:
+                    [.Bun:1, .Cheese:1, .Cow:1, .Fish:1])]),
+        MenuCategory(
+            name: "Main Courses",
+            range: 6...6,
+            canCall: false,
+            menuItems: [
+                MenuItem(name: "Mutton Jeff", ingredients:
+                    [.Fries:1, .Drink:1, .Vegetable:1, .Cow:1]),
+                MenuItem(name: "Frying Dutchman", ingredients:
+                    [.Fries:1, .Drink:1, .Fish:2, .Pie:1]),
+                MenuItem(name: "Winston Churchill", ingredients:
+                    [.Bun:1, .Fries:1, .Drink:1, .Cheese:1, .Cow:1, .Pie:1]),
+                MenuItem(name: "White Man's Bird 'n Cheese", ingredients:
+                    [.Bun:1, .Fries:1, .Drink:1, .Cheese:1, .Bird:1, .Pie:1]),
+                MenuItem(name: "Madness of King George III", ingredients:
+                    [.Bun:1, .Drink:6]),
+                MenuItem(name: "Magna Carda with a side of Fries", ingredients:
+                    [.Bun:1, .Fries:1, .Drink:1, .Vegetable:1, .Cheese:1, .Bird:1, .Fish:1, .Pie:1])])],
+    smallDeck: Deck(
+        cardCounts: [.Bun:7, .Fries:5, .Drink:7, .Vegetable:5, .Cheese:6, .Cow:6, .Fish:4, .Bird:3, .Pie:3]),
+    largeDeck: Deck(
+        cardCounts: [.Bun:10, .Fries:7, .Drink:10, .Vegetable:7, .Cheese:8, .Cow:8, .Fish:6, .Bird:5, .Pie:4]),
     specialRule: "Each time an order goes around the table unfilled, it becomes worth five extra points. These points are tracked with tokens.")
 ]

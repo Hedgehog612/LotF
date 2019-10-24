@@ -131,6 +131,10 @@ class TextUI {
     // Do we want to roll this order? (Otherwise, choose it ourselves)
     //------------------------------------------------------------------------------
     func pickRollThisOrder() {
+        print("Your cards are: ")
+        for card in game.players[0].hand.cards {
+            print(card.name)
+        }
         let textMenu = TextMenu(prompt: """
             \(game.shiftLeader.name), you are the shift leader.
             Would you like to pick an order or roll randomly?

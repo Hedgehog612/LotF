@@ -149,7 +149,9 @@ class Game {
                 }
             }
         }
-        
+        for player in players {
+            player.hand.cards.sort()
+        }
         startNewShift()
     }
     
@@ -319,6 +321,7 @@ class Game {
         }
         players[0].hand.removeCard(card)
         playerToPassTo().hand.cards.append(card)
+        playerToPassTo().hand.cards.sort()
         let passedPlayer = players.remove(at: 0)
         players.append(passedPlayer)
         if passedPlayer.hand.cards.count == 0 {

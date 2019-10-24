@@ -39,6 +39,7 @@ struct CurrentOrder {
                 content.append(card)
             }
         }
+        content = content.sorted()
     }
     
     
