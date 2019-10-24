@@ -42,6 +42,10 @@ class Tests {
         testReport()
     }
     
+
+    //------------------------------------------------------------------------------
+    // doTest
+    //------------------------------------------------------------------------------
     func doTest(result: Bool, comment: String = "", line: Int = #line) {
         totalTests += 1
         
@@ -195,6 +199,8 @@ class Tests {
     //run through a very crude mock game, testing to make sure everything works as expected
     //------------------------------------------------------------------------------
     func gameTesting() {
+        game = Game(ui: TextUI())
+        
         game.players = [Player(name: "Test player 1", image: "Test image 1", totalScore:0),
                             Player(name: "Test player 2", image: "Test image 2", totalScore:0),
                             Player(name: "Test player 3", image: "Test image 3", totalScore:0),
@@ -225,6 +231,8 @@ class Tests {
         doTest(result: game.players[1].name == "Test player 1", comment: "Scoring player order")
         doTest(result: game.players[2].name == "Test player 2", comment: "Scoring player order")
         doTest(result: game.players[3].name == "Test player 3", comment: "Scoring player order")
+        
+        game = Game(ui: TextUI())
     }
     
     
