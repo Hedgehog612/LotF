@@ -209,7 +209,7 @@ class TextUI {
         """)
         
         // TODO: Need to actually pick some cards
-        textMenu.addChoice("Huh", onSelect: { game.fillTheOrder(cards: [Card]() )})
+        textMenu.addChoice("Huh", onSelect: { game.fillTheOrder(playerCards: [Card]() )})
         
         textMenu.execute()
     }
@@ -279,7 +279,7 @@ class TextUI {
         }
         
         addToQueue {
-            game.pickedThreeCards(threeCards)
+            game.pickedThreeCards(self.threeCards)
         }
     }
 
