@@ -282,7 +282,12 @@ class TextUI {
         pickThreeCardsHelper()
     }
     
+    //------------------------------------------------------------------------------
+    // pickThreeCardsHelper
+    // This will pick one of our three cards.
+    //------------------------------------------------------------------------------
     func pickThreeCardsHelper() {
+        // Friendly name for which card we're picking now
         var whichCard = ""
         switch threeCards.count {
         case 0:
@@ -295,6 +300,7 @@ class TextUI {
             assert(false)
         }
         
+        // Now pick one ingredient
         let textMenu = TextMenu(prompt: """
             The Holiday Potluck requires three different ingredients.
             Pick the \(whichCard) ingredient:
@@ -309,15 +315,20 @@ class TextUI {
         textMenu.execute()
     }
     
+    //------------------------------------------------------------------------------
+    // pickedOneOfThreeCards
+    // We've picked one of three cards. If we've got all three, pass them to the game.
+    // If we don't yet have all three, call pickThreeCardsHelper again.
+    //------------------------------------------------------------------------------
     func pickedOneOfThreeCards(_ card: Card) {
         threeCards.append(card)
         if threeCards.count < 3 {
             pickThreeCardsHelper()
-        }
-        
-        addToQueue {
-            game.pickedThreeCards(self.threeCards)
-        }
+        } else {
+            addToQueue {
+                game.pickedThreeCards(self.threeCards)
+            }
+        }        
     }
 
     
@@ -365,6 +376,7 @@ class TextUI {
     // Adds a task to the execution queue.
     //------------------------------------------------------------------------------
     func addToQueue(_ task: @escaping () -> ()) {
+        assert(executionQueue.count == 0)       // Something is probably wrong if tasks are backing up
         executionQueue.append(task)
     }
 }
