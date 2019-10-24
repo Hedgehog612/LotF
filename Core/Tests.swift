@@ -38,7 +38,6 @@ class Tests {
         menuTesting()
         //specialRuleTesting()
         gameTesting()
-        UITesting()
         testReport()
     }
     
@@ -95,6 +94,7 @@ class Tests {
     //------------------------------------------------------------------------------
     //deckTesting
     //Test dealing cards, matching orders
+    //Shouldn't need to reference testUI in order to work
     //------------------------------------------------------------------------------
     func deckTesting() {
         let deck1 = Deck(cardCounts: [.Bun:5])
@@ -119,6 +119,7 @@ class Tests {
     //------------------------------------------------------------------------------
     //cardTesting
     //Test card comparison, isMeat
+    //Doesn't need to reference testUI to work
     //------------------------------------------------------------------------------
     func cardTesting() {
         let testingCards = Deck(cardCounts: [.Bun:1, .Sauce:1, .Fries:1, .Vegetable:1, .Cheese:1, .Bird:1, .Cow:1, .Fish:1, .Pie:1]).sortedCards
@@ -139,6 +140,7 @@ class Tests {
     //------------------------------------------------------------------------------
     //scoreTesting
     //Test moving cards, tokens upon scoring
+    //Will want to integrate this into TestUI
     //------------------------------------------------------------------------------
     func scoreTesting() {
         let testPlayer = Player(name: "Test player", image: "Test image", totalScore: 15)
@@ -157,6 +159,7 @@ class Tests {
     //------------------------------------------------------------------------------
     //menuTesting
     //test menu contents
+    //Does not need to be integrated into testUI
     //------------------------------------------------------------------------------
     func menuTesting() {
         for restaurant in restaurantList {
@@ -168,14 +171,22 @@ class Tests {
                 }
             }
         }
+        for restaurant in restaurantList {
+            var orderCounter = 0
+            for menuCategory in restaurant.menuCategories {
+                for _ in menuCategory.menuItems {
+                    orderCounter += 1
+                }
+            }
+            doTest(result: orderCounter == 24, comment: "24 orders in menu")
+        }
     }
-    //TODO: Test complete range set
-    //
     
     
     //------------------------------------------------------------------------------
     //specialRuleTesting
     //make sure the special rules are working correctly
+    //Add to testUI
     //------------------------------------------------------------------------------
     
     func specialRuleTesting() {
@@ -195,9 +206,10 @@ class Tests {
     //------------------------------------------------------------------------------
     //gameTesting
     //run through a very crude mock game, testing to make sure everything works as expected
+    //Needs to be testUI
     //------------------------------------------------------------------------------
     func gameTesting() {
-        game = Game(ui: TextUI())
+        game = Game(ui: TestUI())
         
         game.players = [Player(name: "Test player 1", image: "Test image 1", totalScore:0),
                             Player(name: "Test player 2", image: "Test image 2", totalScore:0),
@@ -230,16 +242,15 @@ class Tests {
         doTest(result: game.players[2].name == "Test player 2", comment: "Scoring player order")
         doTest(result: game.players[3].name == "Test player 3", comment: "Scoring player order")
         
-        game = Game(ui: TextUI())
+        game = Game(ui: TestUI())
     }
     
-    
-    //------------------------------------------------------------------------------
-    //UITesting
-    //------------------------------------------------------------------------------
-    func UITesting() {
+    func testUIGame() {
+        game = Game(ui: TestUI)
+        game.beginGame()
         
     }
+    
 }
 
 //TODO: Rebuild test function to use a dedicated TestUI instead of snipping bits off of TextUI

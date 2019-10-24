@@ -213,7 +213,10 @@ class Game {
     // The order has been picked or rolled and we're ready to start cookin'
     //------------------------------------------------------------------------------
     func doneWithOrderPicking() {
-        
+        let leadPlayer = players.remove(at: 0)
+        players.append(leadPlayer)
+        orderToPlayer()
+        ui.pickFillOrPass()
     }
     
 

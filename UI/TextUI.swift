@@ -184,7 +184,16 @@ class TextUI {
     // Choose whether to fill or pass (Always passes)
     //------------------------------------------------------------------------------
     func pickFillOrPass() -> Bool {
-        return false
+        print("You have the opportunity to fill an order for \(game.currentOrder.originalItem.name). The order contains:")
+        for item in game.currentOrder.content {
+            print(item.name)
+        }
+        print("It is short \(game.currentOrder.short) items.")
+        let textMenu = TextMenu(prompt: """
+        Would you like to fill or pass?
+        """)
+        textMenu.addChoice("Fill", onSelect: { game.onFillOrder })
+        textMenu.addChoice("Pass", onSelect: { game.onPassOrder })
     }
     
     

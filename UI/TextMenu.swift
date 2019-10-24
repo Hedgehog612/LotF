@@ -78,7 +78,7 @@ class TextMenu {
 
         // Call the appropriate closure for our selection
         game.ui.addToQueue {
-            self.choices.first(where: { $0.number == selection })?.onSelect!()
+            self.choices.first(where: { $0.number == selection })!.onSelect!()
         }
     }
 }
