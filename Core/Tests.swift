@@ -31,6 +31,7 @@ class Tests {
     //This delegates out all the testing functions that need to get run
     //------------------------------------------------------------------------------
     func runAllTests() {
+        return
         deckTesting()
         cardTesting()
         scoreTesting()

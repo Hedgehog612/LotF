@@ -113,24 +113,16 @@ class TextUI {
     // Which restaurant do we want for this shift?
     //------------------------------------------------------------------------------
     func pickRestaurant() {
-        print("\n\nStarting round \(game.currentRound).")
-        print("Which restaurant would you like?")
-        for (index, restaurant) in restaurantList.enumerated() {
-            print("\(index + 1): \(restaurant.name)")
+        let textMenu = TextMenu(prompt: """
+        Starting round \(game.currentRound).
+        Which restaurant would you like?
+        """)
+        
+        for restaurant in restaurantList {
+            textMenu.addChoice(restaurant.name, onSelect: { game.onRestaurantSelected(restaurant) })
         }
         
-        var pick: Int?
-        while pick == nil || pick! <= 0 || pick! > restaurantList.count {
-            var answer: String?
-            while answer == nil {
-                answer = readLine()
-            }
-            pick = Int(answer!)
-        }
-
-        addToQueue {
-            game.onRestaurantSelected(restaurantList[pick! - 1])
-        }
+        textMenu.execute()
     }
     
     
@@ -139,23 +131,15 @@ class TextUI {
     // Do we want to roll this order? (Otherwise, choose it ourselves)
     //------------------------------------------------------------------------------
     func pickRollThisOrder() {
-        print("\n\n\(game.shiftLeader.name), you are the shift leader.")
-        print("Y to roll this order, or N to pick from the menu")
-
-        while true {
-            var answer: String?
-            while answer == nil {
-                answer = readLine()
-                if answer == "Y" || answer == "y" {
-                    addToQueue { game.onPickRollThisOrder(true) }
-                    return
-                }
-                if answer == "N" || answer == "n" {
-                    addToQueue { game.onPickRollThisOrder(false) }
-                    return
-                }
-            }
-        }
+        let textMenu = TextMenu(prompt: """
+        \(game.shiftLeader.name), you are the shift leader.
+        Would you like to pick an order or roll randomly?
+        """)
+        
+        textMenu.addChoice("Pick an order", onSelect: { game.onPickRollThisOrder(false) })
+        textMenu.addChoice("Roll this order randomly", onSelect: { game.onPickRollThisOrder(true)})
+        
+        textMenu.execute()
     }
     
     
@@ -164,17 +148,22 @@ class TextUI {
     // Choose an item on the menu
     //------------------------------------------------------------------------------
     func pickOrder() {
-        print("\n\nHere's the menu for \(game.restaurant.name):")
+        let textMenu = TextMenu(prompt: """
+        Here's the menu for \(game.restaurant.name):
+        What's the next order?
+        """)
+
         for menuCategory in game.restaurant.menuCategories {
-            print("\(menuCategory.name):")
-            for (index, item) in menuCategory.menuItems.enumerated() {
-                print("\(index): \(item)")
+            if menuCategory.canCall {
+                textMenu.addDivider(menuCategory.name)
+                
+                for menuItem in menuCategory.menuItems {
+                    textMenu.addChoice(menuItem.name, onSelect: { game.onPickedOrder(menuItem)})
+                }
             }
         }
-
-        addToQueue {
-            game.onPickedOrder(game.restaurant.menuCategories[0].menuItems[0])
-        }
+        
+        textMenu.execute()
     }
     
     
