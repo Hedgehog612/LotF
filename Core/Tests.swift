@@ -246,7 +246,7 @@ class Tests {
     }
     
     func testUIGame() {
-        game = Game(ui: TestUI)
+        //game = Game(ui: TestUI)
         game.beginGame()
         
     }
