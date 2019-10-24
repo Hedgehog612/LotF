@@ -30,7 +30,6 @@ class Game {
     var roundEnd = false
     var restaurant: Restaurant!
     var specialRule: String
-    var cardsToFill: [Card]
 
     // Current shift
     var shiftLeader: Player!
@@ -50,7 +49,6 @@ class Game {
         timer = 0
         rolledOrder = false
         deck = Deck()
-        cardsToFill = []
     }
     
     
@@ -276,33 +274,21 @@ class Game {
         }
     }
     
-    //------------------------------------------------------------------------------
-    // addToFill
-    // Hold cards as the player builds the cards to fill
-    //------------------------------------------------------------------------------
-    func addToFill(card: Card) {
-        cardsToFill.append(card)
-        if card.name != "Short" {
-            players[0].hand.removeCard(card)
-        }
-    }
-    
     
     
     //------------------------------------------------------------------------------
     // fillTheOrder
     // Verify that the submitted cards can fill the provided order
     //------------------------------------------------------------------------------
-    func fillTheOrder() {
-        if currentOrder.doesOrderMatch(submittedOrder: cardsToFill) {
-            orderFilled(fillCards: cardsToFill)
+    func fillTheOrder(cards: [Card]) {
+        if currentOrder.doesOrderMatch(submittedOrder: cards) {
+            orderFilled(fillCards: cards)
         } else {
             // TODO: should try again
             //Return cards from cardsToFill into player hand and pass the turn
-            for card in cardsToFill {
+            for card in cards {
                 players[0].hand.cards.append(card)
             }
-            cardsToFill = []
             ui.passTheOrder()
         }
     }
