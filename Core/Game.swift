@@ -252,9 +252,9 @@ class Game {
     // fillTheOrder
     // Verify that the submitted cards can fill the provided order
     //------------------------------------------------------------------------------
-    func fillTheOrder(playerCards: [Cards]) {
+    func fillTheOrder(playerCards: [Card]) {
         if currentOrder.doesOrderMatch(submittedOrder: playerCards) {
-            orderFilled()
+            orderFilled(fillCards: playerCards)
         } else {
             ui.passTheOrder()
         }
@@ -263,8 +263,8 @@ class Game {
     
     //------------------------------------------------------------------------------
     // orderPassed
-    // Verify that the submitted cards can fill the provided order
-    //Todo: Do we take the card out of the passer's hand here?
+    // Move a card from the player's hand to the appropriate recipient
+    // Move the player to the end of the order
     //------------------------------------------------------------------------------
     func orderPassed(passCard: Card) {
         currentOrder.timesPassed += 1
@@ -272,6 +272,7 @@ class Game {
             currentOrder.timesPassed = 0
             currentOrder.short += 1
         }
+        players[0].hand.removeCard(passCard)
         if rolledOrder {
             shiftLeader.hand.cards.append(passCard)
         } else {
@@ -285,17 +286,19 @@ class Game {
         if currentOrder.short == currentOrder.content.count {
             ui.pickRollThisOrder()
         } else {
-            sendOrderToPlayer()
+            ui.sendOrderToPlayer()
         }
     }
     
     
     //------------------------------------------------------------------------------
     // orderFilled
+    // Remove cards from hand
     // Move cards from hand into scoring
     //------------------------------------------------------------------------------
     func orderFilled(fillCards: [Card]) {
         for card in fillCards {
+            players[0].hand.removeCard(card)
             players[0].score.cards.append(card)
         }
         players[0].scoreTokens += currentOrder.tokens
