@@ -213,6 +213,41 @@ class Game {
     // The order has been picked or rolled and we're ready to start cookin'
     //------------------------------------------------------------------------------
     func doneWithOrderPicking() {
+        mainLoop()
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // mainLoop
+    // This is the main gameplay loop. It keeps cycling around the table trying to
+    // fill the current order, checking for various end conditions along the way.
+    //------------------------------------------------------------------------------
+    func mainLoop() {
+        // Is this round over?
+        if roundEnd {
+            endRound()
+        }
+        
+        // Cycle to the next player and try to fill the order
+        let prevPlayer = players.remove(at: 0)
+        players.append(prevPlayer)
+        ui.sendOrderToPlayer()
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // pickedFillOrder
+    // The current player has decided whether or not to fill the order.
+    //------------------------------------------------------------------------------
+    func pickedFillOrder(_ fillOrder: Bool) {
+        
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // endRound
+    //------------------------------------------------------------------------------
+    func endRound() {
         
     }
     
@@ -220,24 +255,6 @@ class Game {
 
     
 
-    //------------------------------------------------------------------------------
-    //------------------------------------------------------------------------------
-    func fillOrder(player: Player) {
-        print("Can you fill the order? The order is\(currentOrder!.originalItem.name) and it contains \(currentOrder!.content). It has been short \(currentOrder!.short) times.")
-    }
-    
-    
-    //The main gameplay loop.
-    func playRound() {
-        while roundEnd == false {
-            // makeOrder()
-            while currentOrder != nil {
-                orderToPlayer()
-            }
-        }
-        scoring()
-    }
-    
     
     //Placeholder function. This function gives the current player a chance to fill the order or pass to the next player in line.
     //As the main gameplay loop, we also need to check if anyone's hand is empty at the end
