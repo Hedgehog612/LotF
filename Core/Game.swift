@@ -317,7 +317,7 @@ class Game {
     // Special case for the Holiday Potluck. The user has picked which three ingredients
     // they want in it.
     //------------------------------------------------------------------------------
-    func pickedThreeCards(cards: [Card]) {
+    func pickedThreeCards(_ cards: [Card]) {
         
     }
     
