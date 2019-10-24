@@ -384,8 +384,8 @@ class Game {
              "Roll two Stuffers",
              "Roll two Mainstays":
             var thirdOrder: CurrentOrder
-            secondOrder = CurrentOrder(originalOrder: restaurant!.menuCategories[oldOrder!.originalItem.specialOrderLink].menuItems[orderNumber])
-            thirdOrder = CurrentOrder(originalOrder: restaurant!.menuCategories[oldOrder!.originalItem.specialOrderLink].menuItems[orderType])
+            secondOrder = CurrentOrder(originalOrder: game.restaurant.menuCategories.first(where: { $0.range.contains(oldOrder!.originalItem.specialOrderLink) })!.menuItems[orderNumber])
+            thirdOrder = CurrentOrder(originalOrder: game.restaurant.menuCategories.first(where: { $0.range.contains(oldOrder!.originalItem.specialOrderLink) })!.menuItems[orderType])
             for card in secondOrder.content {
                 newOrder!.content.append(card)
             }
@@ -395,7 +395,7 @@ class Game {
             }
         case "Roll a Main Dish, add one Drink",
              "Roll a Combo, add one Fries":
-             secondOrder = CurrentOrder(originalOrder: restaurant!.menuCategories[oldOrder!.originalItem.specialOrderLink].menuItems[orderNumber])
+             secondOrder = CurrentOrder(originalOrder: game.restaurant.menuCategories.first(where: { $0.range.contains(oldOrder!.originalItem.specialOrderLink) })!.menuItems[orderNumber])
              for card in secondOrder.content {
                  newOrder!.content.append(card)
              }

@@ -172,21 +172,19 @@ class Tests {
     //specialRuleTesting
     //make sure the special rules are working correctly
     //------------------------------------------------------------------------------
-    /*
+    
     func specialRuleTesting() {
         game.restaurant = restaurantList[1]
         var specialTest: CurrentOrder
-        specialTest = game.specialOrder(oldOrder: CurrentOrder(originalOrder: MenuItem(name: "Add one Fish", ingredients:
-        [.Fish:1])))
+        specialTest = game.specialOrder(oldOrder: CurrentOrder(originalOrder: game.restaurant.menuCategories.first(where: { $0.range.contains(6) })!.menuItems[2]))
         doTest(result: specialTest.content.count > 1, comment: "Special order test: Add one item")
-        specialTest = game.specialOrder(oldOrder: CurrentOrder(originalOrder: MenuItem(name: "Roll two Mainstays", ingredients:
-            [:], specialOrderLink: 3)))
+        specialTest = game.specialOrder(oldOrder: CurrentOrder(originalOrder: game.restaurant.menuCategories.first(where: { $0.range.contains(6) })!.menuItems[5]))
         doTest(result: specialTest.content.count > 5, comment: "Special order test: Roll two")
         for card in specialTest.content {
             print(card.name)
         }
     }
- */
+ 
     
     
     //------------------------------------------------------------------------------
@@ -234,3 +232,7 @@ class Tests {
         
     }
 }
+
+//TODO: Rebuild test function to use a dedicated TestUI instead of snipping bits off of TextUI
+//Rebuid tests to run through a mock game instead of taking snippets
+//Set up TextUI to accept input about filling orders
