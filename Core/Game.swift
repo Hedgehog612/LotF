@@ -275,11 +275,11 @@ class Game {
             currentOrder.timesPassed = 0
             currentOrder.short += 1
         }
-        players[0].hand.removeCard(passCard)
+        players[0].hand.removeCard(card)
         if rolledOrder {
-            shiftLeader.hand.cards.append(passCard)
+            shiftLeader.hand.cards.append(card)
         } else {
-            players[1].hand.cards.append(passCard)
+            players[1].hand.cards.append(card)
         }
         let passedPlayer = players.remove(at: 0)
         players.append(passedPlayer)
@@ -375,89 +375,6 @@ class Game {
         
     }
 
-    
-
-    
-    //Placeholder function. This function gives the current player a chance to fill the order or pass to the next player in line.
-    //As the main gameplay loop, we also need to check if anyone's hand is empty at the end
-    func orderToPlayer() {
-        //Begin by checking if the order has become more short than it currently is
-        if currentOrder!.timesPassed == players.count {
-            currentOrder!.timesPassed = 0
-            currentOrder!.short += 1
-            //Love's Labours Lunch adds tokens when it gets short
-            if currentOrder!.originalItem.name == "Love's Labours Lunch" {
-                currentOrder?.tokens += 5
-            }
-        }
-        //Cancel the order if it's completely short
-        if currentOrder!.short == currentOrder!.content.count {
-            print("The order is too short and cannot be filled! Choose a new order.")
-            currentOrder = nil
-            return
-        }
-        let fillOrPass = ui.pickFillOrPass()
-        print("The order is \(currentOrder!.originalItem.name) and it contains \(currentOrder!.content). The order has been shortened by \(currentOrder!.short) items. Do you wish to fill or pass?")
-        switch fillOrPass {
-            //If the order doesn't get filled, move the active player to the back of the order and keep going
-        case false:
-            passTheOrder()
-        case true:
-            matchFood()
-        }
-        for player in players {
-            if player.hand.cards.count == 0 {
-                print("The round has ended!")
-                currentOrder = nil
-                roundEnd = true
-            }
-        }
-    }
-    
-    //Placeholder function. This function allows a player to try to fill an order.
-    func matchFood() {
-        print("You have chosen to fill the order. Please match your cards with the cards in the order.")
-        var playerFill: [Card]
-        //Placeholder in place of user input
-        playerFill = ui.pickCardsToFill()
-        if (currentOrder!.doesOrderMatch(submittedOrder: playerFill)) {
-            print("You have matched the order!")
-            //Ghicciaroni's orders are always worth the same amount of points, even if they're missing items
-            if restaurant!.name == "Ghicciaroni's" {
-                var playerScore = 0
-                var orderScore = 0
-                for card in playerFill {
-                    playerScore += card.score
-                }
-                for card in currentOrder!.content {
-                    orderScore += card.score
-                }
-                currentOrder!.tokens += (orderScore - playerScore)
-            }
-            //Replace "any meat" matches with non-scoring "any meat" cards
-            if restaurant!.name == "Montezuma's Mexi-Deli" {
-                playerFill = currentOrder!.montezumaMatch(playerCards: playerFill)
-            }
-            players[0].filledOrder(orderCards: playerFill, tokens: currentOrder!.tokens)
-            currentOrder = nil
-        } else {
-            print("You fail to match the order and must pass the order!")
-            passTheOrder()
-        }
-    }
-    
-    
-    func passTheOrder() {
-        //The player who passes gives a card to the player who rolled or the player to their left, depending on if the order was rolled or called
-        if rolledOrder {
-            players[0].hand.deal(recipient: shiftLeader!.hand)
-        } else {
-            players[0].hand.deal(recipient: players[1].hand)
-        }
-        currentOrder!.timesPassed += 1
-        let activePlayer = players.remove(at: 0)
-        players.append(activePlayer)
-    }
     
     
     //This function handles special orders

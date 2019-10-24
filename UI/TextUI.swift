@@ -208,7 +208,7 @@ class TextUI {
             It has been short \(game.currentOrder.short) times.
         """)
         
-        textMenu.addChoice("Huh", onSelect: { game.fillTheOrder(cards: [Card]() )})
+        textMenu.addChoice("Huh", onSelect: { game.fillTheOrder(playerCards: [Card]() )})
         
         textMenu.execute()
     }

@@ -111,7 +111,7 @@ class TestUI: TextUI {
         }
     }
 
-
+/*
     //------------------------------------------------------------------------------
     // pickFillOrPass
     // Choose whether to fill or pass (Always passes)
@@ -147,4 +147,5 @@ class TestUI: TextUI {
     override func pickThreeCards() -> [Card] {
         return [.Bird, .Cheese, .Cow]
     }
+ */
 }
