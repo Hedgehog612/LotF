@@ -249,13 +249,125 @@ class Game {
     
     
     //------------------------------------------------------------------------------
+    // fillTheOrder
+    // Verify that the submitted cards can fill the provided order
+    //------------------------------------------------------------------------------
+    func fillTheOrder(playerCards: [Cards]) {
+        if currentOrder.doesOrderMatch(submittedOrder: playerCards) {
+            orderFilled()
+        } else {
+            ui.passTheOrder()
+        }
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // orderPassed
+    // Verify that the submitted cards can fill the provided order
+    //Todo: Do we take the card out of the passer's hand here?
+    //------------------------------------------------------------------------------
+    func orderPassed(passCard: Card) {
+        currentOrder.timesPassed += 1
+        if currentOrder.timesPassed == players.count {
+            currentOrder.timesPassed = 0
+            currentOrder.short += 1
+        }
+        if rolledOrder {
+            shiftLeader.hand.cards.append(passCard)
+        } else {
+            players[1].hand.cards.append(passCard)
+        }
+        let passedPlayer = players.remove(at: 0)
+        players.append(passedPlayer)
+        if passedPlayer.hand.cards.count == 0 {
+            endRound()
+        }
+        if currentOrder.short == currentOrder.content.count {
+            ui.pickRollThisOrder()
+        } else {
+            sendOrderToPlayer()
+        }
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // orderFilled
+    // Move cards from hand into scoring
+    //------------------------------------------------------------------------------
+    func orderFilled(fillCards: [Card]) {
+        for card in fillCards {
+            players[0].score.cards.append(card)
+        }
+        players[0].scoreTokens += currentOrder.tokens
+        if players[0].hand.cards.count == 0 {
+            endRound()
+        }
+        ui.pickRollThisOrder()
+    }
+    
+    
+    //------------------------------------------------------------------------------
     // endRound
     //------------------------------------------------------------------------------
     func endRound() {
-        
+        scoring()
+        if currentRound == numberOfRounds {
+            endTheGame()
+        }
+        currentRound += 1
+        startRound(round: currentRound)
     }
     
-
+    
+    //------------------------------------------------------------------------------
+    // scoring
+    //This function totals up everyone's score
+    //------------------------------------------------------------------------------
+    func scoring() {
+        var roundScores = [Int]()
+        for player in players {
+            var roundPoints = 0
+            for card in player.score.cards {
+                //Score by multiplying the number of cards of each type by the point value of those cards
+                roundPoints += card.score
+            }
+            roundPoints += player.scoreTokens
+            //print("\(player.name) scored \(roundPoints) this round.")
+            var lostPoints = 0
+            for card in player.hand.cards {
+                lostPoints += card.score
+            }
+            //print("\(player.name) has \(lostPoints) points still in hand.")
+            roundPoints -= lostPoints
+            player.tempScore = roundPoints
+            roundScores.append(player.tempScore)
+            //print("\(player.name)'s score this round is \(roundPoints)")
+            player.totalScore += roundPoints
+            //print("This brings \(player.name)'s total score to \(player.totalScore).")
+        }
+        //Move the player with the smallest score to the front
+        let minScore = roundScores.min()!
+        var movePlayer: Player
+        for _ in 1...players.count {
+            if players[0].tempScore > minScore {
+                movePlayer = players.remove(at: 0)
+                players.append(movePlayer)
+            }
+        }
+        //Reset tempScore, scoreTokens for next round
+        for player in players {
+            player.tempScore = 0
+            player.scoreTokens = 0
+        }
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // endTheGame
+    //------------------------------------------------------------------------------
+    func endTheGame() {
+        
+    }
 
     
 
