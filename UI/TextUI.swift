@@ -201,60 +201,31 @@ class TextUI {
         
         textMenu.execute()
     }
-
-
-    //------------------------------------------------------------------------------
-    // pickFillOrPass
-    // Choose whether to fill or pass (Always passes)
-    //------------------------------------------------------------------------------
-    func pickFillOrPass() -> Bool {
-        print("You have the opportunity to fill an order for \(game.currentOrder.originalItem.name). The order contains:")
-        for item in game.currentOrder.content {
-            print(item.name)
-        }
-        print("It is short \(game.currentOrder.short) items.")
-        let textMenu = TextMenu(prompt: """
-        Would you like to fill or pass?
-        """)
-        textMenu.addChoice("Fill the order", onSelect: { game.pickedFillOrder(true) })
-        textMenu.addChoice("Pass", onSelect: { game.pickedFillOrder(false) })
-    }
     
     
     //------------------------------------------------------------------------------
     // pickCardsToFill
     // Fill an order with cards from your hand
     //------------------------------------------------------------------------------
-    func pickCardsToFill() -> [Card] {
-        return []
+    func pickCardsToFill() {
     }
     
     
     //------------------------------------------------------------------------------
     // passTheOrder
-    // Choose cards to pass to another player
+    // The current player is passing on the order. They need to pick a card to pass
+    // to the player on their left (if the order was called) or the shift leader (if
+    // the order was rolled).
     //------------------------------------------------------------------------------
     func passTheOrder() {
-        
     }
     
     
     //------------------------------------------------------------------------------
-    // pickCardToDeal
-    // Placeholder function to choose which card to deal from hand when you pass
-    // Returns the index of the chosen card
+    // pickThreeCards
+    // Special function for the Holiday Potluck: choose three ingredients.
     //------------------------------------------------------------------------------
-    func pickCardToDeal(hand: Deck) -> Int {
-        return 0
-    }
-    
-    
-    //------------------------------------------------------------------------------
-    // pickCardsToFill
-    // Placeholder function to pick three cards for the Holiday Potluck and return an array of those three cards
-    //------------------------------------------------------------------------------
-    func pickThreeCards() -> [Card] {
-        return [.Bird, .Cheese, .Cow]
+    func pickThreeCards() {
     }
 
     
