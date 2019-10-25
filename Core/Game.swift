@@ -207,17 +207,8 @@ class Game {
             if category.name == "Special Orders" {
                 currentOrder = specialOrder(oldOrder: currentOrder)
             }
-            /*
-             TODO: need to fix Donner Pass
+            //TODO: need to fix Donner Pass
             //Donner pass ends your turn
-            if currentOrder!.originalItem.name == "Donner Pass" {
-                currentOrder = nil
-                let activePlayer = players.remove(at: 0)
-                players.append(activePlayer)
-                return
-            }
-            */
-            
             doneWithOrderPicking()
         } else {
             ui.pickOrder()
@@ -242,8 +233,10 @@ class Game {
     func doneWithOrderPicking() {
         //Donner pass special rule
         if currentOrder.originalItem.name == "Donner Pass" {
+            print("You got the donner pass! Your turn is over!")
             let passPlayer = players.remove(at: 0)
             players.append(passPlayer)
+            game.shiftLeader = players[0]
             ui.pickRollThisOrder()
         } else {
             mainLoop()
@@ -337,6 +330,10 @@ class Game {
             currentOrder.timesPassed = 0
             currentOrder.short += 1
             ui.displayGameEvent("The order is now short \(currentOrder.short) items.")
+            if restaurant.name == "Love's Labours Lunch" {
+                print("LLL special rule! The order is now worth 5 extra points!")
+                currentOrder.tokens += 5
+            }
         }
 
         // Cycle to the next player
@@ -363,13 +360,24 @@ class Game {
     //------------------------------------------------------------------------------
     func orderFilled(fillCards: [Card]) {
         ui.displayGameEvent("\(players[0].name) has filled the order.")
-        
+        var scoreTotal = 0
         // Move the relevant cards to the score pile
         for card in fillCards {
             players[0].score.cards.append(card)
+            scoreTotal += card.score
+        }
+        if restaurant.name == "Ghicciaroni's" {
+            var orderTotal = 0
+            for card in currentOrder!.content.cards {
+                orderTotal += card.score
+            }
+            let extraPoints = orderTotal - scoreTotal
+            print("Ghicciaroni's rule: The order was short \(extraPoints) points, so those points are added as tokens!")
+                currentOrder.tokens += extraPoints
         }
         players[0].scoreTokens += currentOrder.tokens
-        
+        scoreTotal += currentOrder.tokens
+        print("That order was worth \(scoreTotal) points!")
         // Is the current player out of cards?
         if players[0].hand.cards.count == 0 {
             endRound()
