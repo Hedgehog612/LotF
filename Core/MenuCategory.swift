@@ -14,7 +14,7 @@ import Foundation
 // Menus are organized into categories (appetizers, desserts, etc.).
 // Each category has a set of MenuItems.
 //------------------------------------------------------------------------------
-struct MenuCategory {
+struct MenuCategory: Hashable {
     var name: String                // Name of this category
     var range: ClosedRange<Int>     // Which values on the green dice roll this category?
     var canCall: Bool               // Can you call this category? (If not, you can only roll it)
@@ -29,5 +29,21 @@ struct MenuCategory {
         range = rangeIn
         canCall = canCallIn
         menuItems = menuItemsIn
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // == (for Comparable)
+    //------------------------------------------------------------------------------
+    static func == (lhs: MenuCategory, rhs: MenuCategory) -> Bool {
+        return lhs.name == rhs.name
+    }
+
+
+    //------------------------------------------------------------------------------
+    // hash (for Hashable)
+    //------------------------------------------------------------------------------
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
     }
 }

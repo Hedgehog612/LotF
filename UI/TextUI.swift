@@ -23,12 +23,6 @@ class TextUI {
     }
 
     
-    deinit {
-        print("Shutting down a UI object")
-    }
-    
-    
-    
 
 
 

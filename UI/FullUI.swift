@@ -30,17 +30,63 @@ class FullUI : TextUI {
     // pickPlayers
     //------------------------------------------------------------------------------
     override func pickPlayers() {
-        // Create the window
-        window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 400, height: 1200),
+        _ = PickPlayersView()
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // pickNumberOfRounds
+    //------------------------------------------------------------------------------
+    override func pickNumberOfRounds() {
+        _ = PickNumberOfRoundsView()
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // startMainUI
+    //------------------------------------------------------------------------------
+    override func startMainUI() {
+        mainWindow = FullUI.makeWindow()
+//        mainWindow.contentView = NSHostingView(rootView: MainView())
+    }
+
+
+    //------------------------------------------------------------------------------
+    // pickRestaurant
+    //------------------------------------------------------------------------------
+    override func pickRestaurant() {
+        mainWindow.contentView = NSHostingView(rootView: MainView(mode: .restaurant))
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // pickRollThisOrder
+    //------------------------------------------------------------------------------
+    override func pickRollThisOrder() {
+        mainWindow.contentView = NSHostingView(rootView: MainView(mode: .rollOrder))
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // pickOrder
+    // Choose an item on the menu
+    //------------------------------------------------------------------------------
+    override func pickOrder() {
+        mainWindow.contentView = NSHostingView(rootView: MainView(mode: .pickOrder))
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // makeWindow
+    //------------------------------------------------------------------------------
+    class func makeWindow() -> NSWindow {
+        let window = NSWindow(
+            contentRect: NSRect(x: 0, y: 0, width: 1200, height: 1200),
             styleMask: [.titled, .closable, .miniaturizable, .resizable],
             backing: .buffered, defer: false)
         window.center()
-        window.setFrameAutosaveName("Who’s playing?")
         window.makeKeyAndOrderFront(nil)
         
-        // Set up our view
-        let pickView = PickPlayersView(window: window)
-        window.contentView = NSHostingView(rootView: pickView)
+        return window
     }
 }

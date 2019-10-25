@@ -14,7 +14,7 @@ import Foundation
 // Restaurant
 // A single restaurant, with associated menu and special rules.
 //------------------------------------------------------------------------------
-class Restaurant {
+class Restaurant: Hashable {
     var image: String
     var name: String
     var subTitle: String
@@ -35,6 +35,22 @@ class Restaurant {
         smallDeck = smallDeckIn
         largeDeck = largeDeckIn
         specialRule = specialRuleIn
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // == (for Comparable)
+    //------------------------------------------------------------------------------
+    static func == (lhs: Restaurant, rhs: Restaurant) -> Bool {
+        return lhs.name == rhs.name
+    }
+
+
+    //------------------------------------------------------------------------------
+    // hash (for Hashable)
+    //------------------------------------------------------------------------------
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
     }
 }
 

@@ -16,6 +16,8 @@ import SwiftUI
 // This function determines the number of players. It is called at the beginning of the game.
 //------------------------------------------------------------------------------
 struct PickPlayersView: View {
+    var window: NSWindow!
+    
     @State private var name1 = ""
     @State private var name2 = ""
     @State private var name3 = ""
@@ -27,17 +29,16 @@ struct PickPlayersView: View {
     
     @State private var notEnoughPlayers = true
     
-    var window: NSWindow
-    
     
     //------------------------------------------------------------------------------
     // init
     //------------------------------------------------------------------------------
-    init(window windowIn: NSWindow) {
-        window = windowIn
+    init() {
+        window = FullUI.makeWindow()
+        window.contentView = NSHostingView(rootView: self)
     }
     
-
+    
     //------------------------------------------------------------------------------
     // body
     //------------------------------------------------------------------------------

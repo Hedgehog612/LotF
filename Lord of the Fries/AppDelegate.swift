@@ -21,7 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         gameTester!.runAllTests()
         gameTester = nil
         
-        game = Game(ui: TextUI())
+        game = Game(ui: FullUI())
         game.beginGame()
     }
     

@@ -13,7 +13,7 @@ import Foundation
 // MenuItem
 // A single item on a menu.
 //------------------------------------------------------------------------------
-struct MenuItem {
+struct MenuItem: Hashable {
     var name: String
     var ingredients: [Card:Int]
     var cardsMustAllBeDifferent: Bool
@@ -27,5 +27,21 @@ struct MenuItem {
         ingredients = ingredientsIn
         cardsMustAllBeDifferent = cardsMustAllBeDifferentIn
         specialOrderLink = specialOrderLinkIn
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // == (for Comparable)
+    //------------------------------------------------------------------------------
+    static func == (lhs: MenuItem, rhs: MenuItem) -> Bool {
+        return lhs.name == rhs.name
+    }
+
+
+    //------------------------------------------------------------------------------
+    // hash (for Hashable)
+    //------------------------------------------------------------------------------
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
     }
 }
