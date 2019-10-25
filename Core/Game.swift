@@ -282,6 +282,7 @@ class Game {
     //------------------------------------------------------------------------------
     func fillTheOrder(cards: [Card]) {
         if currentOrder.doesOrderMatch(submittedOrder: cards) {
+            print("Order successfully filled!")
             orderFilled(fillCards: cards)
         } else {
             // TODO: should try again
