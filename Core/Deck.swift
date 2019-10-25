@@ -67,6 +67,19 @@ class Deck {
     
     
     //------------------------------------------------------------------------------
+    // sortedFilteredCounts
+    // Returns our contents as an array of (card, count). The results are sorted
+    // and filtered to only include cards we have at least 1 of.
+    //------------------------------------------------------------------------------
+    var sortedFilteredCounts: [(card: Card, count: Int)] {
+        return self.cardCounts
+            .map({ ($0.key, $0.value) })
+            .sorted(by: { $0.0 < $1.0 })
+            .filter({ $0.count > 0 })
+    }
+    
+    
+    //------------------------------------------------------------------------------
     // sortedCards
     // Returns all our cards, sorted (as usual, by score and then name)
     //------------------------------------------------------------------------------
@@ -126,5 +139,19 @@ class Deck {
             sortedCards.remove(at: 0)
             nextRecipient = nextRecipient < recipients.count - 1 ? nextRecipient + 1 : 0
         }
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // shortDescription
+    // Returns a short text description of the deck (2 Bun, 3 Fries)
+    //------------------------------------------------------------------------------
+    func shortDescription() -> String {
+        var result = ""
+        for (card, count) in self.sortedFilteredCounts {
+            result += "\(count) \(card.name), "
+        }
+        
+        return result
     }
 }

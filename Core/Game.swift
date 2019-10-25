@@ -125,10 +125,10 @@ class Game {
         // Set up the restaurant
         specialRule = restaurant!.specialRule
         if players.count <= 5 {
-            print("You'll be using the small deck.")
+            print("\nYou'll be using the small deck.")
             deck = restaurant!.smallDeck
         } else {
-            print("You'll be using the large deck.")
+            print("\nYou'll be using the large deck.")
             deck = restaurant!.largeDeck
         }
         if restaurant!.name == "McPubihan's" {
@@ -306,6 +306,7 @@ class Game {
             currentOrder.timesPassed = 0
             currentOrder.short += 1
         }
+        ui.displayPassedCard(card: card, from: players[0], to: playerToPassTo())
         players[0].hand.removeCard(card)
         playerToPassTo().hand.cards.append(card)
         playerToPassTo().hand.cards.sort()
@@ -314,7 +315,7 @@ class Game {
         if passedPlayer.hand.cards.count == 0 {
             endRound()
         }
-        if currentOrder.short == currentOrder.content.count {
+        if currentOrder.short == currentOrder.content.cards.count {
             ui.pickRollThisOrder()
         } else {
             ui.sendOrderToPlayer()
@@ -430,8 +431,8 @@ class Game {
             if restaurant!.menuCategories[orderType].name == "Special Orders" {
                 secondOrder = specialOrder(oldOrder: secondOrder)
             }
-            for card in secondOrder.content {
-                newOrder!.content.append(card)
+            for card in secondOrder.content.cards {
+                newOrder!.content.addCard(card)
             }
             /*
         case "Roll two Side Orders",

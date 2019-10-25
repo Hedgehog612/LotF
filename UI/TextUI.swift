@@ -99,7 +99,7 @@ class TextUI {
     // Bring up the UI for the main gameplay loop.
     //------------------------------------------------------------------------------
     func startMainUI() {
-        print("\n\n\nStarting the main game UI")
+        print("\n\nStarting the main game UI")
         print("\(game.numberOfRounds) rounds.")
         print("Players:")
         for player in game.players {
@@ -116,7 +116,7 @@ class TextUI {
         let textMenu = TextMenu(prompt: """
             Starting round \(game.currentRound).
             Which restaurant would you like?
-        """)
+            """)
         
         for restaurant in restaurantList {
             textMenu.addChoice(restaurant.name, onSelect: { game.onRestaurantSelected(restaurant) })
@@ -131,14 +131,11 @@ class TextUI {
     // Do we want to roll this order? (Otherwise, choose it ourselves)
     //------------------------------------------------------------------------------
     func pickRollThisOrder() {
-        print("Your cards are: ")
-        for card in game.players[0].hand.cards {
-            print(card.name)
-        }
         let textMenu = TextMenu(prompt: """
             \(game.shiftLeader.name), you are the shift leader.
+            Your hand is \(game.shiftLeader.hand.shortDescription())
             Would you like to pick an order or roll randomly?
-        """)
+            """)
         
         textMenu.addChoice("Pick an order", onSelect: { game.onPickRollThisOrder(false) })
         textMenu.addChoice("Roll this order randomly", onSelect: { game.onPickRollThisOrder(true)})
@@ -154,8 +151,7 @@ class TextUI {
     func pickOrder() {
         let textMenu = TextMenu(prompt: """
             Here's the menu for \(game.restaurant.name):
-            What's the next order?
-        """)
+            """)
 
         for menuCategory in game.restaurant.menuCategories {
             if menuCategory.canCall {
@@ -166,6 +162,8 @@ class TextUI {
                 }
             }
         }
+        
+        textMenu.addDivider("What would you like to order?")
         
         textMenu.execute()
     }
@@ -188,21 +186,11 @@ class TextUI {
     //The player chooses to fill or pass the order
     //------------------------------------------------------------------------------
     func sendOrderToPlayer() {
-        print("""
-            \(game.players[0].name), it's your turn.
-            The order is \(game.currentOrder.originalItem.name).
-            
-            It has been short \(game.currentOrder.short) times.
-            The cards in the order are:
-            """)
-        for card in game.currentOrder.content {
-            print(card.name)
-        }
-        print("Your cards are: ")
-        for card in game.players[0].hand.cards {
-            print(card.name)
-        }
         let textMenu = TextMenu(prompt: """
+            \(game.players[0].name), it's your turn.
+            The order is \(game.currentOrder.originalItem.name)\(game.currentOrder.short > 0 ? ", short \(game.currentOrder.short) times." : "")
+            The cards in the order are: \(game.currentOrder.content.shortDescription())
+            Your hand is \(game.players[0].hand.shortDescription())
             Would you like to fill this order?
             """)
         
@@ -210,6 +198,14 @@ class TextUI {
         textMenu.addChoice("Pass", onSelect: { game.pickedFillOrder(false) })
         
         textMenu.execute()
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    // displayPassedCard
+    //------------------------------------------------------------------------------
+    func displayPassedCard(card: Card, from: Player, to: Player) {
+        print("\n\n\(from.name) passed a \(card.name) to \(to.name).")
     }
     
     
@@ -227,22 +223,29 @@ class TextUI {
     }
     
     
+    //------------------------------------------------------------------------------
+    // cardsToFillHelper
+    //------------------------------------------------------------------------------
     func cardsToFillHelper() {
         let textMenu = TextMenu(prompt: """
-            The next card in the order is \(game.currentOrder.content[totalCards]).
+            The next card in the order is \(game.currentOrder.content.cards[totalCards]).
             How would you like to fill it?
-        """)
-        for card in game.players[0].hand.cards {
-            textMenu.addChoice("Fill with \(card.name)", onSelect: { self.filledACard(card) })
+            """)
+        for (card, count) in game.players[0].hand.sortedFilteredCounts {
+            textMenu.addChoice("Fill with \(card.name) (you have \(count)).", onSelect: { self.filledACard(card)})
         }
         textMenu.addChoice("Do not fill this card", onSelect: { self.filledACard(self.kludgeDeck.cards[0]) })
         textMenu.execute()
     }
+
     
+    //------------------------------------------------------------------------------
+    // filledACard
+    //------------------------------------------------------------------------------
     func filledACard(_ card: Card) {
         addToFill.append(card)
         game.players[0].hand.removeCard(card)
-        if totalCards == game.currentOrder.content.count - 1 {
+        if totalCards == game.currentOrder.content.cards.count - 1 {
             addToQueue {
                 game.fillTheOrder(cards: self.addToFill)
             }
@@ -263,10 +266,10 @@ class TextUI {
         let textMenu = TextMenu(prompt: """
             Because you're passing, you need to pass one card to \(game.playerToPassTo().name).
             Which card would you like to pass?
-        """)
+            """)
         
-        for card in game.players[0].hand.cards {
-            textMenu.addChoice(card.name, onSelect: { game.orderPassed(card: card) })
+        for (card, count) in game.players[0].hand.sortedFilteredCounts {
+            textMenu.addChoice("\(card.name) (you have \(count))", onSelect: { game.orderPassed(card: card) })
         }
         
         textMenu.execute()

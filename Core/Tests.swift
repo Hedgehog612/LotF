@@ -193,10 +193,10 @@ class Tests {
         game.restaurant = restaurantList[1]
         var specialTest: CurrentOrder
         specialTest = game.specialOrder(oldOrder: CurrentOrder(originalOrder: game.restaurant.menuCategories.first(where: { $0.range.contains(6) })!.menuItems[2]))
-        doTest(result: specialTest.content.count > 1, comment: "Special order test: Add one item")
+        doTest(result: specialTest.content.cards.count > 1, comment: "Special order test: Add one item")
         specialTest = game.specialOrder(oldOrder: CurrentOrder(originalOrder: game.restaurant.menuCategories.first(where: { $0.range.contains(6) })!.menuItems[5]))
-        doTest(result: specialTest.content.count > 5, comment: "Special order test: Roll two")
-        for card in specialTest.content {
+        doTest(result: specialTest.content.cards.count > 5, comment: "Special order test: Roll two")
+        for card in specialTest.content.cards {
             print(card.name)
         }
     }

@@ -22,7 +22,7 @@ struct ContentView: View {
             HandView(deck: player1Deck)
                 .position(x: 800, y: 1010)
 
-            OrderView(currentOrder.content)
+            OrderView(currentOrder.content.cards)
                 .position(x: 400, y: 50)
         }
         .frame(width: 1600, height: 1200)
