@@ -52,6 +52,17 @@ class Game {
     }
     
     
+    //------------------------------------------------------------------------------
+    // playerAfter
+    // Returns the player after a specified player
+    //------------------------------------------------------------------------------
+    func playerAfter(player: Player) -> Player {
+        let indexIn = players.firstIndex(where: { $0 === player })!
+        let indexAfter = indexIn == players.count - 1 ? 0 : indexIn + 1
+        return players[indexAfter]
+    }
+    
+    
     
     
     
@@ -112,6 +123,7 @@ class Game {
     func startRound(round: Int) {
         currentRound = round
         roundEnd = false
+        ui.displayGameEvent("Starting round \(currentRound)")
         ui.pickRestaurant()
     }
     
@@ -121,25 +133,28 @@ class Game {
     //------------------------------------------------------------------------------
     func onRestaurantSelected(_ restaurantIn: Restaurant) {
         restaurant = restaurantIn
+        var status = "The restaurant is \(restaurant.name)\n"
 
         // Set up the restaurant
         specialRule = restaurant!.specialRule
         if players.count <= 5 {
-            print("\nYou'll be using the small deck.")
+            status += "Using the small deck.\n"
             deck = restaurant!.smallDeck
         } else {
-            print("\nYou'll be using the large deck.")
+            status += "Using the large deck.\n"
             deck = restaurant!.largeDeck
         }
         if restaurant!.name == "McPubihan's" {
-            print("Making the stew pot.")
+            status += "Making the stew pot.\n"
             for _ in 1...6 {
                 deck.deal(recipient: stewPot)
             }
         }
         
         //Deals cards now we know what the deck should be
-        print("Dealing everyone's cards.")
+        status += "Dealing everyone's cards."
+        ui.displayGameEvent(status)
+        
         while deck.cards.count > 0 {
             for player in players {
                 if deck.cards.count > 0 {
@@ -150,7 +165,7 @@ class Game {
         for player in players {
             player.hand.cards.sort()
         }
-        startNewShift()
+        startNewShift(shiftLeader: players[0])
     }
     
     
@@ -158,8 +173,9 @@ class Game {
     // startNewShift
     // Begin a new shift
     //------------------------------------------------------------------------------
-    func startNewShift() {
-        shiftLeader = players[0]
+    func startNewShift(shiftLeader shiftLeaderIn: Player) {
+        shiftLeader = shiftLeaderIn
+        ui.displayGameEvent("Starting a new shift.\n\(shiftLeader.name) is the shift leader.")
         ui.pickRollThisOrder()
     }
     
@@ -178,8 +194,14 @@ class Game {
             
             let blackDie = Int.random(in: 1..<6)
             let menuItem = category.menuItems[blackDie - 1]
-            print("Rolled a \(greenDie) and a \(blackDie)")
             currentOrder = CurrentOrder(originalOrder: menuItem)
+
+            ui.displayGameEvent("""
+                Rolling the green die... \(greenDie)
+                Rolling the black die... \(blackDie)
+                The order is: \(currentOrder.originalItem.name)
+                """)
+            
             //Special order rules go here
             if category.name == "Special Orders" {
                 currentOrder = specialOrder(oldOrder: currentOrder)
@@ -195,7 +217,7 @@ class Game {
             }
             */
             
-            ui.displayRolledOrder(currentOrder)
+            doneWithOrderPicking()
         } else {
             ui.pickOrder()
         }
@@ -300,24 +322,33 @@ class Game {
     // Move the player to the end of the order
     //------------------------------------------------------------------------------
     func orderPassed(card: Card) {
+        // Pass a card to the appropriate player
+        ui.displayGameEvent("\(players[0].name) passes a \(card.name) to \(playerToPassTo().name)")
+        players[0].hand.removeCard(card)
+        playerToPassTo().hand.cards.append(card)
+        playerToPassTo().hand.cards.sort()
+
+        // Did the order just become short(er)?
         currentOrder.timesPassed += 1
         if currentOrder.timesPassed == players.count {
             currentOrder.timesPassed = 0
             currentOrder.short += 1
+            ui.displayGameEvent("The order is now short \(currentOrder.short) items.")
         }
-        ui.displayPassedCard(card: card, from: players[0], to: playerToPassTo())
-        players[0].hand.removeCard(card)
-        playerToPassTo().hand.cards.append(card)
-        playerToPassTo().hand.cards.sort()
+
+        // Is the order too short to fill?
+        if currentOrder.short == currentOrder.content.cards.count {
+            ui.displayGameEvent("The order is too short to fill.")
+            startNewShift(shiftLeader: playerAfter(player: shiftLeader))
+        } else {
+            ui.sendOrderToPlayer()
+        }
+
+        // Cycle to the next player
         let passedPlayer = players.remove(at: 0)
         players.append(passedPlayer)
         if passedPlayer.hand.cards.count == 0 {
             endRound()
-        }
-        if currentOrder.short == currentOrder.content.cards.count {
-            ui.pickRollThisOrder()
-        } else {
-            ui.sendOrderToPlayer()
         }
     }
     
@@ -328,14 +359,21 @@ class Game {
     // Move cards from hand into scoring
     //------------------------------------------------------------------------------
     func orderFilled(fillCards: [Card]) {
+        ui.displayGameEvent("\(players[0].name) has filled the order.")
+        
+        // Move the relevant cards to the score pile
         for card in fillCards {
             players[0].score.cards.append(card)
         }
         players[0].scoreTokens += currentOrder.tokens
+        
+        // Is the current player out of cards?
         if players[0].hand.cards.count == 0 {
             endRound()
         }
-        ui.pickRollThisOrder()
+        
+        // Next shift!
+        startNewShift(shiftLeader: players[0])
     }
     
     
