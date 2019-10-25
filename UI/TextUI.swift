@@ -21,8 +21,14 @@ class TextUI {
     init() {
         beginExecutionQueue()
     }
-    
 
+    
+    deinit {
+        print("Shutting down a UI object")
+    }
+    
+    
+    
 
 
 
@@ -356,6 +362,7 @@ class TextUI {
     //    As a failsafe, we run executeQueue on a 10 Hz timer
     //==============================================================================
     var executionQueue = [(() -> ())]()
+    var executionTimer: Timer?
     
     
     //------------------------------------------------------------------------------
@@ -363,9 +370,18 @@ class TextUI {
     // Fires up our message-passing system.
     //------------------------------------------------------------------------------
     func beginExecutionQueue() {
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { timer in self.executeQueue() })
+        executionTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { timer in self.executeQueue() })
     }
 
+
+    //------------------------------------------------------------------------------
+    // stopExecutionQueue
+    // We're done, so we don't want to get queue events any more
+    //------------------------------------------------------------------------------
+    func stopExecutionQueue() {
+        executionTimer!.invalidate()
+    }
+    
 
     //------------------------------------------------------------------------------
     // executeQueue

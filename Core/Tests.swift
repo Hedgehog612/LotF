@@ -43,6 +43,7 @@ class Tests {
         ui.pickPlayers()
         //specialRuleTesting()
         testReport()
+        ui.stopExecutionQueue()
     }
     
 

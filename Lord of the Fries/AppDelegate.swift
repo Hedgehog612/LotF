@@ -11,13 +11,17 @@ import SwiftUI
 
 
 var game = Game(ui: TextUI())
-var gameTester = Tests()
+var gameTester: Tests?
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Let's do this thing
-        gameTester.runAllTests()
+        gameTester = Tests()
+        gameTester!.runAllTests()
+        gameTester = nil
+        
+        game = Game(ui: TextUI())
         game.beginGame()
     }
     
