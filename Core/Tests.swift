@@ -36,12 +36,14 @@ class Tests {
     //This delegates out all the testing functions that need to get run
     //------------------------------------------------------------------------------
     func runAllTests() {
+        print("Starting testing")
         deckTesting()
         cardTesting()
         scoreTesting()
         menuTesting()
         ui.pickPlayers()
         //specialRuleTesting()
+        print("Sanity check")
         testReport()
     }
     

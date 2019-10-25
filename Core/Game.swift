@@ -303,6 +303,7 @@ class Game {
     // Verify that the submitted cards can fill the provided order
     //------------------------------------------------------------------------------
     func fillTheOrder(cards: [Card]) {
+        ui.addToFill = []
         if currentOrder.doesOrderMatch(submittedOrder: cards) {
             print("Order successfully filled!")
             orderFilled(fillCards: cards)
