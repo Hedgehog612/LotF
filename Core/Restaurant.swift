@@ -339,7 +339,6 @@ Restaurant(
         MenuCategory(
             name: "Main Courses",
             range: 6...6,
-            canCall: false,
             menuItems: [
                 MenuItem(name: "Mutton Jeff", ingredients:
                     [.Fries:1, .Drink:1, .Vegetable:1, .Cow:1]),
@@ -392,46 +391,120 @@ Restaurant(
                     [.Sauce:1, .Vegetable:1, .Fish:1]),
                 MenuItem(name: "Sheep wit' da Fishes", ingredients:
                     [.Cheese:1, .Cow:1, .Fish:2]),
-                MenuItem(name: "Crown Gruel", ingredients:
-                    [.Drink:1, .Cheese:1, .Cow:1]),
-                MenuItem(name: "Bovine Spongiform Yum, Yum, Yum!", ingredients:
-                    [.Bun:2, .Drink:1, .Cow:1])]),
+                MenuItem(name: "Merchant of Venison", ingredients:
+                    [.Vegetable:2, .Cow:2]),
+                MenuItem(name: "Pope Clement IX", ingredients:
+                    [.Sauce:1, .Vegetable:1, .Cheese:1, .Bird:2])]),
         MenuCategory(
-            name: "Sandwiches",
+            name: "Pizze Etc.",
+            range: 4...5,
+            menuItems: [
+                MenuItem(name: "Primo", ingredients:
+                    [.Bun:1, .Sauce:1, .Cheese:1]),
+                MenuItem(name: "Excelsior", ingredients:
+                    [.Bun:1, .Sauce:1, .Cheese:1, .Cow:1]),
+                MenuItem(name: "Gladiator", ingredients:
+                    [.Bun:1, .Sauce:1, .Bird:1, .Cow:1]),
+                MenuItem(name: "Myrmidon", ingredients:
+                    [.Bun:1, .Vegetable:1, .Cheese:1, .Fish:1]),
+                MenuItem(name: "Maximus", ingredients:
+                    [.Vegetable:1, .Cheese:1, .Bird:1, .Cow:1, .Fish:1]),
+                MenuItem(name: "Godfather", ingredients:
+                    [.Sauce:1, .Vegetable:1, .Bird:2, .Pie:1])]),
+        MenuCategory(
+            name: "Children's Menu",
+            range: 6...6,
+            menuItems: [
+                MenuItem(name: "Penne For Your Tots", ingredients:
+                    [.Bun:1, .Vegetable:1]),
+                MenuItem(name: "Moolius Caesar", ingredients:
+                    [.Bun:1, .Cheese:1, .Cow:1]),
+                MenuItem(name: "Marc Antony", ingredients:
+                    [.Bun:1, .Fish:1]),
+                MenuItem(name: "Cleopatra", ingredients:
+                    [.Bun:1, .Cheese:1, .Bird:1]),
+                MenuItem(name: "Notisi Beingrini", ingredients:
+                    [.Vegetable:1, .Cheese:1]),
+                MenuItem(name: "Chocolate Mussolini", ingredients:
+                    [.Sauce:1, .Pie:1])])],
+    smallDeck: Deck(
+        cardCounts: [.Bun:6, .Sauce:6, .Vegetable:6, .Cheese:6, .Cow:5, .Fish:4, .Bird:6, .Pie:3]),
+    largeDeck: Deck(
+        cardCounts: [.Bun:8, .Sauce:8, .Vegetable:9, .Cheese:8, .Cow:7, .Fish:6, .Bird:8, .Pie:4]),
+    specialRule: "A dish is always worth the same number of points, no matter how many parts it is missing. Track the extra points with tokens."),
+    
+    Restaurant(
+    image:      "Montezuma's Zombie",
+    name:       "Montezuma's Mexi-Deli",
+    subTitle:   "Ostensibly Food, Affordably Pricd",
+    menuCategories: [
+        MenuCategory(
+            name: "Subz 'n Snax",
+            range: 1...2,
+            menuItems: [
+                MenuItem(name: "Don Quixote", ingredients:
+                    [.Bun:1]),
+                MenuItem(name: "Sancho Panza", ingredients:
+                    [.Vegetable:1]),
+                MenuItem(name: "Mask of Zorro", ingredients:
+                    [.Cheese:1]),
+                MenuItem(name: "Salsa Kielbasa", ingredients:
+                    [.Vegetable:1, .Cow:1]),
+                MenuItem(name: "El Diablo", ingredients:
+                    [.Bun:1, .Sauce:1, .Drink:1]),
+                MenuItem(name: "Conquest of Paradise", ingredients:
+                    [.Bird:3])]),
+        MenuCategory(
+            name: "Lunches",
+            range: 3...4,
+            menuItems: [
+                MenuItem(name: "Rotten Burro", ingredients:
+                    [.Cheese:1, .Cow:1, .Fish:1]),
+                MenuItem(name: "Treasure of the Sierra Madre", ingredients:
+                    [.Cheese:1, .Cow: 1, .Bird:1]),
+                MenuItem(name: "Neato Fajito", ingredients:
+                    [.Bun:1, .Cheese:1, .Cow:1]),
+                MenuItem(name: "Gonzo Garbanzo", ingredients:
+                    [.Vegetable:2, .Fish:1]),
+                MenuItem(name: "Vito Carnito", ingredients:
+                    [.Bun:1, .Sauce:1, .Cheese:1, .Cow:1]),
+                MenuItem(name: "Juan Sanchez Ramirez Villa Lobos", ingredients:
+                    [.Sauce:2, .Vegetable:2, .Cheese:1])]),
+        MenuCategory(
+            name: "Dinners",
             range: 5...5,
             menuItems: [
-                MenuItem(name: "High Road", ingredients:
-                    [.Bun:1, .Cow:1]),
-                MenuItem(name: "Low Road", ingredients:
-                    [.Bun:1, .Fish:1]),
-                MenuItem(name: "Guy Fawkes", ingredients:
-                    [.Bun:1, .Cheese:1, .Bird:1]),
-                MenuItem(name: "Rozencrantz & Guildenstern", ingredients:
-                    [.Bun:1, .Fries:2]),
-                MenuItem(name: "Two Gentlemen of Verona", ingredients:
-                    [.Bun:1, .Bird:2]),
-                MenuItem(name: "Star Cross'd Lovers", ingredients:
-                    [.Bun:1, .Cheese:1, .Cow:1, .Fish:1])]),
+                MenuItem(name: "Chicken con Pollo", ingredients:
+                    [.Sauce:1, .Drink:1, .Bird:2]),
+                MenuItem(name: "Beef con Carne", ingredients:
+                    [.Sauce:1, .Drink:1, .Cow:2]),
+                MenuItem(name: "Surpriso del Mar", ingredients:
+                    [.Sauce:1, .Vegetable:1, .Fish:2]),
+                MenuItem(name: "Beef which is Actually Beef", ingredients:
+                    [.Bun:1, .Sauce:1, .Vegetable:1, .Bird:1, .Fish:1]),
+                MenuItem(name: "Quetzalcoatl", ingredients:
+                    [.Bun:1, .Drink:1, .Cow:1, .Bird:1, .Fish:1]),
+                MenuItem(name: "Huitzilopochtli", ingredients:
+                    [.Bun:1, .Sauce:1, .Drink:1, .Vegetable:1, .Cheese:1, .Bird:1])]),
         MenuCategory(
-            name: "Main Courses",
+            name: "Drinks",
             range: 6...6,
-            canCall: false,
             menuItems: [
-                MenuItem(name: "Mutton Jeff", ingredients:
-                    [.Fries:1, .Drink:1, .Vegetable:1, .Cow:1]),
-                MenuItem(name: "Frying Dutchman", ingredients:
-                    [.Fries:1, .Drink:1, .Fish:2, .Pie:1]),
-                MenuItem(name: "Winston Churchill", ingredients:
-                    [.Bun:1, .Fries:1, .Drink:1, .Cheese:1, .Cow:1, .Pie:1]),
-                MenuItem(name: "White Man's Bird 'n Cheese", ingredients:
-                    [.Bun:1, .Fries:1, .Drink:1, .Cheese:1, .Bird:1, .Pie:1]),
-                MenuItem(name: "Madness of King George III", ingredients:
-                    [.Bun:1, .Drink:6]),
-                MenuItem(name: "Magna Carda with a side of Fries", ingredients:
-                    [.Bun:1, .Fries:1, .Drink:1, .Vegetable:1, .Cheese:1, .Bird:1, .Fish:1, .Pie:1])])],
+                MenuItem(name: "Rio Grind", ingredients:
+                    [.Drink:1, .Vegetable:1]),
+                MenuItem(name: "Banker's Holiday", ingredients:
+                    [.Sauce:1, .Drink:1]),
+                MenuItem(name: "Forget the Alamo", ingredients:
+                    [.Drink:1, .Fish:1]),
+                MenuItem(name: "Tequila Mockingbird", ingredients:
+                    [.Sauce:1, .Drink:1, .Bird:1]),
+                MenuItem(name: "Ponce de Leon", ingredients:
+                    [.Sauce:1, .Vegetable:1, .Cheese:2]),
+                MenuItem(name: "Secret Tijuana Deathmatch", ingredients:
+                    [.Drink:2, .Bird:1, .Cow:1])])],
     smallDeck: Deck(
-        cardCounts: [.Bun:7, .Fries:5, .Drink:7, .Vegetable:5, .Cheese:6, .Cow:6, .Fish:4, .Bird:3, .Pie:3]),
+        cardCounts: [.Bun:4, .Sauce:6, .Drink:5, .Vegetable:6, .Cheese:6, .Cow:5, .Fish:4, .Bird:5, .Pie:1]),
     largeDeck: Deck(
-        cardCounts: [.Bun:10, .Fries:7, .Drink:10, .Vegetable:7, .Cheese:8, .Cow:8, .Fish:6, .Bird:5, .Pie:4]),
-    specialRule: "Each time an order goes around the table unfilled, it becomes worth five extra points. These points are tracked with tokens.")
+        cardCounts: [.Bun:7, .Sauce:8, .Drink:7, .Vegetable:10, .Cheese:8, .Cow:8, .Fish:6, .Bird:9, .Pie:1]),
+    specialRule: "You can substitute any meat card for the correct one, but it scores 0 points. It is impossible to play the pie."),
 ]

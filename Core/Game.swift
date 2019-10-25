@@ -144,6 +144,7 @@ class Game {
             status += "Using the large deck.\n"
             deck = restaurant!.largeDeck
         }
+        deck.cards.shuffle()
         if restaurant!.name == "McPubihan's" {
             status += "Making the stew pot.\n"
             for _ in 1...6 {
@@ -206,17 +207,8 @@ class Game {
             if category.name == "Special Orders" {
                 currentOrder = specialOrder(oldOrder: currentOrder)
             }
-            /*
-             TODO: need to fix Donner Pass
+            //TODO: need to fix Donner Pass
             //Donner pass ends your turn
-            if currentOrder!.originalItem.name == "Donner Pass" {
-                currentOrder = nil
-                let activePlayer = players.remove(at: 0)
-                players.append(activePlayer)
-                return
-            }
-            */
-            
             doneWithOrderPicking()
         } else {
             ui.pickOrder()
@@ -241,8 +233,10 @@ class Game {
     func doneWithOrderPicking() {
         //Donner pass special rule
         if currentOrder.originalItem.name == "Donner Pass" {
+            print("You got the donner pass! Your turn is over!")
             let passPlayer = players.remove(at: 0)
             players.append(passPlayer)
+            game.shiftLeader = players[0]
             ui.pickRollThisOrder()
         } else {
             mainLoop()
@@ -303,6 +297,7 @@ class Game {
     // Verify that the submitted cards can fill the provided order
     //------------------------------------------------------------------------------
     func fillTheOrder(cards: [Card]) {
+        ui.addToFill = []
         if currentOrder.doesOrderMatch(submittedOrder: cards) {
             print("Order successfully filled!")
             orderFilled(fillCards: cards)
@@ -335,14 +330,10 @@ class Game {
             currentOrder.timesPassed = 0
             currentOrder.short += 1
             ui.displayGameEvent("The order is now short \(currentOrder.short) items.")
-        }
-
-        // Is the order too short to fill?
-        if currentOrder.short == currentOrder.content.cards.count {
-            ui.displayGameEvent("The order is too short to fill.")
-            startNewShift(shiftLeader: playerAfter(player: shiftLeader))
-        } else {
-            ui.sendOrderToPlayer()
+            if restaurant.name == "Love's Labours Lunch" {
+                print("LLL special rule! The order is now worth 5 extra points!")
+                currentOrder.tokens += 5
+            }
         }
 
         // Cycle to the next player
@@ -350,6 +341,14 @@ class Game {
         players.append(passedPlayer)
         if passedPlayer.hand.cards.count == 0 {
             endRound()
+        }
+        
+        // Is the order too short to fill?
+        if currentOrder.short == currentOrder.content.cards.count {
+            ui.displayGameEvent("The order is too short to fill.")
+            startNewShift(shiftLeader: playerAfter(player: shiftLeader))
+        } else {
+            ui.sendOrderToPlayer()
         }
     }
     
@@ -361,13 +360,24 @@ class Game {
     //------------------------------------------------------------------------------
     func orderFilled(fillCards: [Card]) {
         ui.displayGameEvent("\(players[0].name) has filled the order.")
-        
+        var scoreTotal = 0
         // Move the relevant cards to the score pile
         for card in fillCards {
             players[0].score.cards.append(card)
+            scoreTotal += card.score
+        }
+        if restaurant.name == "Ghicciaroni's" {
+            var orderTotal = 0
+            for card in currentOrder!.content.cards {
+                orderTotal += card.score
+            }
+            let extraPoints = orderTotal - scoreTotal
+            print("Ghicciaroni's rule: The order was short \(extraPoints) points, so those points are added as tokens!")
+                currentOrder.tokens += extraPoints
         }
         players[0].scoreTokens += currentOrder.tokens
-        
+        scoreTotal += currentOrder.tokens
+        print("That order was worth \(scoreTotal) points!")
         // Is the current player out of cards?
         if players[0].hand.cards.count == 0 {
             endRound()
@@ -394,7 +404,7 @@ class Game {
     func endRound() {
         scoring()
         if currentRound == numberOfRounds {
-            endTheGame()
+            findWinner()
         }
         currentRound += 1
         startRound(round: currentRound)
@@ -414,18 +424,18 @@ class Game {
                 roundPoints += card.score
             }
             roundPoints += player.scoreTokens
-            //print("\(player.name) scored \(roundPoints) this round.")
+            print("\(player.name) scored \(roundPoints) this round.")
             var lostPoints = 0
             for card in player.hand.cards {
                 lostPoints += card.score
             }
-            //print("\(player.name) has \(lostPoints) points still in hand.")
+            print("\(player.name) has \(lostPoints) points still in hand.")
             roundPoints -= lostPoints
             player.tempScore = roundPoints
             roundScores.append(player.tempScore)
-            //print("\(player.name)'s score this round is \(roundPoints)")
+            print("\(player.name)'s score this round is \(roundPoints)")
             player.totalScore += roundPoints
-            //print("This brings \(player.name)'s total score to \(player.totalScore).")
+            print("This brings \(player.name)'s total score to \(player.totalScore).")
         }
         //Move the player with the smallest score to the front
         let minScore = roundScores.min()!
@@ -436,11 +446,25 @@ class Game {
                 players.append(movePlayer)
             }
         }
+        print("The first shift leader for the next round will be \(players[0].name)")
         //Reset tempScore, scoreTokens for next round
         for player in players {
             player.tempScore = 0
             player.scoreTokens = 0
         }
+    }
+    
+    
+    func findWinner() {
+        var finalWinner: Player
+        finalWinner = players[0]
+        for player in players {
+            if player.totalScore > finalWinner.totalScore {
+                finalWinner = player
+            }
+        }
+        print("The winner is \(finalWinner.name) with \(finalWinner.totalScore) points!")
+        endTheGame()
     }
     
     

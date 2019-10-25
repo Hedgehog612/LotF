@@ -121,28 +121,6 @@ class Deck {
     
     
     //------------------------------------------------------------------------------
-    // shuffleAndDeal
-    // Shuffle this deck and deal all the cards in it to an array of target decks.
-    //------------------------------------------------------------------------------
-    func shuffleAndDeal(recipients: [Deck]) {
-        // Create an array of individual cards and sort them by random number
-        var individualCards = [(card: Card, order: Double)]()
-        for card in cards {
-            individualCards.append((card: card, order: Double.random(in: 0..<1)))
-        }
-        var sortedCards = individualCards.sorted(by: { $0.order < $1.order })
-        
-        // Now deal them all out
-        var nextRecipient = 0
-        while sortedCards.count > 0 {
-            recipients[nextRecipient].addCard(sortedCards[0].card)
-            sortedCards.remove(at: 0)
-            nextRecipient = nextRecipient < recipients.count - 1 ? nextRecipient + 1 : 0
-        }
-    }
-    
-    
-    //------------------------------------------------------------------------------
     // shortDescription
     // Returns a short text description of the deck (2 Bun, 3 Fries)
     //------------------------------------------------------------------------------

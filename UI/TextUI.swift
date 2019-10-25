@@ -189,6 +189,7 @@ class TextUI {
         
         textMenu.addChoice("Fill the order", onSelect: { game.pickedFillOrder(true) })
         textMenu.addChoice("Pass", onSelect: { game.pickedFillOrder(false) })
+        textMenu.addChoice("End the round", onSelect: {game.endRound()})
         
         textMenu.execute()
     }
@@ -235,6 +236,7 @@ class TextUI {
         if totalCards == game.currentOrder.content.cards.count - 1 {
             addToQueue {
                 game.fillTheOrder(cards: self.addToFill)
+                self.totalCards = 0
             }
         } else {
             totalCards += 1
