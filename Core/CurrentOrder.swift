@@ -19,7 +19,7 @@ struct CurrentOrder {
     var short: Int
     var tokens: Int
     var timesPassed: Int
-    var content = [Card]()
+    var content = Deck()
     
 
     //------------------------------------------------------------------------------
@@ -36,10 +36,10 @@ struct CurrentOrder {
 
         for card in originalItem.ingredients.keys {
             for _ in 1...originalItem.ingredients[card]! {
-                content.append(card)
+                content.addCard(card)
             }
         }
-        content = content.sorted()
+        content.cards.sort()
     }
     
     
@@ -49,12 +49,12 @@ struct CurrentOrder {
     //------------------------------------------------------------------------------
     func doesOrderMatch(submittedOrder: [Card]) -> Bool {
         //We need at least necessaryMatch cards to match for the order to be valid
-        let neededMatches = content.count - short
+        let neededMatches = content.cards.count - short
         var totalMatched = 0
         for (index, card) in submittedOrder.enumerated() {
-            if card.matchesRequirement(requirement: content[index]) {
+            if card.matchesRequirement(requirement: content.cards[index]) {
                 totalMatched += 1
-            } else if game.restaurant!.name == "Montezuma's Mexi-Deli" && card.isMeat() && content[index].isMeat() {
+            } else if game.restaurant!.name == "Montezuma's Mexi-Deli" && card.isMeat() && content.cards[index].isMeat() {
                 totalMatched += 1
             }
         }
@@ -69,7 +69,7 @@ struct CurrentOrder {
     func montezumaMatch(playerCards: [Card]) -> [Card] {
         var newOrder = playerCards
         for (index, card) in newOrder.enumerated() {
-            if !card.matchesRequirement(requirement: content[index]) && card.isMeat() && content[index].isMeat() {
+            if !card.matchesRequirement(requirement: content.cards[index]) && card.isMeat() && content.cards[index].isMeat() {
                 newOrder[index] = .AnyMeat
             }
         }
