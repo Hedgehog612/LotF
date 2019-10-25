@@ -195,6 +195,7 @@ class TextUI {
         
         textMenu.addChoice("Fill the order", onSelect: { game.pickedFillOrder(true) })
         textMenu.addChoice("Pass", onSelect: { game.pickedFillOrder(false) })
+        textMenu.addChoice("End the round", onSelect: {game.endRound()})
         
         textMenu.execute()
     }

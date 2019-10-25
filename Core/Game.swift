@@ -396,7 +396,7 @@ class Game {
     func endRound() {
         scoring()
         if currentRound == numberOfRounds {
-            endTheGame()
+            findWinner()
         }
         currentRound += 1
         startRound(round: currentRound)
@@ -416,18 +416,18 @@ class Game {
                 roundPoints += card.score
             }
             roundPoints += player.scoreTokens
-            //print("\(player.name) scored \(roundPoints) this round.")
+            print("\(player.name) scored \(roundPoints) this round.")
             var lostPoints = 0
             for card in player.hand.cards {
                 lostPoints += card.score
             }
-            //print("\(player.name) has \(lostPoints) points still in hand.")
+            print("\(player.name) has \(lostPoints) points still in hand.")
             roundPoints -= lostPoints
             player.tempScore = roundPoints
             roundScores.append(player.tempScore)
-            //print("\(player.name)'s score this round is \(roundPoints)")
+            print("\(player.name)'s score this round is \(roundPoints)")
             player.totalScore += roundPoints
-            //print("This brings \(player.name)'s total score to \(player.totalScore).")
+            print("This brings \(player.name)'s total score to \(player.totalScore).")
         }
         //Move the player with the smallest score to the front
         let minScore = roundScores.min()!
@@ -438,11 +438,25 @@ class Game {
                 players.append(movePlayer)
             }
         }
+        print("The first shift leader for the next round will be \(players[0].name)")
         //Reset tempScore, scoreTokens for next round
         for player in players {
             player.tempScore = 0
             player.scoreTokens = 0
         }
+    }
+    
+    
+    func findWinner() {
+        var finalWinner: Player
+        finalWinner = players[0]
+        for player in players {
+            if player.totalScore > finalWinner.totalScore {
+                finalWinner = player
+            }
+        }
+        print("The winner is \(finalWinner.name) with \(finalWinner.totalScore) points!")
+        endTheGame()
     }
     
     

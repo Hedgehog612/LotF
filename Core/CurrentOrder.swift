@@ -49,6 +49,7 @@ struct CurrentOrder {
     //------------------------------------------------------------------------------
     func doesOrderMatch(submittedOrder: [Card]) -> Bool {
         //We need at least necessaryMatch cards to match for the order to be valid
+        var errorMatch = true
         let neededMatches = content.cards.count - short
         var totalMatched = 0
         for (index, card) in submittedOrder.enumerated() {
@@ -57,8 +58,12 @@ struct CurrentOrder {
             } else if game.restaurant!.name == "Montezuma's Mexi-Deli" && card.isMeat() && content.cards[index].isMeat() {
                 totalMatched += 1
             }
+            //Prevent an incorrect match - i.e. playing pie cheese fish for bun cheese fish, short 1.
+            if card.isRealCard() && !card.matchesRequirement(requirement: content.cards[index]) {
+                errorMatch = false
+            }
         }
-        return totalMatched >= neededMatches
+        return totalMatched >= neededMatches && errorMatch
     }
     
     
