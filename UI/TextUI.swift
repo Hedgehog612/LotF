@@ -99,12 +99,16 @@ class TextUI {
     // Bring up the UI for the main gameplay loop.
     //------------------------------------------------------------------------------
     func startMainUI() {
-        print("\n\nStarting the main game UI")
-        print("\(game.numberOfRounds) rounds.")
-        print("Players:")
+        var status = """
+            Starting the main game UI.
+            There will be \(game.numberOfRounds) rounds.
+            There are \(game.players.count) players:
+            """
         for player in game.players {
-            print("   \(player.name)")
+            status += "\n   \(player.name)"
         }
+        
+        displayGameEvent(status)
     }
 
 
@@ -114,7 +118,6 @@ class TextUI {
     //------------------------------------------------------------------------------
     func pickRestaurant() {
         let textMenu = TextMenu(prompt: """
-            Starting round \(game.currentRound).
             Which restaurant would you like?
             """)
         
@@ -170,25 +173,15 @@ class TextUI {
     
     
     //------------------------------------------------------------------------------
-    // displayRolledOrder
-    // We've rolled an order: tell the user what it is
-    //------------------------------------------------------------------------------
-    func displayRolledOrder(_ currentOrder: CurrentOrder) {
-        print("You rolled: \(currentOrder.originalItem.name)")
-        addToQueue {
-            game.doneWithOrderPicking()
-        }
-    }
-    
-    
-    //------------------------------------------------------------------------------
     //sendOrderToPlayer
     //The player chooses to fill or pass the order
     //------------------------------------------------------------------------------
     func sendOrderToPlayer() {
+        displayGameEvent("The order passes to \(game.players[0].name)")
+        
         let textMenu = TextMenu(prompt: """
             \(game.players[0].name), it's your turn.
-            The order is \(game.currentOrder.originalItem.name)\(game.currentOrder.short > 0 ? ", short \(game.currentOrder.short) times." : "")
+            The order is \(game.currentOrder.originalItem.name)\(game.currentOrder.short > 0 ? ", short \(game.currentOrder.short) items." : "")
             The cards in the order are: \(game.currentOrder.content.shortDescription())
             Your hand is \(game.players[0].hand.shortDescription())
             Would you like to fill this order?
@@ -198,14 +191,6 @@ class TextUI {
         textMenu.addChoice("Pass", onSelect: { game.pickedFillOrder(false) })
         
         textMenu.execute()
-    }
-    
-    
-    //------------------------------------------------------------------------------
-    // displayPassedCard
-    //------------------------------------------------------------------------------
-    func displayPassedCard(card: Card, from: Player, to: Player) {
-        print("\n\n\(from.name) passed a \(card.name) to \(to.name).")
     }
     
     
@@ -336,6 +321,21 @@ class TextUI {
             }
         }        
     }
+    
+    
+    //------------------------------------------------------------------------------
+    // displayGameEvent
+    // Something happened in the game. Let the user know about it.
+    //------------------------------------------------------------------------------
+    func displayGameEvent(_ text: String) {
+        print("\n\n****************************************")
+        print("*")
+        for line in text.components(separatedBy: "\n") {
+            print("* \(line)")
+        }
+        print("*")
+        print("****************************************")
+    }
 
     
     
@@ -351,6 +351,9 @@ class TextUI {
     //
     // The basic idea is that every time you are making a call that would be initiated
     // by a message in SwiftUI, you should add that call to our execution queue.
+    // We drain the execution queue in two ways:
+    //    When we execute a queue item, we immediately ask Dispatch to call executeQueue again
+    //    As a failsafe, we run executeQueue on a 10 Hz timer
     //==============================================================================
     var executionQueue = [(() -> ())]()
     
@@ -373,6 +376,7 @@ class TextUI {
         if executionQueue.count > 0 {
             let task = executionQueue.removeFirst()
             task()
+            DispatchQueue.main.async { self.executeQueue() }
         }
     }
 

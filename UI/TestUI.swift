@@ -83,17 +83,6 @@ class TestUI: TextUI {
     
     
     //------------------------------------------------------------------------------
-    // displayRolledOrder
-    // Do not print information
-    //------------------------------------------------------------------------------
-    override func displayRolledOrder(_ currentOrder: CurrentOrder) {
-        addToQueue {
-            game.doneWithOrderPicking()
-        }
-    }
-    
-    
-    //------------------------------------------------------------------------------
     //sendOrderToPlayer
     //Fill or pass based on what we need to test
     //------------------------------------------------------------------------------
