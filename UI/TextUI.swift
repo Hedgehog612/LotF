@@ -241,6 +241,7 @@ class TextUI {
         if totalCards == game.currentOrder.content.cards.count - 1 {
             addToQueue {
                 game.fillTheOrder(cards: self.addToFill)
+                self.totalCards = 0
             }
         } else {
             totalCards += 1

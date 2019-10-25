@@ -144,6 +144,7 @@ class Game {
             status += "Using the large deck.\n"
             deck = restaurant!.largeDeck
         }
+        deck.cards.shuffle()
         if restaurant!.name == "McPubihan's" {
             status += "Making the stew pot.\n"
             for _ in 1...6 {
@@ -338,19 +339,19 @@ class Game {
             ui.displayGameEvent("The order is now short \(currentOrder.short) items.")
         }
 
+        // Cycle to the next player
+        let passedPlayer = players.remove(at: 0)
+        players.append(passedPlayer)
+        if passedPlayer.hand.cards.count == 0 {
+            endRound()
+        }
+        
         // Is the order too short to fill?
         if currentOrder.short == currentOrder.content.cards.count {
             ui.displayGameEvent("The order is too short to fill.")
             startNewShift(shiftLeader: playerAfter(player: shiftLeader))
         } else {
             ui.sendOrderToPlayer()
-        }
-
-        // Cycle to the next player
-        let passedPlayer = players.remove(at: 0)
-        players.append(passedPlayer)
-        if passedPlayer.hand.cards.count == 0 {
-            endRound()
         }
     }
     
