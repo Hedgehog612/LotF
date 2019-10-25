@@ -244,7 +244,9 @@ class TextUI {
     //------------------------------------------------------------------------------
     func filledACard(_ card: Card) {
         addToFill.append(card)
-        game.players[0].hand.removeCard(card)
+        if card.isRealCard() {
+            game.players[0].hand.removeCard(card)
+        }
         if totalCards == game.currentOrder.content.cards.count - 1 {
             addToQueue {
                 game.fillTheOrder(cards: self.addToFill)

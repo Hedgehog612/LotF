@@ -408,9 +408,19 @@ class Game {
     
     //------------------------------------------------------------------------------
     // endTheGame
+    // This unwinds everything that's been created and assigned during the game, so the next game can start with a blank slate
     //------------------------------------------------------------------------------
     func endTheGame() {
-        
+        for player in game.players {
+            player.score.cards = []
+            player.tempScore = 0
+            player.totalScore = 0
+            player.scoreTokens = 0
+            player.hand.cards = []
+        }
+        game.players = []
+        game.currentOrder = nil
+        game.restaurant = nil
     }
 
     

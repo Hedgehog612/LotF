@@ -17,7 +17,7 @@ var gameTester = Tests()
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Let's do this thing
-        //gameTester.runAllTests()
+        gameTester.runAllTests()
         game.beginGame()
     }
     

@@ -65,15 +65,10 @@ class TestUI: TextUI {
     // Do we want to roll this order? (Otherwise, choose it ourselves)
     //------------------------------------------------------------------------------
     override func pickRollThisOrder() {
-        let textMenu = TextMenu(prompt: """
-        \(game.shiftLeader.name), you are the shift leader.
-        Would you like to pick an order or roll randomly?
-        """)
-        
-        textMenu.addChoice("Pick an order", onSelect: { game.onPickRollThisOrder(false) })
-        textMenu.addChoice("Roll this order randomly", onSelect: { game.onPickRollThisOrder(true)})
-        
-        textMenu.execute()
+        if gameTester.testedHands == false {
+            gameTester.testHandSize()
+        }
+        game.onPickRollThisOrder(false)
     }
     
     
@@ -82,22 +77,8 @@ class TestUI: TextUI {
     // Choose an item on the menu
     //------------------------------------------------------------------------------
     override func pickOrder() {
-        let textMenu = TextMenu(prompt: """
-        Here's the menu for \(game.restaurant.name):
-        What's the next order?
-        """)
-
-        for menuCategory in game.restaurant.menuCategories {
-            if menuCategory.canCall {
-                textMenu.addDivider(menuCategory.name)
-                
-                for menuItem in menuCategory.menuItems {
-                    textMenu.addChoice(menuItem.name, onSelect: { game.onPickedOrder(menuItem)})
-                }
-            }
-        }
-        
-        textMenu.execute()
+        game.onPickedOrder(MenuItem(name: "David Copperfield", ingredients:
+        [.Cheese:1]))
     }
     
     
@@ -110,42 +91,35 @@ class TestUI: TextUI {
             game.doneWithOrderPicking()
         }
     }
-
-/*
+    
+    
     //------------------------------------------------------------------------------
-    // pickFillOrPass
-    // Choose whether to fill or pass (Always passes)
+    //sendOrderToPlayer
+    //Fill or pass based on what we need to test
     //------------------------------------------------------------------------------
-    override func pickFillOrPass() -> Bool {
-        return false
+    override func sendOrderToPlayer() {
+        if gameTester.testedPass == false {
+            game.pickedFillOrder(true)
+        } else {
+            gameTester.doTest(result: game.players[0].hand.cards.count > 10, comment: "Testing passing")
+            gameTester.doTest(result: game.players[(game.players.count - 1)].hand.cards.count < 11, comment: "Testing passing")
+            game.endTheGame()
+        }
     }
     
     
     //------------------------------------------------------------------------------
-    // pickCardsToFill
-    // Fill an order with cards from your hand
+    //pickCardsToFill
+    //Deliberately fail to fill the order
     //------------------------------------------------------------------------------
-    override func pickCardsToFill() -> [Card] {
-        return []
+    override func pickCardsToFill() {
+        let kludgeDeck = Deck(cardCounts: [.Short:1])
+        game.fillTheOrder(cards: kludgeDeck.cards)
     }
     
     
-    //------------------------------------------------------------------------------
-    // pickCardToDeal
-    // Placeholder function to choose which card to deal from hand when you pass
-    // Returns the index of the chosen card
-    //------------------------------------------------------------------------------
-    override func pickCardToDeal(hand: Deck) -> Int {
-        return 0
+    override func passTheOrder() {
+        game.orderPassed(card: game.players[0].hand.cards[0])
     }
     
-    
-    //------------------------------------------------------------------------------
-    // pickCardsToFill
-    // Placeholder function to pick three cards for the Holiday Potluck and return an array of those three cards
-    //------------------------------------------------------------------------------
-    override func pickThreeCards() -> [Card] {
-        return [.Bird, .Cheese, .Cow]
-    }
- */
 }

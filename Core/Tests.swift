@@ -16,6 +16,9 @@ class Tests {
     var totalTests: Int
     var passedTests: Int
     var failedTests: [String]
+    var testedHands: Bool
+    var ui = TestUI()
+    var testedPass: Bool
     
     //------------------------------------------------------------------------------
     //------------------------------------------------------------------------------
@@ -23,6 +26,8 @@ class Tests {
         totalTests = 0
         passedTests = 0
         failedTests = []
+        testedHands = false
+        testedPass = false
     }
     
     
@@ -31,13 +36,12 @@ class Tests {
     //This delegates out all the testing functions that need to get run
     //------------------------------------------------------------------------------
     func runAllTests() {
-        return
         deckTesting()
         cardTesting()
         scoreTesting()
         menuTesting()
+        ui.pickPlayers()
         //specialRuleTesting()
-        gameTesting()
         testReport()
     }
     
@@ -88,6 +92,18 @@ class Tests {
                 print(test)
             }
         }
+    }
+    
+    
+    //------------------------------------------------------------------------------
+    //testHandSize
+    //Makes sure a 4-player group was dealt the right number of cards for Friedey's Holiday
+    //------------------------------------------------------------------------------
+    func testHandSize() {
+        for player in game.players {
+            doTest(result: player.hand.cards.count == 10 || player.hand.cards.count == 11, comment: "Dealing cards to players")
+        }
+        testedHands = true
     }
     
     
@@ -200,57 +216,6 @@ class Tests {
             print(card.name)
         }
     }
- 
-    
-    
-    //------------------------------------------------------------------------------
-    //gameTesting
-    //run through a very crude mock game, testing to make sure everything works as expected
-    //Needs to be testUI
-    //------------------------------------------------------------------------------
-    func gameTesting() {
-        game = Game(ui: TestUI())
-        
-        game.players = [Player(name: "Test player 1", image: "Test image 1", totalScore:0),
-                            Player(name: "Test player 2", image: "Test image 2", totalScore:0),
-                            Player(name: "Test player 3", image: "Test image 3", totalScore:0),
-                            Player(name: "Test player 4", image: "Test image 4", totalScore:0)]
-        game.onRestaurantSelected(restaurantList[0])
-        for player in game.players {
-            doTest(result: player.hand.cards.count == 13, comment: "Small deck deal to players")
-        }
-        game.players = [Player(name: "Test player 1", image: "Test image 1", totalScore:0),
-                            Player(name: "Test player 2", image: "Test image 2", totalScore:0),
-                            Player(name: "Test player 3", image: "Test image 3", totalScore:0),
-                            Player(name: "Test player 4", image: "Test image 4", totalScore:0),
-                            Player(name: "Test player 5", image: "Test image 5", totalScore:0),
-                            Player(name: "Test player 6", image: "Test image 6", totalScore:0)]
-        game.onRestaurantSelected(restaurantList[0])
-        for player in game.players {
-            doTest(result: player.hand.cards.count == 11 || player.hand.cards.count == 12, comment: "Large deck deal to players")
-        }
-        
-        game.players = [
-            Player(name: "Test player 1", image: "Test image 1", totalScore:0, score: Deck(cardCounts: [.Bird:8])),
-            Player(name: "Test player 2", image: "Test image 2", totalScore:0, score: Deck(cardCounts: [.Bird:6])),
-            Player(name: "Test player 3", image: "Test image 3", totalScore:0, score: Deck(cardCounts: [.Bird:4])),
-            Player(name: "Test player 4", image: "Test image 4", totalScore:0, score: Deck(cardCounts: [.Bird:2]))]
-        
-        game.scoring()
-        doTest(result: game.players[0].name == "Test player 4", comment: "Scoring player order")
-        doTest(result: game.players[1].name == "Test player 1", comment: "Scoring player order")
-        doTest(result: game.players[2].name == "Test player 2", comment: "Scoring player order")
-        doTest(result: game.players[3].name == "Test player 3", comment: "Scoring player order")
-        
-        game = Game(ui: TestUI())
-    }
-    
-    func testUIGame() {
-        //game = Game(ui: TestUI)
-        game.beginGame()
-        
-    }
-    
 }
 
 //TODO: Rebuild test function to use a dedicated TestUI instead of snipping bits off of TextUI
