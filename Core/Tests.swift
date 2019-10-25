@@ -45,6 +45,7 @@ class Tests {
         //specialRuleTesting()
         print("Sanity check")
         testReport()
+        ui.stopExecutionQueue()
     }
     
 

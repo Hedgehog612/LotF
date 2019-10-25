@@ -65,8 +65,8 @@ class TestUI: TextUI {
     // Do we want to roll this order? (Otherwise, choose it ourselves)
     //------------------------------------------------------------------------------
     override func pickRollThisOrder() {
-        if gameTester.testedHands == false {
-            gameTester.testHandSize()
+        if gameTester!.testedHands == false {
+            gameTester!.testHandSize()
         }
         game.onPickRollThisOrder(false)
     }
@@ -87,11 +87,11 @@ class TestUI: TextUI {
     //Fill or pass based on what we need to test
     //------------------------------------------------------------------------------
     override func sendOrderToPlayer() {
-        if gameTester.testedPass == false {
+        if gameTester!.testedPass == false {
             game.pickedFillOrder(true)
         } else {
-            gameTester.doTest(result: game.players[0].hand.cards.count > 10, comment: "Testing passing")
-            gameTester.doTest(result: game.players[(game.players.count - 1)].hand.cards.count < 11, comment: "Testing passing")
+            gameTester!.doTest(result: game.players[0].hand.cards.count > 10, comment: "Testing passing")
+            gameTester!.doTest(result: game.players[(game.players.count - 1)].hand.cards.count < 11, comment: "Testing passing")
             game.endTheGame()
         }
     }
